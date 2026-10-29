@@ -3,6 +3,6 @@
       "target": {
         "namespace": "android_app",
         "package_name": "com.didaquedigital.app",
-        "sha256_cert_fingerprints": ["98:58:51:16:83:CE:4E:FC:81:6C:39:5F:DD:56:E9:DA:0B:92:0C:56:61:FA:0E:B6:D4:D6:41:1E:C8:92:8A:3F"]
+        "sha256_cert_fingerprints": ["F7:B6:C2:B0:18:93:87:5E:1E:10:14:63:7B:E1:90:CF:71:4F:2F:55:5F:EB:23:64:50:A0:4B:02:ED:8A:10:E0"]
       }
     }]
