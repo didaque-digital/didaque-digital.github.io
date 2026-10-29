@@ -1,1 +1,8 @@
-
+[{
+      "relation": ["delegate_permission/common.handle_all_urls"],
+      "target": {
+        "namespace": "android_app",
+        "package_name": "com.didaquedigital.app",
+        "sha256_cert_fingerprints": ["98:58:51:16:83:CE:4E:FC:81:6C:39:5F:DD:56:E9:DA:0B:92:0C:56:61:FA:0E:B6:D4:D6:41:1E:C8:92:8A:3F"]
+      }
+    }]
