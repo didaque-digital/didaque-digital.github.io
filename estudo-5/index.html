@@ -1,0 +1,336 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="robots" content="noindex">
+<title>Estudo 5 · A Morte e a Nova Terra</title>
+<style>
+:root{--bg:#FFF8E7;--card:#fff;--tx:#222;--mut:#666;--navy:#1F3A5F;--qc:#1F3A5F;--or:#E07B39;--teal:#2A7F8E;--ok:#2E7D32;--bad:#C62828;--line:#E6D9B8;--inp:#FDF1D8;--gold:#F4B43C;box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}
+@media (prefers-color-scheme:dark){:root:not([data-theme="light"]){--bg:#0F1B2D;--card:#172A45;--tx:#EDEFF2;--mut:#A9B4C4;--navy:#14263F;--qc:#C9DAF5;--or:#F0914F;--teal:#6CC6D3;--ok:#66BB6A;--bad:#EF5350;--line:#2B4466;--inp:#1E3556}}
+:root[data-theme="dark"]{--bg:#0F1B2D;--card:#172A45;--tx:#EDEFF2;--mut:#A9B4C4;--navy:#14263F;--qc:#C9DAF5;--or:#F0914F;--teal:#6CC6D3;--ok:#66BB6A;--bad:#EF5350;--line:#2B4466;--inp:#1E3556}
+html{scroll-padding-top:env(safe-area-inset-top,0px)}
+body{margin:0;background:var(--bg);color:var(--tx);font:17px/1.55 Calibri,"Segoe UI",system-ui,sans-serif}
+body.lock{overflow:hidden}
+.wrap{max-width:640px;margin:0 auto;padding:0 14px 40px}
+.hero{background:radial-gradient(circle at 88% 20%,#f4b43c55,transparent 45%),linear-gradient(135deg,var(--navy),#2c527f);color:#fff;margin:0 -14px 14px;padding:22px 22px 20px;border-radius:0 0 24px 24px}
+.hero small{color:var(--gold);letter-spacing:.3em;font-weight:700;font-size:13px}
+.hero .n{font:700 56px/1 Georgia,serif;color:#F0914F;margin-top:2px}
+.hero h1{font:700 30px/1.15 Georgia,serif;margin:4px 0 0}
+.bar{height:8px;background:var(--line);border-radius:6px;overflow:hidden;margin:6px 0 4px}
+.bar i{display:block;height:100%;width:0;background:var(--or);transition:width .4s}
+.cnt{font-size:14px;color:var(--mut);margin-bottom:10px}
+.card{background:var(--card);border-radius:14px;padding:18px;border:1px solid var(--line);border-left:6px solid var(--or)}
+.q{font:700 19px/1.35 Georgia,serif;color:var(--qc)}
+.ref{margin:8px 0 14px}
+.refbtn{font:inherit;font-weight:700;color:var(--teal);background:transparent;border:0;border-bottom:2px dotted var(--teal);padding:2px 0;margin:0 2px;cursor:pointer;text-align:left}
+.s{line-height:2.3;margin:0 0 6px}
+.s+.row,.sub+.row{border-top:1px solid var(--line)}
+.sub{margin:12px 0 2px;color:var(--mut);font-size:15px}
+.intro{margin:0 0 10px}
+.mut{color:var(--mut);font-size:15px}
+a.btn{display:inline-block;text-decoration:none}
+input.b{font:inherit;border:2px solid var(--line);background:var(--inp);color:var(--tx);border-radius:8px;padding:1px 8px;width:9em;max-width:100%}
+input.ok,.opt.ok{border-color:var(--ok)!important;background:color-mix(in srgb,var(--ok) 15%,transparent)!important}
+input.no,.opt.no{border-color:var(--bad)!important}
+.opt{display:block;width:100%;text-align:left;font:inherit;color:var(--tx);background:var(--card);padding:11px 12px;border:2px solid var(--line);border-radius:10px;margin:8px 0;cursor:pointer}
+.opt.sel{border-color:var(--or)}
+.row{display:flex;justify-content:space-between;gap:10px;align-items:center;padding:8px 0;border-bottom:1px solid var(--line)}
+.vf{display:flex;gap:6px;flex:none}
+.vf button{width:44px;height:44px;border-radius:50%;border:2px solid var(--line);background:var(--card);color:var(--tx);font:700 16px inherit;cursor:pointer}
+.vf button.sel{background:var(--or);border-color:var(--or);color:#fff}
+.vf.ok button.sel{background:var(--ok);border-color:var(--ok)}
+.vf.no button.sel{background:var(--bad);border-color:var(--bad)}
+.btn{background:var(--or);color:#fff;border:0;border-radius:12px;padding:13px 22px;font:700 17px inherit;cursor:pointer;margin-top:16px}
+a.btn{display:inline-block;text-decoration:none}
+.btn.sec{background:transparent;color:var(--teal);border:2px solid var(--teal);padding:9px 16px;font-size:15px;margin-top:10px}
+.btn:focus-visible,.opt:focus-visible,.vf button:focus-visible,input:focus-visible,a:focus-visible,.refbtn:focus-visible,.xbtn:focus-visible,.tab:focus-visible{outline:3px solid var(--teal);outline-offset:2px}
+.msg{margin-top:12px;font-weight:700}.msg.ok{color:var(--ok)}.msg.no{color:var(--bad)}
+.hint,.note{margin-top:10px;padding:10px 12px;border-radius:10px;background:var(--inp);font-size:15px}
+.note{border-left:4px solid var(--teal)}
+.shake{animation:sh .35s}
+@keyframes sh{20%,60%{transform:translateX(-7px)}40%,80%{transform:translateX(7px)}}
+.foot{display:flex;justify-content:space-between;margin-top:18px;font-size:14px;color:var(--mut)}
+.foot a.home{color:var(--mut);text-decoration:underline;padding:6px}
+.foot button{background:none;border:0;color:var(--mut);font:inherit;text-decoration:underline;cursor:pointer;padding:6px}
+.tc{display:flex;gap:8px;margin-top:8px}.tc input{flex:1;min-width:0;font:inherit;padding:8px;border-radius:8px;border:2px solid var(--line);background:var(--inp);color:var(--tx)}
+.chk{display:flex;gap:10px;align-items:flex-start;padding:8px 0}.chk input{width:22px;height:22px;margin-top:3px;accent-color:var(--or)}
+/* ===== Pop-up do texto bíblico ===== */
+.ov{position:fixed;inset:0;z-index:100;display:none;align-items:flex-end;justify-content:center;background:rgba(10,20,40,.6);-webkit-backdrop-filter:blur(3px);backdrop-filter:blur(3px)}
+.ov.on{display:flex;animation:fd .2s}
+.md{background:var(--card);color:var(--tx);width:100%;max-width:640px;max-height:84vh;max-height:84dvh;display:flex;flex-direction:column;overflow:hidden;border-radius:24px 24px 0 0;border-top:6px solid var(--or);box-shadow:0 -10px 40px rgba(0,0,0,.35);animation:up .28s ease-out}
+.mh{display:flex;align-items:center;justify-content:space-between;gap:10px;padding:14px 12px 8px 20px}
+.mh b{font:700 13px/1 Calibri,system-ui,sans-serif;letter-spacing:.2em;color:var(--or);text-transform:uppercase}
+.xbtn{flex:none;width:44px;height:44px;border-radius:50%;border:0;background:var(--inp);color:var(--tx);font:400 26px/1 system-ui,sans-serif;cursor:pointer;display:flex;align-items:center;justify-content:center}
+.tabs{display:flex;gap:8px;padding:0 20px 8px;overflow-x:auto}
+.tab{flex:none;font:inherit;font-weight:700;font-size:15px;color:var(--teal);background:transparent;border:2px solid var(--teal);border-radius:999px;padding:6px 14px;cursor:pointer}
+.tab.sel{background:var(--teal);color:#fff}
+.mb{padding:6px 20px 12px;overflow-y:auto;-webkit-overflow-scrolling:touch;min-height:120px}
+.mb h2{font:700 24px/1.2 Georgia,serif;color:var(--qc);margin:4px 0 12px}
+.vs{font:20px/1.75 Georgia,serif;margin:0 0 10px}
+.vs sup{font:700 12px Calibri,system-ui,sans-serif;color:var(--or);margin-right:3px}
+.ver{font-size:13px;color:var(--mut);margin-top:12px}
+.ld{color:var(--mut);padding:24px 0;text-align:center}
+.mf{padding:6px 20px calc(16px + env(safe-area-inset-bottom,0px))}
+.mf .btn{width:100%;margin-top:6px}
+@keyframes up{from{transform:translateY(40px);opacity:0}to{transform:none;opacity:1}}
+@keyframes fd{from{opacity:0}to{opacity:1}}
+@media (min-width:700px){.ov{align-items:center}.md{border-radius:24px;max-height:80vh}.mf{padding-bottom:18px}}
+@media (prefers-reduced-motion:reduce){.shake,.md,.ov.on{animation:none}.bar i{transition:none}}
+</style>
+</head>
+<body>
+<div class="wrap">
+  <div class="hero"><small>ESTUDO</small><div class="n">5</div><h1>A Morte e a Nova Terra</h1></div>
+  <div class="bar"><i id="pb"></i></div>
+  <div class="cnt" id="cnt"></div>
+  <main id="app"></main>
+  <div class="foot"><button id="mute">🔊 Som ligado</button><a class="home" href="../estudos/">Estudos</a><button id="back" aria-label="Voltar à pergunta anterior">← Voltar</button><button id="reset">Recomeçar</button></div>
+</div>
+
+<!-- Pop-up do texto bíblico -->
+<div class="ov" id="ov" aria-hidden="true">
+  <div class="md" role="dialog" aria-modal="true" aria-labelledby="mt">
+    <div class="mh"><b id="mt">📖 Texto bíblico</b><button class="xbtn" id="mx" aria-label="Fechar">×</button></div>
+    <div class="tabs" id="mtabs"></div>
+    <div class="mb" id="mbody"></div>
+    <div class="mf"><button class="btn" id="mclose">Fechar e voltar à pergunta</button></div>
+  </div>
+</div>
+
+<script>
+// ====== CONFIGURAÇÃO (edite aqui) ======
+var TEACHER_CODE = "1234";    // código do instrutor (mostra a resposta)
+var NEXT_CODE = "ESTUDO6";    // código que libera o próximo estudo
+var NEXT_URL = "../estudo-6/"; // endereço da página do próximo estudo
+var KEY = "didaque_e5_v1";
+
+// Cada resposta: [texto exibido, trechos aceitos...]  (sem acento, minúsculas; "=" no início = palavra exata)
+var Q = [
+ {q:"De que material Deus criou o homem, e o que o transformou em alma vivente?",
+  v:[["Gênesis 2:7", "gen 2:7"]],
+  p:["Deus formou o homem do ",["pó","=po","poeira"]," da terra e soprou em seu nariz o ",["fôlego","folego","sopro","espirito"]," de ",["vida","vida"],". Portanto, ",["pó","=po","corpo","terra"]," + ",["fôlego","folego","sopro","espirito","vida"]," = alma vivente (ser humano)."],
+  h:"Gênesis 2:7: Deus formou o homem do pó e soprou em suas narinas o fôlego de ... Na NAA a expressão é “ser vivente”; em outras versões, “alma vivente”."},
+ {q:"Como a Bíblia usa a palavra “alma”?",
+  v:[["Ezequiel 18:4", "eze 18:4"], ["Gênesis 46:27", "gen 46:27"], ["Deuteronômio 10:22", "deu 10:22"]],
+  p:["Todas as ",["almas","alma","vida","pessoa"]," são minhas. Portanto, alma significa ",["pessoa","pessoa","ser","gente","vida"]," viva."],
+  h:"Ezequiel 18:4 diz que todas as almas (em algumas versões, “vidas”) pertencem a Deus. Em Gênesis 46:27, “almas” são as pessoas da família de Jacó."},
+ {q:"O que acontece com a pessoa quando morre?",
+  v:[["Gênesis 3:19", "gen 3:19"], ["Eclesiastes 12:7", "ecc 12:7"], ["Eclesiastes 9:5", "ecc 9:5"]],
+  p:["O corpo volta a ser ",["pó","=po","poeira","terra"],". O fôlego de vida volta para ",["Deus","deus"],". A memória é entregue ao ",["esquecimento","esquec"],"."],
+  h:"Gênesis 3:19: ao pó tornarás. Eclesiastes 12:7: o espírito volta a Deus. Eclesiastes 9:5: a lembrança dos mortos cai no ..."},
+ {q:"Para onde vai a pessoa após a morte?",
+  v:[["Eclesiastes 9:5, 10", "ecc 9:5,10"], ["Jó 7:9-10", "job 7:9-10"]],
+  o:["Céu","Inferno","Flutuar no espaço","Sepultura"], c:3,
+  h:"Eclesiastes 9:10 fala da sepultura, para onde você vai. Jó 7:9 diz que quem desce à sepultura não sobe mais."},
+ {q:"Os mortos têm conhecimento de alguma coisa?",
+  v:[["Eclesiastes 9:5", "ecc 9:5"], ["2 Coríntios 11:13-14", "2co 11:13-14"]],
+  o:["Sim","Não"], c:1,
+  h:"Eclesiastes 9:5 diz que os mortos nada sabem.",
+  n:"Não nos é possível ver ou falar com alguém que já morreu. Nas supostas manifestações de mortos, a Bíblia ensina que não é a pessoa que aparece, e sim anjos maus disfarçados (2Co 11:13-14). A oportunidade de salvação existe enquanto vivemos."},
+ {q:"Quem possui imortalidade, e o que o pecado ocasionou ao ser humano?",
+  v:[["1 Timóteo 6:16", "1ti 6:16"], ["Gênesis 2:16-17", "gen 2:16-17"], ["Romanos 5:12", "rom 5:12"], ["Romanos 6:23", "rom 6:23"]],
+  p:["O único que possui imortalidade é ",["Deus","deus","cristo","jesus","senhor"],". A condição para o homem conservar a imortalidade era não ",["comer","comer","provar","tocar","comid"]," do fruto da árvore do conhecimento do bem e do mal. O pecado trouxe a ",["morte","mort"]," que passou a todos os ",["homens","homen","seres","humano","pessoa"],"."],
+  h:"1 Timóteo 6:16 diz quem é o único imortal. Romanos 5:12 diz o que o pecado trouxe ao mundo e a quem."},
+ {q:"Como Jesus considerou a morte, e até quando os mortos em Cristo permanecerão assim?",
+  v:[["João 11:11-14", "john 11:11-14"], ["João 5:28-29", "john 5:28-29"], ["1 Tessalonicenses 4:16", "1th 4:16"]],
+  p:["Jesus afirmou que a morte é um ",["sono","sono","dormir","dorm"],". Os mortos em Cristo ficam na sepultura até a ",["volta","volta","vinda","retorno","segunda"]," de Jesus."],
+  h:"Em João 11:11-14 Jesus diz que Lázaro dormia. Em 1 Tessalonicenses 4:16, os mortos em Cristo ressuscitam quando o Senhor desce do Céu."},
+ {q:"Qual será a recompensa dos que participarem da primeira ressurreição?",
+  v:[["1 Coríntios 15:51-53", "1co 15:51-53"]],
+  p:["Receberão a imortalidade perdida, num ",["abrir","abrir","abri"]," e fechar de ",["olhos","olho"],"."],
+  h:"1 Coríntios 15:52: num momento, num piscar de ... (o tempo de abrir e fechar os olhos)."},
+ {q:"O que o Senhor prometeu criar depois do milênio?",
+  v:[["2 Pedro 3:13", "2pe 3:13"], ["Apocalipse 21:2", "rev 21:2"]],
+  p:["Nós, porém, ",["segundo","segundo","conforme","acordo"]," a sua ",["promessa","promessa"],", esperamos novos ",["céus","ceus","ceu"]," e nova ",["terra","terra"]," onde habita a justiça."],
+  h:"Leia 2 Pedro 3:13 com atenção: o que esperamos, segundo a promessa de Deus?",
+  n:"Depois dos mil anos, a Nova Jerusalém descerá para a Terra e será a capital da Nova Terra. Na cidade estarão o trono de Deus, a árvore da vida e o rio da vida (Ap 21:2; 22:1, 2)."},
+ {q:"Quem ficará fora da cidade e quem entrará nela?",
+  v:[["Apocalipse 21:8", "rev 21:8"], ["Apocalipse 21:27", "rev 21:27"], ["1 Coríntios 6:9-10", "1co 6:9-10"]],
+  p:["Ficarão de fora os ",["ímpios","impi","pecador","incredul","covard","impenit","imoral","assassin","mentiros","idolatr","injust","desobedi","maus"],". Entrarão somente aqueles que têm o nome no ",["Livro da Vida","livro","vida"],"."],
+  h:"Apocalipse 21:8 lista os que ficam de fora (os que rejeitam a Deus). Apocalipse 21:27 diz quem entra: os que estão inscritos no livro ..."},
+ {q:"Como será a vida na Nova Terra?",
+  v:[["Apocalipse 21:4", "rev 21:4"], ["Isaías 35:5-6, 9-10", "isa 35:5-6,9-10"]],
+  s:"Marque V ou F em cada frase:",
+  i:[["Na Nova Terra haverá morte, luto, pranto e dor.",0],["Na Nova Terra haverá vida eterna.",1],["Na Nova Terra haverá deficientes físicos e enfermos.",0],["Na Nova Terra haverá voz de choro e clamor.",0]],
+  h:"Apocalipse 21:4 diz que Deus enxugará toda lágrima e que a morte, o pranto e a dor não existirão mais."},
+ {q:"Como será a vida dos salvos na Nova Terra?",
+  v:[["Isaías 65:21-22", "isa 65:21-22"], ["Isaías 65:25", "isa 65:25"], ["Isaías 66:22-23", "isa 66:22-23"]],
+  p:["Plantarão ",["vinhas","vinha","vinhedo"],"; cada um desfrutará do trabalho de suas mãos. O ",["lobo","lobo","cordeiro"]," e o ",["cordeiro","cordeir","lobo"]," pastarão juntos. De um ",["sábado","sabado","outro","mes","lua"]," a ",["outro","outro","sabado","lua"],", virá toda a carne adorar perante Deus."],
+  h:"Isaías 65:21 fala do que os salvos plantarão; Isaías 65:25 fala de dois animais que pastarão juntos; Isaías 66:23 fala da frequência da adoração."},
+ {q:"Para quem Deus preparou essa cidade, e qual é a marca de quem ama Jesus?",
+  v:[["1 Coríntios 2:9", "1co 2:9"], ["João 14:15", "john 14:15"]],
+  p:["Deus preparou esse novo lar para aqueles que O ",["amam","amam","amar"],". Se desejo estar na Nova Terra, devo a cada dia ",["amar","amar","seguir","buscar","conhecer","confiar"]," Jesus e obedecer aos Seus mandamentos. Quem Me ama guardará os Meus ",["mandamentos","mandament"],"."],
+  h:"1 Coríntios 2:9 fala dos que amam a Deus. João 14:15: se vocês me amam, guardarão os meus ..."},
+ {q:"Recapitulação", recap:1,
+  p:["Deus fez o homem do ",["pó","=po","poeira"]," da terra e soprou nele o ",["fôlego","folego","sopro","espirito"]," de ",["vida","vida"],". Então o homem se tornou ",["alma","alma","ser"]," vivente. Alma, na Bíblia, é uma ",["pessoa","pessoa","ser","gente","vida"],". A morte é um estado de inconsciência. Jesus a considerou um ",["sono","sono","dormir","dorm"],". Os mortos não ",["sabem","sab","conhec","lembr","percebem"]," de coisa alguma. Os mortos justos ficarão na sepultura até a volta de ",["Jesus","jesus","cristo"],". Depois dos mil anos, Deus criará um novo ",["céu","ceu"]," e uma nova ",["Terra","terra"],". A capital será a Nova ",["Jerusalém","jerusalem","cidade"],", e nela entrarão os que têm o nome no livro da ",["vida","vida"]," e amam a Jesus."],
+  h:"Use as respostas que você já deu nas perguntas."}
+];
+var NQ = Q.length, TOTAL = NQ + 2;
+var $ = function(s){return document.querySelector(s)}, app = $("#app");
+var st = {i:-1,u:0}; try{var sv=JSON.parse(localStorage.getItem(KEY)); if(sv) st=sv;}catch(e){}
+function save(){try{localStorage.setItem(KEY,JSON.stringify(st))}catch(e){}}
+var muted=false, tries=0, sel={}, ac;
+
+function norm(s){return String(s).toLowerCase().normalize("NFD").replace(/[\u0300-\u036f]/g,"").replace(/[^a-z0-9 ]/g," ").replace(/\s+/g," ").trim()}
+function match(v,a){ if(a.charAt(0)==="=") return (" "+v+" ").indexOf(" "+norm(a.slice(1))+" ")>-1; return v.indexOf(norm(a))>-1; }
+function accepted(x){ return x.length>1 ? x.slice(1) : x; }
+function esc(s){return String(s).replace(/[&<>"]/g,function(c){return {"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;"}[c]})}
+function tone(seq){ if(muted) return; try{ ac=ac||new (window.AudioContext||window.webkitAudioContext)(); var t=ac.currentTime;
+  seq.forEach(function(n){var o=ac.createOscillator(),g=ac.createGain();o.type=n[2]||"sine";o.frequency.value=n[0];g.gain.setValueAtTime(.16,t);g.gain.exponentialRampToValueAtTime(.001,t+n[1]);o.connect(g);g.connect(ac.destination);o.start(t);o.stop(t+n[1]);t+=n[1]+.06}); }catch(e){} }
+var BAD=[[190,.18,"square"],[150,.3,"square"]], GOOD=[[660,.12],[880,.22]];
+
+/* ===== Pop-up bíblico ===== */
+var bibOpen=false, bibList=[], bibFocus=null;
+// ====== TEXTOS BÍBLICOS (ficam dentro do aplicativo, funcionam sem internet) ======
+// Tradução atual: João Ferreira de Almeida (domínio público).
+// Para trocar por outra tradução, substitua o texto de cada versículo abaixo.
+// Formato: "chave": [ [número do versículo, "texto"], ... ]
+var BIB = {
+ "gen 2:7":[[7, "E formou o Senhor Deus o homem do pó da terra, e soprou-lhe nas narinas o fôlego da vida; e o homem tornou-se alma vivente."]],
+ "eze 18:4":[[4, "Eis que todas as almas são minhas; como o é a alma do pai, assim também a alma do filho é minha: a alma que pecar, essa morrerá."]],
+ "gen 46:27":[[27, "e os filhos de José, que lhe nasceram no Egito, eram duas almas. Todas as almas da casa de Jacó, que vieram para o Egito eram setenta."]],
+ "deu 10:22":[[22, "Com setenta almas teus pais desceram ao Egito; e agora o Senhor teu Deus te fez, em número, como as estrelas do céu."]],
+ "gen 3:19":[[19, "Do suor do teu rosto comerás o teu pão, até que tornes à terra, porque dela foste tomado; porquanto és pó, e ao pó tornarás."]],
+ "ecc 12:7":[[7, "e o pó volte para a terra como o era, e o espírito volte a Deus que o deu."]],
+ "ecc 9:5":[[5, "Pois os vivos sabem que morrerão, mas os mortos não sabem coisa nenhuma, nem tampouco têm eles daí em diante recompensa; porque a sua memória ficou entregue ao esquecimento."]],
+ "ecc 9:5,10":[[5, "Pois os vivos sabem que morrerão, mas os mortos não sabem coisa nenhuma, nem tampouco têm eles daí em diante recompensa; porque a sua memória ficou entregue ao esquecimento."], [10, "Tudo quanto te vier à mão para fazer, faze-o conforme as tuas forças; porque no Seol, para onde tu vais, não há obra, nem projeto, nem conhecimento, nem sabedoria alguma."]],
+ "job 7:9-10":[[9, "Tal como a nuvem se desfaz e some, aquele que desce à sepultura nunca tornará a subir."], [10, "Nunca mais tornará à sua casa, nem o seu lugar o conhecerá mais."]],
+ "2co 11:13-14":[[13, "Pois os tais são falsos apóstolos, obreiros fraudulentos, disfarçando-se em apóstolos de Cristo."], [14, "E não é de admirar, porquanto o próprio Satanás se disfarça em anjo de luz."]],
+ "1ti 6:16":[[16, "aquele que possui, ele só, a imortalidade, e habita em luz inacessível; a quem nenhum dos homens tem visto nem pode ver; ao qual seja honra e poder sempiterno. Amém."]],
+ "gen 2:16-17":[[16, "Ordenou o Senhor Deus ao homem, dizendo: De toda árvore do jardim podes comer livremente;"], [17, "mas da árvore do conhecimento do bem e do mal, dessa não comerás; porque no dia em que dela comeres, certamente morrerás."]],
+ "rom 5:12":[[12, "Portanto, assim como por um só homem entrou o pecado no mundo, e pelo pecado a morte, assim também a morte passou a todos os homens, porquanto todos pecaram."]],
+ "rom 6:23":[[23, "Porque o salário do pecado é a morte, mas o dom gratuito de Deus é a vida eterna em Cristo Jesus nosso Senhor."]],
+ "john 11:11-14":[[11, "E, tendo assim falado, acrescentou: Lázaro, o nosso amigo, dorme, mas vou despertá-lo do sono."], [12, "Disseram-lhe, pois, os discípulos: Senhor, se dorme, ficará bom."], [13, "Mas Jesus falara da sua morte; eles, porém, entenderam que falava do repouso do sono."], [14, "Então Jesus lhes disse claramente: Lázaro morreu;"]],
+ "john 5:28-29":[[28, "Não vos admireis disso, porque vem a hora em que todos os que estão nos sepulcros ouvirão a sua voz e sairão:"], [29, "os que tiverem feito o bem, para a ressurreição da vida, e os que tiverem praticado o mal, para a ressurreição do juízo."]],
+ "1th 4:16":[[16, "Porque o Senhor mesmo descerá do céu com grande brado, à voz do arcanjo, ao som da trombeta de Deus, e os que morreram em Cristo ressuscitarão primeiro."]],
+ "1co 15:51-53":[[51, "Eis aqui vos digo um mistério: Nem todos dormiremos mas todos seremos transformados,"], [52, "num momento, num abrir e fechar de olhos, ao som da última trombeta; porque a trombeta soará, e os mortos serão ressuscitados incorruptíveis, e nós seremos transformados."], [53, "Porque é necessário que isto que é corruptível se revista da incorruptibilidade e que isto que é mortal se revista da imortalidade."]],
+ "2pe 3:13":[[13, "Nós, porém, segundo a sua promessa, aguardamos novos céus e uma nova terra, nos quais habita a justiça."]],
+ "rev 21:2":[[2, "E vi a santa cidade, a nova Jerusalém, que descia do céu da parte de Deus, adereçada como uma noiva ataviada para o seu noivo."]],
+ "rev 21:8":[[8, "Mas, quanto aos medrosos, e aos incrédulos, e aos abomináveis, e aos homicidas, e aos adúlteros, e aos feiticeiros, e aos idólatras, e a todos os mentirosos, a sua parte será no lago ardente de fogo e enxofre, que é a segunda morte."]],
+ "rev 21:27":[[27, "E não entrará nela coisa alguma impura, nem o que pratica abominação ou mentira; mas somente os que estão inscritos no livro da vida do Cordeiro."]],
+ "1co 6:9-10":[[9, "Não sabeis que os injustos não herdarão o reino de Deus? Não vos enganeis: nem os devassos, nem os idólatras, nem os adúlteros, nem os efeminados, nem os sodomitas,"], [10, "nem os ladrões, nem os avarentos, nem os bêbedos, nem os maldizentes, nem os roubadores herdarão o reino de Deus."]],
+ "rev 21:4":[[4, "Ele enxugará de seus olhos toda lágrima; e não haverá mais morte, nem haverá mais pranto, nem lamento, nem dor; porque já as primeiras coisas são passadas."]],
+ "isa 35:5-6,9-10":[[5, "Então os olhos dos cegos serão abertos, e os ouvidos dos surdos se desimpedirão."], [6, "Então o coxo saltará como o cervo, e a língua do mudo cantará de alegria; porque águas arrebentarão no deserto e ribeiros no ermo."], [9, "Ali não haverá leão, nem animal feroz subirá por ele, nem se achará nele; mas os redimidos andarão por ele."], [10, "E os resgatados do Senhor voltarão; e virão a Sião com júbilo, e alegria eterna haverá sobre as suas cabeças; gozo e alegria alcançarão, e deles fugirá a tristeza e o gemido."]],
+ "isa 65:21-22":[[21, "E eles edificarão casas, e as habitarão; e plantarão vinhas, e comerão o fruto delas."], [22, "Não edificarão para que outros habitem; não plantarão para que outros comam; porque os dias do meu povo serão como os dias da árvore, e os meus escolhidos gozarão por longo tempo das obras das suas mãos:"]],
+ "isa 65:25":[[25, "O lobo e o cordeiro juntos se apascentarão, o leão comerá palha como o boi; e pó será a comida da serpente. Não farão mal nem dano algum em todo o meu santo monte, diz o Senhor."]],
+ "isa 66:22-23":[[22, "Pois, como os novos céus e a nova terra, que hei de fazer, durarão diante de mim, diz o Senhor, assim durará a vossa posteridade e o vosso nome."], [23, "E acontecerá que desde uma lua nova até a outra, e desde um sábado até o outro, virá toda a carne a adorar perante mim, diz o Senhor."]],
+ "1co 2:9":[[9, "Mas, como está escrito: As coisas que olhos não viram, nem ouvidos ouviram, nem penetraram o coração do homem, são as que Deus preparou para os que o amam."]],
+ "john 14:15":[[15, "Se me amardes, guardareis os meus mandamentos."]]
+};
+var BIBNAME = "João Ferreira de Almeida (domínio público)";
+
+function openBible(list,opener,start){
+  bibList=list; bibFocus=opener||document.activeElement;
+  var tabs=$("#mtabs");
+  tabs.innerHTML = list.length>1 ? list.map(function(x,k){return '<button class="tab" data-k="'+k+'">'+esc(x[0])+'</button>'}).join("") : "";
+  tabs.style.display = list.length>1 ? "flex" : "none";
+  tabs.querySelectorAll(".tab").forEach(function(b){b.onclick=function(){showRef(+b.dataset.k)}});
+  $("#ov").classList.add("on"); $("#ov").setAttribute("aria-hidden","false");
+  document.body.classList.add("lock"); bibOpen=true;
+  try{history.pushState({bib:1},"")}catch(e){}   // o botão "voltar" do celular fecha o pop-up
+  showRef(start||0); $("#mx").focus();
+}
+function closeBible(fromPop){
+  if(!bibOpen) return;
+  bibOpen=false;
+  $("#ov").classList.remove("on"); $("#ov").setAttribute("aria-hidden","true");
+  document.body.classList.remove("lock");
+  if(!fromPop){ try{ if(history.state&&history.state.bib) history.back(); }catch(e){} }
+  try{ bibFocus&&bibFocus.focus&&bibFocus.focus(); }catch(e){}
+}
+function showRef(k){
+  var item=bibList[k], body=$("#mbody");
+  document.querySelectorAll("#mtabs .tab").forEach(function(b,j){b.classList.toggle("sel",j===k)});
+  body.scrollTop=0;
+  var sb=document.querySelector("#mtabs .tab.sel"); if(sb&&sb.scrollIntoView){ try{sb.scrollIntoView({inline:"center",block:"nearest"})}catch(e){} }
+  var vs=BIB[item[1]];
+  if(vs) draw(item,vs); else body.innerHTML='<h2>'+esc(item[0])+'</h2><div class="ld">Texto não encontrado.</div>';
+}
+function draw(item,vs){
+  var multi=vs.length>1;
+  $("#mbody").innerHTML='<h2>'+esc(item[0])+'</h2>'+vs.map(function(v){return '<p class="vs">'+(multi?'<sup>'+v[0]+'</sup>':'')+esc(v[1])+'</p>'}).join("")+'<div class="ver">Tradução: '+esc(BIBNAME)+'</div>';
+}
+$("#mx").onclick=function(){closeBible()};
+$("#mclose").onclick=function(){closeBible()};
+$("#ov").addEventListener("click",function(e){ if(e.target===this) closeBible(); });
+document.addEventListener("keydown",function(e){ if(e.key==="Escape"&&bibOpen) closeBible(); });
+window.addEventListener("popstate",function(){ if(bibOpen) closeBible(true); });
+
+function render(){
+  var i=st.i; tries=0; sel={};
+  $("#back").style.visibility = i>0 ? "visible" : "hidden";
+  $("#pb").style.width=(Math.max(i,0)/TOTAL*100)+"%";
+  $("#cnt").textContent = i<0 ? "" : i<NQ ? (Q[i].recap?"Recapitulação":"Pergunta "+(i+1)+" de "+(NQ-1)) : i===NQ ? "Compromisso de fé" : "Estudo concluído";
+  if(i<0){ app.innerHTML='<div class="card"><p class="q">Vamos começar</p><p class="intro">Toda pessoa, em algum momento, faz esta pergunta: o que acontece quando a gente morre? Muitos têm medo da resposta, e muitos já ouviram respostas que só aumentaram a dúvida. Vamos procurá-la onde ela é confiável, na Bíblia, e descobrir que a história de Deus com você não termina na sepultura.</p><p class="mut">Tente responder cada pergunta. Se errar, é só tentar de novo: você só avança quando acertar. Se ficar difícil, leia o texto bíblico indicado ou peça ajuda ao seu instrutor.</p><button class="btn" id="go">Começar</button></div>'; $("#go").onclick=function(){st.i=0;save();render()}; return; }
+  if(i<NQ) return question(Q[i],i);
+  if(i===NQ){ app.innerHTML='<div class="card"><p class="q">Compromisso de fé</p><p>Se quiser, marque o que você deseja assumir:</p><label class="chk"><input type="checkbox"><span>Creio que o homem foi criado por Deus para ser imortal, mas perdeu a imortalidade por causa da desobediência.</span></label><label class="chk"><input type="checkbox"><span>Creio que a morte é um sono e que os mortos justos ressuscitarão na segunda vinda de Jesus.</span></label><label class="chk"><input type="checkbox"><span>Creio que Jesus está preparando morada para mim.</span></label><label class="chk"><input type="checkbox"><span>Quero ter a marca daqueles que amam a Jesus e desejo obedecer-Lhe em tudo.</span></label><button class="btn" id="nx">Concluir o estudo</button></div>'; $("#nx").onclick=function(){st.i=NQ+1;save();render()}; return; }
+  if(!st.d){st.d=1;save();}
+  app.innerHTML='<div class="card"><p class="q">Parabéns! Você concluiu o Estudo 5.</p><p>Agora você sabe o que a Bíblia ensina sobre a morte e sobre o lar que Deus preparou para os salvos. O próximo estudo será liberado pelo seu instrutor.</p>'+(st.u?'<p class="msg ok">Estudo 6 liberado!</p><a class="btn" href="'+NEXT_URL+'">Ir para o Estudo 6</a>':'<div class="tc"><input id="uc" placeholder="Código de liberação" autocapitalize="characters"><button class="btn sec" id="ub" style="margin:0">Liberar</button></div><div id="um" class="msg"></div>')+'</div>';
+  if(!st.u) $("#ub").onclick=function(){ if($("#uc").value.trim().toUpperCase()===NEXT_CODE){st.u=1;save();render()} else {$("#um").className="msg no";$("#um").textContent="Código incorreto. Peça ao seu instrutor.";tone(BAD)} };
+}
+
+function question(q,i){
+  var h='<div class="card" id="c"><div class="q">'+(q.recap?q.q:(i+1)+". "+q.q)+'</div>';
+  if(q.v) h+='<div class="ref">📖 '+q.v.map(function(x,k){return '<button class="refbtn" data-k="'+k+'">'+esc(x[0])+'</button>'}).join(" · ")+' <span class="mut">· toque para ler</span></div>'; else h+='<div class="ref"></div>';
+  var parts={
+    p:function(){ var k=0; return '<p class="s">'+q.p.map(function(x){return typeof x==="string"?x:'<input class="b" data-k="'+(k++)+'" autocomplete="off" autocapitalize="off" spellcheck="false" aria-label="Resposta '+k+'">'}).join("")+'</p>'; },
+    i:function(){ return (q.s?'<p class="sub">'+q.s+'</p>':'')+q.i.map(function(x,k){return '<div class="row"><span>'+x[0]+'</span><span class="vf" data-k="'+k+'"><button data-v="1" aria-label="Verdadeiro">V</button><button data-v="0" aria-label="Falso">F</button></span></div>'}).join(""); },
+    o:function(){ return q.o.map(function(x,k){return '<button class="opt" data-k="'+k+'">'+x+'</button>'}).join(""); }
+  };
+  (q.ord||"poi").split("").forEach(function(c){ if(q[c]) h+=parts[c](); });
+  h+='<div id="fb"></div><button class="btn" id="ck">Verificar</button></div>';
+  app.innerHTML=h;
+  document.querySelectorAll(".refbtn").forEach(function(b){b.onclick=function(){openBible(q.v,b,+b.dataset.k)}});
+  document.querySelectorAll(".vf button").forEach(function(b){b.onclick=function(){var p=b.parentNode;p.querySelectorAll("button").forEach(function(x){x.classList.remove("sel")});b.classList.add("sel");sel[p.dataset.k]=+b.dataset.v}});
+  document.querySelectorAll(".opt").forEach(function(b){b.onclick=function(){document.querySelectorAll(".opt").forEach(function(x){x.classList.remove("sel")});b.classList.add("sel");sel.c=+b.dataset.k}});
+  $("#ck").onclick=function(){check(q,i)};
+  document.querySelectorAll("input.b").forEach(function(f){f.addEventListener("keydown",function(e){if(e.key==="Enter")check(q,i)})});
+  var sa=st.a&&st.a[i]; if(sa){ putAns(q,sa); check(q,i,true); }
+}
+
+function canonAns(q){ var a={}; if(q.p) a.f=q.p.filter(function(x){return typeof x!=="string"}).map(function(x){return x[0]}); if(q.i){ a.v={}; q.i.forEach(function(x,k){ a.v[k]=x[1]; }); } if(q.o) a.c=q.c; return a; }
+function readAns(q){ var a={}; if(q.p) a.f=[].map.call(document.querySelectorAll("input.b"),function(x){return x.value}); if(q.i){ a.v={}; q.i.forEach(function(x,k){ if(sel[k]!==undefined) a.v[k]=sel[k]; }); } if(q.o&&sel.c!==undefined) a.c=sel.c; return a; }
+function putAns(q,a){
+  if(a.f) [].forEach.call(document.querySelectorAll("input.b"),function(x,k){ x.value=a.f[k]||""; });
+  if(a.v) Object.keys(a.v).forEach(function(k){ sel[k]=a.v[k]; var g=document.querySelector('.vf[data-k="'+k+'"]'); if(g) g.querySelectorAll("button").forEach(function(b){ b.classList.toggle("sel",+b.dataset.v===a.v[k]); }); });
+  if(a.c!==undefined){ sel.c=a.c; document.querySelectorAll(".opt").forEach(function(b){ b.classList.toggle("sel",+b.dataset.k===a.c); }); }
+}
+function answerText(q){
+  var a=[];
+  if(q.p) a.push(q.p.filter(function(x){return typeof x!=="string"}).map(function(x){return x[0]}).join(" · "));
+  if(q.i) a.push(q.i.map(function(x){return (x[1]?"V":"F")}).join(" · "));
+  if(q.o) a.push(q.o[q.c]);
+  return a.join(" | ");
+}
+function check(q,i,silent){
+  var ok=true, fb=$("#fb"), card=$("#c");
+  if(q.p){ var k=0; q.p.forEach(function(x){ if(typeof x==="string")return; var inp=document.querySelector('input[data-k="'+(k++)+'"]'); var v=norm(inp.value); var good=!!v&&accepted(x).some(function(a){return match(v,a)}); inp.classList.toggle("ok",good); inp.classList.toggle("no",!good); if(!good) ok=false; }); }
+  if(q.i){ q.i.forEach(function(x,k){ var g=document.querySelector('.vf[data-k="'+k+'"]'); var good=sel[k]===x[1]; g.classList.toggle("ok",good); g.classList.toggle("no",!good); if(!good) ok=false; }); }
+  if(q.o){ document.querySelectorAll(".opt").forEach(function(b){b.classList.remove("ok","no")}); var b=document.querySelector('.opt[data-k="'+sel.c+'"]'); if(sel.c===undefined) ok=false; else { b.classList.add(sel.c===q.c?"ok":"no"); if(sel.c!==q.c) ok=false; } }
+  if(ok) return acerto(q,i,silent);
+  if(silent) return;
+  tries++; tone(BAD); try{navigator.vibrate&&navigator.vibrate([80,60,80])}catch(e){}
+  card.classList.remove("shake"); void card.offsetWidth; card.classList.add("shake");
+  var m='<div class="msg no">Ainda não. Releia o texto e tente de novo.</div>';
+  if(tries>=2) m+='<div class="hint">💡 Dica: '+q.h+'</div>';
+  if(tries>=3) m+='<button class="btn sec" id="ti">Chamar o instrutor</button><div id="tb"></div>';
+  fb.innerHTML=m;
+  if(tries>=3) $("#ti").onclick=function(){ $("#tb").innerHTML='<div class="tc"><input id="tcd" type="password" placeholder="Código do instrutor"><button class="btn sec" id="tok" style="margin:0">OK</button></div><div id="tr"></div>'; $("#tok").onclick=function(){ if($("#tcd").value===TEACHER_CODE){ $("#tr").innerHTML='<div class="note">Resposta: '+answerText(q)+'</div><button class="btn" id="sk">Seguir adiante</button>'; $("#sk").onclick=function(){ st.a=st.a||{}; st.a[i]=canonAns(q); avancar(); }; } else {$("#tr").innerHTML='<div class="msg no">Código incorreto.</div>';tone(BAD)} } };
+}
+function acerto(q,i,silent){
+  if(!silent){ st.a=st.a||{}; st.a[i]=readAns(q); save(); tone(GOOD); }
+  document.querySelectorAll("input.b,.opt,.vf button").forEach(function(x){x.disabled=true});
+  var h='<div class="msg ok">Muito bem! ✔</div>'+(q.n?'<div class="note">'+q.n+'</div>':'')+'<button class="btn" id="nx">'+(i===NQ-1?"Continuar":"Próxima pergunta")+'</button>';
+  $("#fb").innerHTML=h; $("#ck").style.display="none"; $("#nx").onclick=avancar; if(!silent) $("#nx").focus();
+}
+function avancar(){ st.i++; save(); render(); window.scrollTo({top:0,behavior:"smooth"}); }
+
+function voltar(){ if(st.i<=0) return; closeBible(); st.i--; save(); render(); window.scrollTo({top:0,behavior:"smooth"}); }
+$("#back").onclick=voltar;
+$("#mute").onclick=function(){muted=!muted;this.textContent=muted?"🔇 Som desligado":"🔊 Som ligado"};
+$("#reset").onclick=function(){ st={i:-1,u:0}; save(); render(); };
+render();
+</script>
+</body>
+</html>

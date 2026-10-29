@@ -1,0 +1,328 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="robots" content="noindex">
+<title>Estudo 7 · Lei de Deus e Sábado</title>
+<style>
+:root{--bg:#FFF8E7;--card:#fff;--tx:#222;--mut:#666;--navy:#1F3A5F;--qc:#1F3A5F;--or:#E07B39;--teal:#2A7F8E;--ok:#2E7D32;--bad:#C62828;--line:#E6D9B8;--inp:#FDF1D8;--gold:#F4B43C;box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}
+@media (prefers-color-scheme:dark){:root:not([data-theme="light"]){--bg:#0F1B2D;--card:#172A45;--tx:#EDEFF2;--mut:#A9B4C4;--navy:#14263F;--qc:#C9DAF5;--or:#F0914F;--teal:#6CC6D3;--ok:#66BB6A;--bad:#EF5350;--line:#2B4466;--inp:#1E3556}}
+:root[data-theme="dark"]{--bg:#0F1B2D;--card:#172A45;--tx:#EDEFF2;--mut:#A9B4C4;--navy:#14263F;--qc:#C9DAF5;--or:#F0914F;--teal:#6CC6D3;--ok:#66BB6A;--bad:#EF5350;--line:#2B4466;--inp:#1E3556}
+html{scroll-padding-top:env(safe-area-inset-top,0px)}
+body{margin:0;background:var(--bg);color:var(--tx);font:17px/1.55 Calibri,"Segoe UI",system-ui,sans-serif}
+body.lock{overflow:hidden}
+.wrap{max-width:640px;margin:0 auto;padding:0 14px 40px}
+.hero{background:radial-gradient(circle at 88% 20%,#f4b43c55,transparent 45%),linear-gradient(135deg,var(--navy),#2c527f);color:#fff;margin:0 -14px 14px;padding:22px 22px 20px;border-radius:0 0 24px 24px}
+.hero small{color:var(--gold);letter-spacing:.3em;font-weight:700;font-size:13px}
+.hero .n{font:700 56px/1 Georgia,serif;color:#F0914F;margin-top:2px}
+.hero h1{font:700 30px/1.15 Georgia,serif;margin:4px 0 0}
+.bar{height:8px;background:var(--line);border-radius:6px;overflow:hidden;margin:6px 0 4px}
+.bar i{display:block;height:100%;width:0;background:var(--or);transition:width .4s}
+.cnt{font-size:14px;color:var(--mut);margin-bottom:10px}
+.card{background:var(--card);border-radius:14px;padding:18px;border:1px solid var(--line);border-left:6px solid var(--or)}
+.q{font:700 19px/1.35 Georgia,serif;color:var(--qc)}
+.ref{margin:8px 0 14px}
+.refbtn{font:inherit;font-weight:700;color:var(--teal);background:transparent;border:0;border-bottom:2px dotted var(--teal);padding:2px 0;margin:0 2px;cursor:pointer;text-align:left}
+.s{line-height:2.3;margin:0 0 6px}
+.s+.row,.sub+.row{border-top:1px solid var(--line)}
+.sub{margin:12px 0 2px;color:var(--mut);font-size:15px}
+.intro{margin:0 0 10px}
+.mut{color:var(--mut);font-size:15px}
+a.btn{display:inline-block;text-decoration:none}
+input.b{font:inherit;border:2px solid var(--line);background:var(--inp);color:var(--tx);border-radius:8px;padding:1px 8px;width:9em;max-width:100%}
+input.ok,.opt.ok{border-color:var(--ok)!important;background:color-mix(in srgb,var(--ok) 15%,transparent)!important}
+input.no,.opt.no{border-color:var(--bad)!important}
+.opt{display:block;width:100%;text-align:left;font:inherit;color:var(--tx);background:var(--card);padding:11px 12px;border:2px solid var(--line);border-radius:10px;margin:8px 0;cursor:pointer}
+.opt.sel{border-color:var(--or)}
+.row{display:flex;justify-content:space-between;gap:10px;align-items:center;padding:8px 0;border-bottom:1px solid var(--line)}
+.vf{display:flex;gap:6px;flex:none}
+.vf button{width:44px;height:44px;border-radius:50%;border:2px solid var(--line);background:var(--card);color:var(--tx);font:700 16px inherit;cursor:pointer}
+.vf button.sel{background:var(--or);border-color:var(--or);color:#fff}
+.vf.ok button.sel{background:var(--ok);border-color:var(--ok)}
+.vf.no button.sel{background:var(--bad);border-color:var(--bad)}
+.btn{background:var(--or);color:#fff;border:0;border-radius:12px;padding:13px 22px;font:700 17px inherit;cursor:pointer;margin-top:16px}
+a.btn{display:inline-block;text-decoration:none}
+.btn.sec{background:transparent;color:var(--teal);border:2px solid var(--teal);padding:9px 16px;font-size:15px;margin-top:10px}
+.btn:focus-visible,.opt:focus-visible,.vf button:focus-visible,input:focus-visible,a:focus-visible,.refbtn:focus-visible,.xbtn:focus-visible,.tab:focus-visible{outline:3px solid var(--teal);outline-offset:2px}
+.msg{margin-top:12px;font-weight:700}.msg.ok{color:var(--ok)}.msg.no{color:var(--bad)}
+.hint,.note{margin-top:10px;padding:10px 12px;border-radius:10px;background:var(--inp);font-size:15px}
+.note{border-left:4px solid var(--teal)}
+.shake{animation:sh .35s}
+@keyframes sh{20%,60%{transform:translateX(-7px)}40%,80%{transform:translateX(7px)}}
+.foot{display:flex;justify-content:space-between;margin-top:18px;font-size:14px;color:var(--mut)}
+.foot a.home{color:var(--mut);text-decoration:underline;padding:6px}
+.foot button{background:none;border:0;color:var(--mut);font:inherit;text-decoration:underline;cursor:pointer;padding:6px}
+.tc{display:flex;gap:8px;margin-top:8px}.tc input{flex:1;min-width:0;font:inherit;padding:8px;border-radius:8px;border:2px solid var(--line);background:var(--inp);color:var(--tx)}
+.chk{display:flex;gap:10px;align-items:flex-start;padding:8px 0}.chk input{width:22px;height:22px;margin-top:3px;accent-color:var(--or)}
+/* ===== Pop-up do texto bíblico ===== */
+.ov{position:fixed;inset:0;z-index:100;display:none;align-items:flex-end;justify-content:center;background:rgba(10,20,40,.6);-webkit-backdrop-filter:blur(3px);backdrop-filter:blur(3px)}
+.ov.on{display:flex;animation:fd .2s}
+.md{background:var(--card);color:var(--tx);width:100%;max-width:640px;max-height:84vh;max-height:84dvh;display:flex;flex-direction:column;overflow:hidden;border-radius:24px 24px 0 0;border-top:6px solid var(--or);box-shadow:0 -10px 40px rgba(0,0,0,.35);animation:up .28s ease-out}
+.mh{display:flex;align-items:center;justify-content:space-between;gap:10px;padding:14px 12px 8px 20px}
+.mh b{font:700 13px/1 Calibri,system-ui,sans-serif;letter-spacing:.2em;color:var(--or);text-transform:uppercase}
+.xbtn{flex:none;width:44px;height:44px;border-radius:50%;border:0;background:var(--inp);color:var(--tx);font:400 26px/1 system-ui,sans-serif;cursor:pointer;display:flex;align-items:center;justify-content:center}
+.tabs{display:flex;gap:8px;padding:0 20px 8px;overflow-x:auto}
+.tab{flex:none;font:inherit;font-weight:700;font-size:15px;color:var(--teal);background:transparent;border:2px solid var(--teal);border-radius:999px;padding:6px 14px;cursor:pointer}
+.tab.sel{background:var(--teal);color:#fff}
+.mb{padding:6px 20px 12px;overflow-y:auto;-webkit-overflow-scrolling:touch;min-height:120px}
+.mb h2{font:700 24px/1.2 Georgia,serif;color:var(--qc);margin:4px 0 12px}
+.vs{font:20px/1.75 Georgia,serif;margin:0 0 10px}
+.vs sup{font:700 12px Calibri,system-ui,sans-serif;color:var(--or);margin-right:3px}
+.ver{font-size:13px;color:var(--mut);margin-top:12px}
+.ld{color:var(--mut);padding:24px 0;text-align:center}
+.mf{padding:6px 20px calc(16px + env(safe-area-inset-bottom,0px))}
+.mf .btn{width:100%;margin-top:6px}
+@keyframes up{from{transform:translateY(40px);opacity:0}to{transform:none;opacity:1}}
+@keyframes fd{from{opacity:0}to{opacity:1}}
+@media (min-width:700px){.ov{align-items:center}.md{border-radius:24px;max-height:80vh}.mf{padding-bottom:18px}}
+@media (prefers-reduced-motion:reduce){.shake,.md,.ov.on{animation:none}.bar i{transition:none}}
+</style>
+</head>
+<body>
+<div class="wrap">
+  <div class="hero"><small>ESTUDO</small><div class="n">7</div><h1>Lei de Deus e Sábado</h1></div>
+  <div class="bar"><i id="pb"></i></div>
+  <div class="cnt" id="cnt"></div>
+  <main id="app"></main>
+  <div class="foot"><button id="mute">🔊 Som ligado</button><a class="home" href="../estudos/">Estudos</a><button id="back" aria-label="Voltar à pergunta anterior">← Voltar</button><button id="reset">Recomeçar</button></div>
+</div>
+
+<!-- Pop-up do texto bíblico -->
+<div class="ov" id="ov" aria-hidden="true">
+  <div class="md" role="dialog" aria-modal="true" aria-labelledby="mt">
+    <div class="mh"><b id="mt">📖 Texto bíblico</b><button class="xbtn" id="mx" aria-label="Fechar">×</button></div>
+    <div class="tabs" id="mtabs"></div>
+    <div class="mb" id="mbody"></div>
+    <div class="mf"><button class="btn" id="mclose">Fechar e voltar à pergunta</button></div>
+  </div>
+</div>
+
+<script>
+// ====== CONFIGURAÇÃO (edite aqui) ======
+var TEACHER_CODE = "1234";    // código do instrutor (mostra a resposta)
+var NEXT_CODE = "ESTUDO8";    // código que libera o próximo estudo
+var NEXT_URL = "../estudo-8/"; // endereço da página do próximo estudo
+var KEY = "didaque_e7_v1";
+
+// Cada resposta: [texto exibido, trechos aceitos...]  (sem acento, minúsculas; "=" no início = palavra exata)
+var Q = [
+ {q:"Que tipo de lei expressa o caráter de Deus e que foi escrita pelo dedo do próprio Deus em tábuas de pedra?",
+  v:[["Êxodo 31:18","exo 31:18"],["Êxodo 20:3-17","exo 20:3-17"]],
+  o:["Lei civil","Lei cerimonial","Lei de saúde","Lei moral (os dez mandamentos)"], c:3,
+  h:"Êxodo 31:18 diz que as tábuas foram escritas pelo dedo de Deus. Êxodo 20:3-17 traz os dez mandamentos.",
+  n:"A Bíblia traz quatro tipos de leis: civis (para governar a nação de Israel), cerimoniais (sacrifícios e ofertas do santuário), de saúde e a lei moral. Não podemos confundir uma com a outra."},
+ {q:"O que aconteceu com a lei cerimonial, ligada ao santuário, depois da morte de Cristo?",
+  v:[["Efésios 2:15","eph 2:15"],["Colossenses 2:14","col 2:14"]],
+  s:"Marque V ou F em cada frase:",
+  i:[["O ritual do santuário era regido pela lei cerimonial.",1],["Depois da morte de Cristo, a lei cerimonial continuou em vigor.",0],["A lei cerimonial foi cancelada na cruz.",1]],
+  h:"Os dois textos falam de uma lei de ordenanças que Cristo tirou do meio e cravou na cruz.",
+  n:"Os sacrifícios apontavam para Jesus. Quando Ele morreu, a sombra deu lugar à realidade e essa lei chegou ao fim."},
+ {q:"E a lei dos dez mandamentos? Qual foi a atitude de Jesus diante dela?",
+  v:[["Mateus 5:17-18","mat 5:17-18"],["João 15:10","john 15:10"]],
+  o:["Aboliu os mandamentos","Alterou os mandamentos em parte","Confirmou os mandamentos e os guardou"], c:2,
+  h:"Em Mateus 5:17 Jesus diz que não veio revogar a lei. Em João 15:10 Ele diz que guardou os mandamentos do Pai.",
+  n:"Jesus nunca mudou um só mandamento. Ele os viveu."},
+ {q:"Segundo Jesus, em quantas partes estão divididos os dez mandamentos?",
+  v:[["Mateus 22:36-40","mat 22:36-40"]],
+  p:["A primeira parte é o amor a ",["Deus","deus"],"; a segunda, o amor ao ",["próximo","proximo","proxim"],". Destes dois mandamentos dependem toda a ",["lei","lei"]," e os ",["profetas","profet"],"."],
+  h:"Mateus 22:37-40 resume tudo em dois grandes mandamentos: amar a Deus e amar ao ...",
+  n:"São duas partes: as quatro primeiras tratam da nossa relação com Deus; as seis últimas, da relação com as pessoas."},
+ {q:"A fé em Cristo anula a obrigação de seguir os dez mandamentos?",
+  v:[["Romanos 3:31","rom 3:31"],["Romanos 7:12","rom 7:12"]],
+  p:["Anulamos a lei pela fé? De maneira ",["nenhuma","nenhum"],". Antes, ",["confirmamos","confirm","estabelec"]," a lei. A lei é ",["santa","sant"],", e o mandamento é santo, justo e bom."],
+  h:"Romanos 3:31 responde que a fé não anula a lei; Romanos 7:12 diz como é a lei.",
+  n:"A lei mostra o que é o pecado, mas não salva. Quem salva é Jesus."},
+ {q:"Qual é a relação entre a salvação e a obediência aos mandamentos?",
+  v:[["Efésios 2:8-9","eph 2:8-9"],["1 João 5:2-3","1jo 5:2-3"]],
+  o:["Guardamos os mandamentos para sermos salvos","Guardamos os mandamentos porque já fomos salvos, por amor a Cristo","Quem é salvo não precisa mais dos mandamentos"], c:1,
+  h:"Efésios 2:8-9 diz como somos salvos. 1 João 5:3 diz como mostramos amor a Deus.",
+  n:"A obediência não é a causa da salvação, é o resultado dela. Não se guarda a lei para ser salvo, e sim por estar salvo em Cristo. Quem está em Cristo recebe dEle poder para ser fiel, e o faz por amor."},
+ {q:"O que a Bíblia diz que aconteceria no futuro com a lei de Deus?",
+  v:[["Daniel 7:25","dan 7:25"],["Daniel 8:12","dan 8:12"]],
+  s:"Marque V ou F em cada frase:",
+  i:[["A verdade de Deus seria lançada por terra.",1],["Um poder tentaria mudar os tempos e a lei.",1],["Deus daria permissão para mudar os Seus mandamentos.",0]],
+  h:"Daniel 7:25 fala de quem cuidaria em mudar os tempos e a lei. Daniel 8:12 diz o que seria lançado por terra.",
+  n:"A Bíblia avisou que haveria tentativas humanas de mudar a lei de Deus. Mas isso nunca teve a aprovação de Deus."},
+ {q:"O que Jesus diz sobre os mandamentos de homens, e a quem devemos obedecer primeiro?",
+  v:[["Marcos 7:6-9","mar 7:6-9"],["Atos 5:29","act 5:29"]],
+  p:["Em vão Me adoram, ensinando ",["doutrinas","doutrina","ensin"]," que são ",["mandamentos","mandamento","preceito"]," de homens. Mais importa obedecer a ",["Deus","deus"]," do que aos ",["homens","homem"],"."],
+  h:"Marcos 7:7 fala do que os homens ensinam. Atos 5:29 diz a quem importa obedecer.",
+  n:"Devemos rejeitar tradições e mandamentos humanos que nos desviam da verdade. Um Deus que ama sabe o que é melhor para os Seus filhos."},
+ {q:"Vamos agora ao quarto mandamento. O que ele diz?",
+  v:[["Êxodo 20:8-11","exo 20:8-11"]],
+  p:["Lembra-te do dia do ",["sábado","sabado"],", para o ",["santificar","santific","santo","consagr"],". Em seis dias fez o ",["Senhor","senhor","deus"]," os céus e a Terra, e ao sétimo dia ",["descansou","descans","repous"],". O sétimo dia é o sábado do Senhor teu Deus."],
+  h:"Êxodo 20:8: Lembra-te do dia do ... para o ... . O versículo 11 diz o que Deus fez no sétimo dia.",
+  n:"É o único mandamento que começa com a palavra “lembra-te”."},
+ {q:"Quem estabeleceu o sábado, quando e por quê?",
+  v:[["Gênesis 2:1-3","gen 2:1-3"],["Marcos 2:27-28","mar 2:27-28"]],
+  p:["Deus estabeleceu o sábado na ",["criação","criacao","cria","princip"],", antes de entrar o ",["pecado","peca"]," no mundo. Jesus disse que o sábado foi feito por causa do ",["homem","ser humano","human","adao"],"."],
+  h:"Gênesis 2:2-3 mostra quando o sábado começou. Marcos 2:27 diz para quem ele foi feito.",
+  n:"Adão e Eva eram os únicos habitantes do mundo. Por isso, o sábado é anterior à nação judaica e foi feito para toda a humanidade."},
+ {q:"O que a Bíblia diz sobre o sábado no tempo dos profetas?",
+  v:[["Êxodo 16:23","exo 16:23"],["Isaías 58:13-14","isa 58:13-14"],["Ezequiel 20:12","eze 20:12"]],
+  s:"Marque V ou F em cada frase:",
+  i:[["No tempo de Moisés, Deus já falava do santo sábado.",1],["Isaías e Ezequiel também falaram do sábado como dia santo.",1],["O Antigo Testamento ensina que o dia de guarda seria mudado para o domingo.",0]],
+  h:"Os três textos falam do sábado. Nenhum deles fala em mudar o dia de guarda.",
+  n:"Jeremias e Neemias também mencionam o sábado. No Antigo Testamento não há nenhum texto indicando mudança do dia de guarda."},
+ {q:"Que dia foi observado por Jesus e por seus seguidores?",
+  v:[["Lucas 4:16","luk 4:16"],["Atos 17:2","act 17:2"],["Lucas 23:54-56","luk 23:54-56"]],
+  s:"Marque V ou F em cada frase:",
+  i:[["Jesus tinha o costume de ir à sinagoga no sábado.",1],["O apóstolo Paulo também tinha o costume de reunir-se no sábado.",1],["As mulheres que seguiam Jesus descansaram no sábado, depois da Sua morte, conforme o mandamento.",1],["Jesus e seus seguidores guardavam o domingo.",0]],
+  h:"Lucas 4:16 diz qual era o costume de Jesus. Atos 17:2 diz qual era o costume de Paulo.",
+  n:"Jesus, os apóstolos e os primeiros cristãos observavam o sábado."},
+ {q:"Que dia os salvos guardarão na Nova Terra, e podemos ignorar esse mandamento?",
+  v:[["Isaías 66:22-23","isa 66:22-23"],["Tiago 2:10-11","jas 2:10-11"],["1 João 2:4","1jo 2:4"]],
+  s:"Marque V ou F em cada frase:",
+  i:[["Na Nova Terra, os salvos adorarão a Deus de sábado em sábado.",1],["Podemos ignorar um mandamento, se guardarmos os outros.",0],["Quem diz conhecer a Deus, mas não guarda os Seus mandamentos, é mentiroso.",1]],
+  h:"Isaías 66:23 fala de sábado em sábado. Tiago 2:10 diz o que acontece com quem tropeça em um só ponto da lei.",
+  n:"Guardar o sábado não é meio de alcançar a salvação, que vem unicamente pela graça de Jesus. É uma demonstração de amor a Deus e fruto da experiência pessoal com Ele."},
+ {q:"O que dizem os oito textos do Novo Testamento que citam o primeiro dia da semana (o domingo)?",
+  v:[["Mateus 28:1","mat 28:1"],["Marcos 16:1","mar 16:1"],["Marcos 16:9","mar 16:9"],["Lucas 24:1","luk 24:1"],["João 20:1","john 20:1"],["João 20:19","john 20:19"],["Atos 20:7","act 20:7"],["1 Coríntios 16:2","1co 16:2"]],
+  o:["Ordenam guardar o domingo como dia de adoração","Apenas contam fatos que ocorreram nesse dia; nenhum manda guardá-lo","Mudam o sábado para o domingo"], c:1,
+  h:"Leia os textos pelas abas. Algum deles dá uma ordem de guardar o domingo?",
+  n:"Nenhum desses textos apresenta o domingo como dia de adoração. Na Bíblia, o símbolo da ressurreição de Cristo é o batismo (Romanos 6:3-8), e não o domingo."},
+ {q:"Quem ordenou, pela primeira vez, a guarda do domingo, e quando isso ocorreu?",
+  p:["Foi o imperador ",["Constantino","constantino"],", no ano ",["321","=321"]," d.C."],
+  h:"Foi um imperador romano. O ano tem três algarismos e começa com 3.",
+  n:"O decreto de 7 de março de 321 chamava o domingo de “venerável dia do Sol”. Entre os pagãos, o primeiro dia da semana era dedicado à adoração dos astros (Dt 4:19). Essa mudança veio de uma decisão humana, e não da Bíblia."},
+ {q:"Recapitulação", recap:1,
+  p:["Os dez mandamentos fazem parte da lei ",["moral","moral"],", escrita pelo dedo de ",["Deus","deus"],". A lei ",["cerimonial","cerimon"]," terminou na cruz. Jesus ",["confirmou","confirm","guardou","cumpr","obedec"]," os mandamentos. A obediência é o ",["resultado","result","fruto"]," da salvação. A profecia sobre a mudança da lei está em Daniel ",["7","=7"],". Mais importa obedecer a ",["Deus","deus"]," que aos homens. O sábado foi instituído na ",["criação","criacao","cria"],", antes do ",["pecado","peca"],". Jesus e seus seguidores guardavam o ",["sábado","sabado"],". Nenhum texto bíblico manda guardar o domingo, que foi decretado pelo imperador ",["Constantino","constantino"]," no ano ",["321","=321"],"."],
+  h:"Use as respostas que você já deu nas perguntas."}
+];
+var NQ = Q.length, TOTAL = NQ + 2;
+var $ = function(s){return document.querySelector(s)}, app = $("#app");
+var st = {i:-1,u:0}; try{var sv=JSON.parse(localStorage.getItem(KEY)); if(sv) st=sv;}catch(e){}
+function save(){try{localStorage.setItem(KEY,JSON.stringify(st))}catch(e){}}
+var muted=false, tries=0, sel={}, ac;
+
+function norm(s){return String(s).toLowerCase().normalize("NFD").replace(/[\u0300-\u036f]/g,"").replace(/[^a-z0-9 ]/g," ").replace(/\s+/g," ").trim()}
+function match(v,a){ if(a.charAt(0)==="=") return (" "+v+" ").indexOf(" "+norm(a.slice(1))+" ")>-1; return v.indexOf(norm(a))>-1; }
+function accepted(x){ return x.length>1 ? x.slice(1) : x; }
+function esc(s){return String(s).replace(/[&<>"]/g,function(c){return {"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;"}[c]})}
+function tone(seq){ if(muted) return; try{ ac=ac||new (window.AudioContext||window.webkitAudioContext)(); var t=ac.currentTime;
+  seq.forEach(function(n){var o=ac.createOscillator(),g=ac.createGain();o.type=n[2]||"sine";o.frequency.value=n[0];g.gain.setValueAtTime(.16,t);g.gain.exponentialRampToValueAtTime(.001,t+n[1]);o.connect(g);g.connect(ac.destination);o.start(t);o.stop(t+n[1]);t+=n[1]+.06}); }catch(e){} }
+var BAD=[[190,.18,"square"],[150,.3,"square"]], GOOD=[[660,.12],[880,.22]];
+
+/* ===== Pop-up bíblico ===== */
+var bibOpen=false, bibList=[], bibFocus=null;
+// ====== TEXTOS BÍBLICOS (ficam dentro do aplicativo, funcionam sem internet) ======
+// Formato: "chave": [ [número do versículo, "texto"], ... ]
+var BIB = {"exo 31:18": [[18, "E deu a Moisés, quando acabou de falar com ele no monte Sinai, as duas tábuas do testemunho, tábuas de pedra, escritas pelo dedo de Deus."]], "exo 20:3-17": [[3, "Não terás outros deuses diante de mim."], [4, "Não farás para ti imagem de escultura, nem alguma semelhança do que há em cima nos céus, nem embaixo na terra, nem nas águas debaixo da terra."], [5, "Não te encurvarás a elas nem as servirás; porque eu, o Senhor teu Deus, sou Deus zeloso, que visito a iniquidade dos pais nos filhos, até a terceira e quarta geração daqueles que me aborrecem,"], [6, "e faço misericórdia em milhares aos que me amam e guardam os meus mandamentos."], [7, "Não tomarás o nome do Senhor teu Deus em vão; porque o Senhor não terá por inocente o que tomar o seu nome em vão."], [8, "Lembra-te do dia do sábado, para o santificar."], [9, "Seis dias trabalharás, e farás toda a tua obra,"], [10, "mas o sétimo dia é o sábado do Senhor teu Deus; não farás nenhuma obra, nem tu, nem o teu filho, nem a tua filha, nem o teu servo, nem a tua serva, nem o teu animal, nem o teu estrangeiro, que está dentro das tuas portas."], [11, "Porque em seis dias fez o Senhor os céus e a terra, o mar e tudo o que neles há, e ao sétimo dia descansou; por isso abençoou o Senhor o dia do sábado, e o santificou."], [12, "Honra teu pai e tua mãe, para que se prolonguem os teus dias na terra que o Senhor teu Deus te dá."], [13, "Não matarás."], [14, "Não adulterarás."], [15, "Não furtarás."], [16, "Não dirás falso testemunho contra o teu próximo."], [17, "Não cobiçarás a casa do teu próximo, não cobiçarás a mulher do teu próximo, nem o seu servo, nem a sua serva, nem o seu boi, nem o seu jumento, nem coisa alguma do teu próximo."]], "eph 2:15": [[15, "Na sua carne desfez a inimizade, isto é, a lei dos mandamentos que consistia em ordenanças, para criar em si mesmo, dos dois, um novo homem, fazendo a paz,"]], "col 2:14": [[14, "Havendo riscado a cédula que era contra nós nas suas ordenanças, a qual de alguma maneira nos era contrária, e a tirou do meio de nós, cravando-a na cruz;"]], "mat 5:17-18": [[17, "Não cuideis que vim destruir a lei ou os profetas; não vim ab-rogar, mas cumprir."], [18, "Porque em verdade vos digo que, até que o céu e a terra passem, nem um jota ou um til se omitirá da lei, sem que tudo seja cumprido."]], "john 15:10": [[10, "Se guardardes os meus mandamentos, permanecereis no meu amor, como também eu tenho guardado os mandamentos de meu Pai, e permaneço no seu amor."]], "mat 22:36-40": [[36, "Mestre, qual é o grande mandamento na lei?"], [37, "Disse-lhe Jesus: Amarás o Senhor teu Deus de todo o teu coração, e de toda a tua alma, e de todo o teu pensamento."], [38, "Este é o primeiro e grande mandamento."], [39, "E o segundo, semelhante a este, é: Amarás o teu próximo como a ti mesmo."], [40, "Destes dois mandamentos dependem toda a lei e os profetas."]], "rom 3:31": [[31, "Anulamos, pois, a lei pela fé? De maneira nenhuma, antes estabelecemos a lei."]], "rom 7:12": [[12, "Assim que a lei é santa, e o mandamento santo, e justo, e bom."]], "eph 2:8-9": [[8, "Porque pela graça sois salvos, por meio da fé; e isso não vem de vós, é dom de Deus;"], [9, "não vem das obras, para que ninguém se glorie."]], "1jo 5:2-3": [[2, "Nisto conhecemos que amamos os filhos de Deus: quando amamos a Deus e guardamos os seus mandamentos."], [3, "Porque este é o amor de Deus: que guardemos os seus mandamentos; e os seus mandamentos não são pesados."]], "dan 7:25": [[25, "E proferirá palavras contra o Altíssimo, e destruirá os santos do Altíssimo, e cuidará em mudar os tempos e a lei; e eles serão entregues na sua mão por um tempo, e tempos, e metade de um tempo."]], "dan 8:12": [[12, "E o exército lhe foi entregue, com o sacrifício contínuo, por causa das transgressões; e lançou por terra a verdade; e fez isto, e prosperou."]], "mar 7:6-9": [[6, "E ele, respondendo, disse-lhes: Bem profetizou Isaías acerca de vós, hipócritas, como está escrito: Este povo honra-me com os lábios, mas o seu coração está longe de mim."], [7, "Em vão, porém, me honram, ensinando doutrinas que são mandamentos de homens."], [8, "Porque, deixando o mandamento de Deus, retendes a tradição dos homens, como o lavar dos jarros e dos copos; e fazeis muitas outras coisas semelhantes a estas."], [9, "E dizia-lhes: Bem invalidais o mandamento de Deus para guardardes a vossa tradição."]], "act 5:29": [[29, "Mas, respondendo Pedro e os apóstolos, disseram: Mais importa obedecer a Deus do que aos homens."]], "exo 20:8-11": [[8, "Lembra-te do dia do sábado, para o santificar."], [9, "Seis dias trabalharás, e farás toda a tua obra,"], [10, "mas o sétimo dia é o sábado do Senhor teu Deus; não farás nenhuma obra, nem tu, nem o teu filho, nem a tua filha, nem o teu servo, nem a tua serva, nem o teu animal, nem o teu estrangeiro, que está dentro das tuas portas."], [11, "Porque em seis dias fez o Senhor os céus e a terra, o mar e tudo o que neles há, e ao sétimo dia descansou; por isso abençoou o Senhor o dia do sábado, e o santificou."]], "gen 2:1-3": [[1, "Assim os céus, e a terra, e todo o seu exército foram acabados."], [2, "E, havendo Deus acabado no dia sétimo a obra que fizera, descansou no sétimo dia de toda a sua obra, que tinha feito."], [3, "E abençoou Deus o dia sétimo, e o santificou; porque nele descansou de toda a sua obra, que Deus criara e fizera."]], "mar 2:27-28": [[27, "E disse-lhes: O sábado foi feito por causa do homem, e não o homem por causa do sábado."], [28, "Assim que o Filho do Homem até do sábado é senhor."]], "exo 16:23": [[23, "E disse-lhes: Isto é o que disse o Senhor: Amanhã é o repouso, o santo sábado do Senhor; o que quiserdes cozer no forno, cozei-o, e o que quiserdes cozer em água, cozei-o em água; e tudo o que sobejar, guardai-o para vós até amanhã."]], "isa 58:13-14": [[13, "Se desviares o teu pé do sábado, de fazeres a tua vontade no meu santo dia, e chamares ao sábado deleitoso, e o santo dia do Senhor, digno de honra, e o honrares não seguindo os teus caminhos, nem pretendendo fazer a tua própria vontade, nem falando as tuas próprias palavras,"], [14, "então te deleitarás no Senhor, e te farei cavalgar sobre as alturas da terra, e te sustentarei com a herança de teu pai Jacó; porque a boca do Senhor o disse."]], "eze 20:12": [[12, "E também lhes dei os meus sábados, para servirem de sinal entre mim e eles, para que soubessem que eu sou o Senhor que os santifico."]], "luk 4:16": [[16, "E chegou a Nazaré, onde fora criado; e, segundo o seu costume, entrou num sábado na sinagoga, e levantou-se para ler."]], "act 17:2": [[2, "E Paulo, segundo o seu costume, foi ter com eles, e por três sábados disputou com eles sobre as Escrituras,"]], "luk 23:54-56": [[54, "E era o dia da preparação, e começava o sábado."], [55, "E as mulheres que com ele tinham vindo da Galileia, seguindo-o, viram o sepulcro, e como foi posto o seu corpo;"], [56, "e, voltando elas, prepararam aromas e unguentos; e no sábado repousaram, conforme o mandamento."]], "isa 66:22-23": [[22, "Porque, como os novos céus e a nova terra, que hei de fazer, estarão diante de mim, diz o Senhor, assim há de estar a vossa posteridade e o vosso nome."], [23, "E será que desde uma lua nova até à outra, e desde um sábado até ao outro, virá toda a carne a adorar perante mim, diz o Senhor."]], "jas 2:10-11": [[10, "Porque qualquer que guardar toda a lei e tropeçar em um só ponto tornou-se culpado de todos."], [11, "Porque aquele que disse: Não cometerás adultério, também disse: Não matarás. Se tu, pois, não cometeres adultério, mas matares, estás feito transgressor da lei."]], "1jo 2:4": [[4, "Aquele que diz: Eu conheço-o, e não guarda os seus mandamentos, é mentiroso, e nele não está a verdade."]], "mat 28:1": [[1, "E, no fim do sábado, quando já despontava o primeiro dia da semana, foram Maria Madalena e a outra Maria ver o sepulcro."]], "mar 16:1": [[1, "E, passado o sábado, Maria Madalena, e Maria, mãe de Tiago, e Salomé, compraram aromas para irem ungi-lo."]], "mar 16:9": [[9, "E, ressuscitando Jesus na manhã do primeiro dia da semana, apareceu primeiramente a Maria Madalena, da qual tinha expulsado sete demônios."]], "luk 24:1": [[1, "E no primeiro dia da semana, muito de madrugada, foram elas ao sepulcro, levando as especiarias que haviam preparado, e algumas outras com elas."]], "john 20:1": [[1, "E no primeiro dia da semana, Maria Madalena foi ao sepulcro de madrugada, sendo ainda escuro, e viu a pedra tirada do sepulcro."]], "john 20:19": [[19, "Chegada, pois, a tarde daquele dia, o primeiro da semana, e cerradas as portas onde os discípulos se ajuntaram com medo dos judeus, chegou Jesus, e pôs-se no meio, e disse-lhes: Paz seja convosco."]], "act 20:7": [[7, "E, no primeiro dia da semana, ajuntando-se os discípulos para partir o pão, Paulo, que havia de partir no dia seguinte, falava com eles, e prolongou a palavra até à meia-noite."]], "1co 16:2": [[2, "No primeiro dia da semana cada um de vós ponha de parte, em sua casa, o que puder ajuntar, conforme a sua prosperidade, para que, quando eu chegar, não se façam então colectas."]]};
+var BIBNAME = "Almeida (domínio público) · confira na sua Bíblia em caso de dúvida";
+
+function openBible(list,opener,start){
+  bibList=list; bibFocus=opener||document.activeElement;
+  var tabs=$("#mtabs");
+  tabs.innerHTML = list.length>1 ? list.map(function(x,k){return '<button class="tab" data-k="'+k+'">'+esc(x[0])+'</button>'}).join("") : "";
+  tabs.style.display = list.length>1 ? "flex" : "none";
+  tabs.querySelectorAll(".tab").forEach(function(b){b.onclick=function(){showRef(+b.dataset.k)}});
+  $("#ov").classList.add("on"); $("#ov").setAttribute("aria-hidden","false");
+  document.body.classList.add("lock"); bibOpen=true;
+  try{history.pushState({bib:1},"")}catch(e){}   // o botão "voltar" do celular fecha o pop-up
+  showRef(start||0); $("#mx").focus();
+}
+function closeBible(fromPop){
+  if(!bibOpen) return;
+  bibOpen=false;
+  $("#ov").classList.remove("on"); $("#ov").setAttribute("aria-hidden","true");
+  document.body.classList.remove("lock");
+  if(!fromPop){ try{ if(history.state&&history.state.bib) history.back(); }catch(e){} }
+  try{ bibFocus&&bibFocus.focus&&bibFocus.focus(); }catch(e){}
+}
+function showRef(k){
+  var item=bibList[k], body=$("#mbody");
+  document.querySelectorAll("#mtabs .tab").forEach(function(b,j){b.classList.toggle("sel",j===k)});
+  body.scrollTop=0;
+  var sb=document.querySelector("#mtabs .tab.sel"); if(sb&&sb.scrollIntoView){ try{sb.scrollIntoView({inline:"center",block:"nearest"})}catch(e){} }
+  var vs=BIB[item[1]];
+  if(vs) draw(item,vs); else body.innerHTML='<h2>'+esc(item[0])+'</h2><div class="ld">Texto não encontrado.</div>';
+}
+function draw(item,vs){
+  var multi=vs.length>1;
+  $("#mbody").innerHTML='<h2>'+esc(item[0])+'</h2>'+vs.map(function(v){return '<p class="vs">'+(multi?'<sup>'+v[0]+'</sup>':'')+esc(v[1])+'</p>'}).join("")+'<div class="ver">Tradução: '+esc(BIBNAME)+'</div>';
+}
+$("#mx").onclick=function(){closeBible()};
+$("#mclose").onclick=function(){closeBible()};
+$("#ov").addEventListener("click",function(e){ if(e.target===this) closeBible(); });
+document.addEventListener("keydown",function(e){ if(e.key==="Escape"&&bibOpen) closeBible(); });
+window.addEventListener("popstate",function(){ if(bibOpen) closeBible(true); });
+
+function render(){
+  var i=st.i; tries=0; sel={};
+  $("#back").style.visibility = i>0 ? "visible" : "hidden";
+  $("#pb").style.width=(Math.max(i,0)/TOTAL*100)+"%";
+  $("#cnt").textContent = i<0 ? "" : i<NQ ? (Q[i].recap?"Recapitulação":"Pergunta "+(i+1)+" de "+(NQ-1)) : i===NQ ? "Compromisso de fé" : "Estudo concluído";
+  if(i<0){ app.innerHTML='<div class="card"><p class="q">Vamos começar</p><p class="intro">Imagine um semáforo que mudasse de cor conforme a pressa de cada motorista. Em pouco tempo, ninguém mais saberia a hora de parar, e o trânsito viraria um caos. Leis só protegem quando ninguém as altera. Neste estudo, vamos descobrir quais leis Deus deu, qual delas continua valendo e o que a Bíblia diz sobre o dia de descanso que Ele separou.</p><p class="mut">Tente responder cada pergunta. Se errar, é só tentar de novo: você só avança quando acertar. Se ficar difícil, leia o texto bíblico indicado ou peça ajuda ao seu instrutor.</p><button class="btn" id="go">Começar</button></div>'; $("#go").onclick=function(){st.i=0;save();render()}; return; }
+  if(i<NQ) return question(Q[i],i);
+  if(i===NQ){ app.innerHTML='<div class="card"><p class="q">Compromisso de fé</p><p>Se quiser, marque o que você deseja assumir:</p><label class="chk"><input type="checkbox"><span>Aceito que a lei cravada na cruz foi a lei cerimonial, e não a lei moral.</span></label><label class="chk"><input type="checkbox"><span>Creio nos dez mandamentos como norma para todos os cristãos e desejo seguir os mandamentos de Deus.</span></label><label class="chk"><input type="checkbox"><span>Creio que o sábado teve sua origem em um mundo sem pecado e desejo observá-lo como Jesus fazia.</span></label><label class="chk"><input type="checkbox"><span>Confirmo o sábado como dia de adoração a Deus e preciso da ajuda dEle para cumprir esse mandamento.</span></label><button class="btn" id="nx">Concluir o estudo</button></div>'; $("#nx").onclick=function(){st.i=NQ+1;save();render()}; return; }
+  if(!st.d){st.d=1;save();}
+  app.innerHTML='<div class="card"><p class="q">Parabéns! Você concluiu o Estudo 7.</p><p>Agora você sabe qual lei foi cumprida na cruz, qual continua valendo e o que a Bíblia ensina sobre o sábado. O próximo estudo será liberado pelo seu instrutor.</p>'+(st.u?'<p class="msg ok">Estudo 8 liberado!</p><a class="btn" href="'+NEXT_URL+'">Ir para o Estudo 8</a>':'<div class="tc"><input id="uc" placeholder="Código de liberação" autocapitalize="characters"><button class="btn sec" id="ub" style="margin:0">Liberar</button></div><div id="um" class="msg"></div>')+'</div>';
+  if(!st.u) $("#ub").onclick=function(){ if($("#uc").value.trim().toUpperCase()===NEXT_CODE){st.u=1;save();render()} else {$("#um").className="msg no";$("#um").textContent="Código incorreto. Peça ao seu instrutor.";tone(BAD)} };
+}
+
+function question(q,i){
+  var h='<div class="card" id="c"><div class="q">'+(q.recap?q.q:(i+1)+". "+q.q)+'</div>';
+  if(q.v) h+='<div class="ref">📖 '+q.v.map(function(x,k){return '<button class="refbtn" data-k="'+k+'">'+esc(x[0])+'</button>'}).join(" · ")+' <span class="mut">· toque para ler</span></div>'; else h+='<div class="ref"></div>';
+  var parts={
+    p:function(){ var k=0; return '<p class="s">'+q.p.map(function(x){return typeof x==="string"?x:'<input class="b" data-k="'+(k++)+'" autocomplete="off" autocapitalize="off" spellcheck="false" aria-label="Resposta '+k+'">'}).join("")+'</p>'; },
+    i:function(){ return (q.s?'<p class="sub">'+q.s+'</p>':'')+q.i.map(function(x,k){return '<div class="row"><span>'+x[0]+'</span><span class="vf" data-k="'+k+'"><button data-v="1" aria-label="Verdadeiro">V</button><button data-v="0" aria-label="Falso">F</button></span></div>'}).join(""); },
+    o:function(){ return q.o.map(function(x,k){return '<button class="opt" data-k="'+k+'">'+x+'</button>'}).join(""); }
+  };
+  (q.ord||"poi").split("").forEach(function(c){ if(q[c]) h+=parts[c](); });
+  h+='<div id="fb"></div><button class="btn" id="ck">Verificar</button></div>';
+  app.innerHTML=h;
+  document.querySelectorAll(".refbtn").forEach(function(b){b.onclick=function(){openBible(q.v,b,+b.dataset.k)}});
+  document.querySelectorAll(".vf button").forEach(function(b){b.onclick=function(){var p=b.parentNode;p.querySelectorAll("button").forEach(function(x){x.classList.remove("sel")});b.classList.add("sel");sel[p.dataset.k]=+b.dataset.v}});
+  document.querySelectorAll(".opt").forEach(function(b){b.onclick=function(){document.querySelectorAll(".opt").forEach(function(x){x.classList.remove("sel")});b.classList.add("sel");sel.c=+b.dataset.k}});
+  $("#ck").onclick=function(){check(q,i)};
+  document.querySelectorAll("input.b").forEach(function(f){f.addEventListener("keydown",function(e){if(e.key==="Enter")check(q,i)})});
+  var sa=st.a&&st.a[i]; if(sa){ putAns(q,sa); check(q,i,true); }
+}
+
+function canonAns(q){ var a={}; if(q.p) a.f=q.p.filter(function(x){return typeof x!=="string"}).map(function(x){return x[0]}); if(q.i){ a.v={}; q.i.forEach(function(x,k){ a.v[k]=x[1]; }); } if(q.o) a.c=q.c; return a; }
+function readAns(q){ var a={}; if(q.p) a.f=[].map.call(document.querySelectorAll("input.b"),function(x){return x.value}); if(q.i){ a.v={}; q.i.forEach(function(x,k){ if(sel[k]!==undefined) a.v[k]=sel[k]; }); } if(q.o&&sel.c!==undefined) a.c=sel.c; return a; }
+function putAns(q,a){
+  if(a.f) [].forEach.call(document.querySelectorAll("input.b"),function(x,k){ x.value=a.f[k]||""; });
+  if(a.v) Object.keys(a.v).forEach(function(k){ sel[k]=a.v[k]; var g=document.querySelector('.vf[data-k="'+k+'"]'); if(g) g.querySelectorAll("button").forEach(function(b){ b.classList.toggle("sel",+b.dataset.v===a.v[k]); }); });
+  if(a.c!==undefined){ sel.c=a.c; document.querySelectorAll(".opt").forEach(function(b){ b.classList.toggle("sel",+b.dataset.k===a.c); }); }
+}
+function answerText(q){
+  var a=[];
+  if(q.p) a.push(q.p.filter(function(x){return typeof x!=="string"}).map(function(x){return x[0]}).join(" · "));
+  if(q.i) a.push(q.i.map(function(x){return (x[1]?"V":"F")}).join(" · "));
+  if(q.o) a.push(q.o[q.c]);
+  return a.join(" | ");
+}
+function check(q,i,silent){
+  var ok=true, fb=$("#fb"), card=$("#c");
+  if(q.p){ var k=0; q.p.forEach(function(x){ if(typeof x==="string")return; var inp=document.querySelector('input[data-k="'+(k++)+'"]'); var v=norm(inp.value); var good=!!v&&accepted(x).some(function(a){return match(v,a)}); inp.classList.toggle("ok",good); inp.classList.toggle("no",!good); if(!good) ok=false; }); }
+  if(q.i){ q.i.forEach(function(x,k){ var g=document.querySelector('.vf[data-k="'+k+'"]'); var good=sel[k]===x[1]; g.classList.toggle("ok",good); g.classList.toggle("no",!good); if(!good) ok=false; }); }
+  if(q.o){ document.querySelectorAll(".opt").forEach(function(b){b.classList.remove("ok","no")}); var b=document.querySelector('.opt[data-k="'+sel.c+'"]'); if(sel.c===undefined) ok=false; else { b.classList.add(sel.c===q.c?"ok":"no"); if(sel.c!==q.c) ok=false; } }
+  if(ok) return acerto(q,i,silent);
+  if(silent) return;
+  tries++; tone(BAD); try{navigator.vibrate&&navigator.vibrate([80,60,80])}catch(e){}
+  card.classList.remove("shake"); void card.offsetWidth; card.classList.add("shake");
+  var m='<div class="msg no">Ainda não. Releia o texto e tente de novo.</div>';
+  if(tries>=2) m+='<div class="hint">💡 Dica: '+q.h+'</div>';
+  if(tries>=3) m+='<button class="btn sec" id="ti">Chamar o instrutor</button><div id="tb"></div>';
+  fb.innerHTML=m;
+  if(tries>=3) $("#ti").onclick=function(){ $("#tb").innerHTML='<div class="tc"><input id="tcd" type="password" placeholder="Código do instrutor"><button class="btn sec" id="tok" style="margin:0">OK</button></div><div id="tr"></div>'; $("#tok").onclick=function(){ if($("#tcd").value===TEACHER_CODE){ $("#tr").innerHTML='<div class="note">Resposta: '+answerText(q)+'</div><button class="btn" id="sk">Seguir adiante</button>'; $("#sk").onclick=function(){ st.a=st.a||{}; st.a[i]=canonAns(q); avancar(); }; } else {$("#tr").innerHTML='<div class="msg no">Código incorreto.</div>';tone(BAD)} } };
+}
+function acerto(q,i,silent){
+  if(!silent){ st.a=st.a||{}; st.a[i]=readAns(q); save(); tone(GOOD); }
+  document.querySelectorAll("input.b,.opt,.vf button").forEach(function(x){x.disabled=true});
+  var h='<div class="msg ok">Muito bem! ✔</div>'+(q.n?'<div class="note">'+q.n+'</div>':'')+'<button class="btn" id="nx">'+(i===NQ-1?"Continuar":"Próxima pergunta")+'</button>';
+  $("#fb").innerHTML=h; $("#ck").style.display="none"; $("#nx").onclick=avancar; if(!silent) $("#nx").focus();
+}
+function avancar(){ st.i++; save(); render(); window.scrollTo({top:0,behavior:"smooth"}); }
+
+function voltar(){ if(st.i<=0) return; closeBible(); st.i--; save(); render(); window.scrollTo({top:0,behavior:"smooth"}); }
+$("#back").onclick=voltar;
+$("#mute").onclick=function(){muted=!muted;this.textContent=muted?"🔇 Som desligado":"🔊 Som ligado"};
+$("#reset").onclick=function(){ st={i:-1,u:0}; save(); render(); };
+render();
+</script>
+<script type="module" src="../comum/didaque.js"></script>
+</body>
+</html>

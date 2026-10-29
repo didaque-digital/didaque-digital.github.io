@@ -1,0 +1,344 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="robots" content="noindex">
+<title>Estudo 4 · A Volta de Jesus</title>
+<style>
+:root{--bg:#FFF8E7;--card:#fff;--tx:#222;--mut:#666;--navy:#1F3A5F;--qc:#1F3A5F;--or:#E07B39;--teal:#2A7F8E;--ok:#2E7D32;--bad:#C62828;--line:#E6D9B8;--inp:#FDF1D8;--gold:#F4B43C;box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}
+@media (prefers-color-scheme:dark){:root:not([data-theme="light"]){--bg:#0F1B2D;--card:#172A45;--tx:#EDEFF2;--mut:#A9B4C4;--navy:#14263F;--qc:#C9DAF5;--or:#F0914F;--teal:#6CC6D3;--ok:#66BB6A;--bad:#EF5350;--line:#2B4466;--inp:#1E3556}}
+:root[data-theme="dark"]{--bg:#0F1B2D;--card:#172A45;--tx:#EDEFF2;--mut:#A9B4C4;--navy:#14263F;--qc:#C9DAF5;--or:#F0914F;--teal:#6CC6D3;--ok:#66BB6A;--bad:#EF5350;--line:#2B4466;--inp:#1E3556}
+html{scroll-padding-top:env(safe-area-inset-top,0px)}
+body{margin:0;background:var(--bg);color:var(--tx);font:17px/1.55 Calibri,"Segoe UI",system-ui,sans-serif}
+body.lock{overflow:hidden}
+.wrap{max-width:640px;margin:0 auto;padding:0 14px 40px}
+.hero{background:radial-gradient(circle at 88% 20%,#f4b43c55,transparent 45%),linear-gradient(135deg,var(--navy),#2c527f);color:#fff;margin:0 -14px 14px;padding:22px 22px 20px;border-radius:0 0 24px 24px}
+.hero small{color:var(--gold);letter-spacing:.3em;font-weight:700;font-size:13px}
+.hero .n{font:700 56px/1 Georgia,serif;color:#F0914F;margin-top:2px}
+.hero h1{font:700 30px/1.15 Georgia,serif;margin:4px 0 0}
+.bar{height:8px;background:var(--line);border-radius:6px;overflow:hidden;margin:6px 0 4px}
+.bar i{display:block;height:100%;width:0;background:var(--or);transition:width .4s}
+.cnt{font-size:14px;color:var(--mut);margin-bottom:10px}
+.card{background:var(--card);border-radius:14px;padding:18px;border:1px solid var(--line);border-left:6px solid var(--or)}
+.q{font:700 19px/1.35 Georgia,serif;color:var(--qc)}
+.ref{margin:8px 0 14px}
+.refbtn{font:inherit;font-weight:700;color:var(--teal);background:transparent;border:0;border-bottom:2px dotted var(--teal);padding:2px 0;margin:0 2px;cursor:pointer;text-align:left}
+.s{line-height:2.3;margin:0 0 6px}
+.s+.row,.sub+.row{border-top:1px solid var(--line)}
+.sub{margin:12px 0 2px;color:var(--mut);font-size:15px}
+.intro{margin:0 0 10px}
+.mut{color:var(--mut);font-size:15px}
+a.btn{display:inline-block;text-decoration:none}
+input.b{font:inherit;border:2px solid var(--line);background:var(--inp);color:var(--tx);border-radius:8px;padding:1px 8px;width:9em;max-width:100%}
+input.ok,.opt.ok{border-color:var(--ok)!important;background:color-mix(in srgb,var(--ok) 15%,transparent)!important}
+input.no,.opt.no{border-color:var(--bad)!important}
+.opt{display:block;width:100%;text-align:left;font:inherit;color:var(--tx);background:var(--card);padding:11px 12px;border:2px solid var(--line);border-radius:10px;margin:8px 0;cursor:pointer}
+.opt.sel{border-color:var(--or)}
+.row{display:flex;justify-content:space-between;gap:10px;align-items:center;padding:8px 0;border-bottom:1px solid var(--line)}
+.vf{display:flex;gap:6px;flex:none}
+.vf button{width:44px;height:44px;border-radius:50%;border:2px solid var(--line);background:var(--card);color:var(--tx);font:700 16px inherit;cursor:pointer}
+.vf button.sel{background:var(--or);border-color:var(--or);color:#fff}
+.vf.ok button.sel{background:var(--ok);border-color:var(--ok)}
+.vf.no button.sel{background:var(--bad);border-color:var(--bad)}
+.btn{background:var(--or);color:#fff;border:0;border-radius:12px;padding:13px 22px;font:700 17px inherit;cursor:pointer;margin-top:16px}
+a.btn{display:inline-block;text-decoration:none}
+.btn.sec{background:transparent;color:var(--teal);border:2px solid var(--teal);padding:9px 16px;font-size:15px;margin-top:10px}
+.btn:focus-visible,.opt:focus-visible,.vf button:focus-visible,input:focus-visible,a:focus-visible,.refbtn:focus-visible,.xbtn:focus-visible,.tab:focus-visible{outline:3px solid var(--teal);outline-offset:2px}
+.msg{margin-top:12px;font-weight:700}.msg.ok{color:var(--ok)}.msg.no{color:var(--bad)}
+.hint,.note{margin-top:10px;padding:10px 12px;border-radius:10px;background:var(--inp);font-size:15px}
+.note{border-left:4px solid var(--teal)}
+.shake{animation:sh .35s}
+@keyframes sh{20%,60%{transform:translateX(-7px)}40%,80%{transform:translateX(7px)}}
+.foot{display:flex;justify-content:space-between;margin-top:18px;font-size:14px;color:var(--mut)}
+.foot a.home{color:var(--mut);text-decoration:underline;padding:6px}
+.foot button{background:none;border:0;color:var(--mut);font:inherit;text-decoration:underline;cursor:pointer;padding:6px}
+.tc{display:flex;gap:8px;margin-top:8px}.tc input{flex:1;min-width:0;font:inherit;padding:8px;border-radius:8px;border:2px solid var(--line);background:var(--inp);color:var(--tx)}
+.chk{display:flex;gap:10px;align-items:flex-start;padding:8px 0}.chk input{width:22px;height:22px;margin-top:3px;accent-color:var(--or)}
+/* ===== Pop-up do texto bíblico ===== */
+.ov{position:fixed;inset:0;z-index:100;display:none;align-items:flex-end;justify-content:center;background:rgba(10,20,40,.6);-webkit-backdrop-filter:blur(3px);backdrop-filter:blur(3px)}
+.ov.on{display:flex;animation:fd .2s}
+.md{background:var(--card);color:var(--tx);width:100%;max-width:640px;max-height:84vh;max-height:84dvh;display:flex;flex-direction:column;overflow:hidden;border-radius:24px 24px 0 0;border-top:6px solid var(--or);box-shadow:0 -10px 40px rgba(0,0,0,.35);animation:up .28s ease-out}
+.mh{display:flex;align-items:center;justify-content:space-between;gap:10px;padding:14px 12px 8px 20px}
+.mh b{font:700 13px/1 Calibri,system-ui,sans-serif;letter-spacing:.2em;color:var(--or);text-transform:uppercase}
+.xbtn{flex:none;width:44px;height:44px;border-radius:50%;border:0;background:var(--inp);color:var(--tx);font:400 26px/1 system-ui,sans-serif;cursor:pointer;display:flex;align-items:center;justify-content:center}
+.tabs{display:flex;gap:8px;padding:0 20px 8px;overflow-x:auto}
+.tab{flex:none;font:inherit;font-weight:700;font-size:15px;color:var(--teal);background:transparent;border:2px solid var(--teal);border-radius:999px;padding:6px 14px;cursor:pointer}
+.tab.sel{background:var(--teal);color:#fff}
+.mb{padding:6px 20px 12px;overflow-y:auto;-webkit-overflow-scrolling:touch;min-height:120px}
+.mb h2{font:700 24px/1.2 Georgia,serif;color:var(--qc);margin:4px 0 12px}
+.vs{font:20px/1.75 Georgia,serif;margin:0 0 10px}
+.vs sup{font:700 12px Calibri,system-ui,sans-serif;color:var(--or);margin-right:3px}
+.ver{font-size:13px;color:var(--mut);margin-top:12px}
+.ld{color:var(--mut);padding:24px 0;text-align:center}
+.mf{padding:6px 20px calc(16px + env(safe-area-inset-bottom,0px))}
+.mf .btn{width:100%;margin-top:6px}
+@keyframes up{from{transform:translateY(40px);opacity:0}to{transform:none;opacity:1}}
+@keyframes fd{from{opacity:0}to{opacity:1}}
+@media (min-width:700px){.ov{align-items:center}.md{border-radius:24px;max-height:80vh}.mf{padding-bottom:18px}}
+@media (prefers-reduced-motion:reduce){.shake,.md,.ov.on{animation:none}.bar i{transition:none}}
+</style>
+</head>
+<body>
+<div class="wrap">
+  <div class="hero"><small>ESTUDO</small><div class="n">4</div><h1>A Volta de Jesus</h1></div>
+  <div class="bar"><i id="pb"></i></div>
+  <div class="cnt" id="cnt"></div>
+  <main id="app"></main>
+  <div class="foot"><button id="mute">🔊 Som ligado</button><a class="home" href="../estudos/">Estudos</a><button id="back" aria-label="Voltar à pergunta anterior">← Voltar</button><button id="reset">Recomeçar</button></div>
+</div>
+
+<!-- Pop-up do texto bíblico -->
+<div class="ov" id="ov" aria-hidden="true">
+  <div class="md" role="dialog" aria-modal="true" aria-labelledby="mt">
+    <div class="mh"><b id="mt">📖 Texto bíblico</b><button class="xbtn" id="mx" aria-label="Fechar">×</button></div>
+    <div class="tabs" id="mtabs"></div>
+    <div class="mb" id="mbody"></div>
+    <div class="mf"><button class="btn" id="mclose">Fechar e voltar à pergunta</button></div>
+  </div>
+</div>
+
+<script>
+// ====== CONFIGURAÇÃO (edite aqui) ======
+var TEACHER_CODE = "1234";    // código do instrutor (mostra a resposta)
+var NEXT_CODE = "ESTUDO5";    // código que libera o próximo estudo
+var NEXT_URL = "../estudo-5/"; // endereço da página do próximo estudo
+var KEY = "didaque_e4_v1";
+
+// Cada resposta: [texto exibido, trechos aceitos...]  (sem acento, minúsculas; "=" no início = palavra exata)
+var Q = [
+ {q:"Que sinais seriam vistos no mundo social e no natural antes da volta de Cristo?",
+  v:[["Mateus 24:6-7", "mat 24:6-7"], ["Mateus 24:29", "mat 24:29"], ["2 Timóteo 3:1-4", "2ti 3:1-4"]],
+  p:["<b>Mundo social:</b> Ouvireis falar de ",["guerras","guerra"]," e de ",["rumores","rumor","boato","noticia"],"; nação contra ",["nação","naca"],", e haverá ",["fomes","fome","peste","terremoto"]," em vários lugares.<br><b>Mundo natural:</b> 1) terremotos; 2) escurecimento do Sol e da Lua (19/05/1780); 3) queda de ",["estrelas","estrela","meteoro"]," (13/11/1833)."],
+  h:"Mateus 24:6-7 fala de guerras, rumores de guerras e nação contra nação. Mateus 24:29 diz o que acontece com o Sol, a Lua e as ..."},
+ {q:"Que sinais seriam vistos no mundo religioso?",
+  v:[["Mateus 24:4-5", "mat 24:4-5"], ["Mateus 24:11", "mat 24:11"], ["Mateus 24:24", "mat 24:24"]],
+  p:["Haverá falsos ",["cristos","cristo","messias"]," e falsos ",["profetas","profet"],". O engano será baseado em sinais e ",["prodígios","prodig","milagre","maravilha"],"."],
+  h:"Leia Mateus 24:5, 11 e 24. Quem se apresentaria como o Cristo, e quem enganaria muitos?"},
+ {q:"Que sinal importante foi mencionado por Cristo, e o que fazer para não ser enganado?",
+  v:[["Mateus 24:14", "mat 24:14"], ["1 João 4:1", "1jo 4:1"]],
+  p:["A pregação do evangelho verdadeiro em todo o ",["mundo","mundo"],". Devo ",["examinar","exami","verific","prov","test","confer","analis","investig"]," se o ensino está de acordo com a Palavra de ",["Deus","deus"],"."],
+  h:"Mateus 24:14 diz onde o evangelho seria pregado. Em 1 João 4:1, o que devemos fazer com os espíritos (os ensinos)?"},
+ {q:"Como saber se uma doutrina é verdadeira?",
+  v:[["João 7:17", "john 7:17"], ["Isaías 28:10", "isa 28:10"]],
+  s:"Marque V ou F em cada frase:",
+  i:[["Doutrina de acordo com toda a Bíblia.",1],["Doutrina baseada em um só livro da Bíblia ou só no Novo Testamento.",0],["Doutrina baseada em uma parábola e poucos versos da Bíblia.",0]],
+  h:"Isaías 28:10 diz que o ensino se constrói ‘um pouco aqui, um pouco ali’. Uma doutrina segura se apoia em toda a Bíblia, e não em um só trecho."},
+ {q:"Se os sinais estão se cumprindo, por que Jesus ainda não voltou, e que atitudes devemos ter?",
+  v:[["2 Pedro 3:9", "2pe 3:9"], ["Lucas 21:28, 34", "luk 21:28,34"], ["Mateus 6:33", "mat 6:33"]],
+  p:["Jesus está sendo ",["paciente","pacien","longanim"],", para que ninguém se perca. Devemos erguer a ",["cabeça","cabeca"]," e buscar a Deus em ",["primeiro","primeir"]," lugar."],
+  h:"2 Pedro 3:9 mostra uma qualidade de Jesus. Lucas 21:28 fala de levantar a ...; Mateus 6:33, de buscar o reino em ... lugar."},
+ {q:"Qual é a maior promessa de Jesus, e podemos marcar a data da Sua volta?",
+  v:[["João 14:1-3", "john 14:1-3"], ["Mateus 24:36", "mat 24:36"]],
+  p:["Eu voltarei e vos ",["receberei","receber","levar","lev","buscar"]," para Mim mesmo."],
+  o:["Sim, podemos marcar a data","Não, não podemos marcar a data"], c:1,
+  h:"Leia Mateus 24:36: quem sabe o dia e a hora da volta de Jesus?"},
+ {q:"Como Jesus virá?",
+  v:[["Mateus 24:30-31", "mat 24:30-31"], ["Apocalipse 1:7", "rev 1:7"], ["Atos 1:11", "act 1:11"], ["2 Pedro 3:10", "2pe 3:10"], ["Salmo 50:3", "psa 50:3"]],
+  s:"Marque V ou F em cada frase:",
+  i:[["Cristo virá como ladrão, tomando muitos de surpresa.",1],["Sua vinda será secreta e silenciosa.",0],["Ele não descerá à Terra; ficará nas nuvens.",0],["Será visível apenas para os cristãos.",0],["Virá com poder e glória, acompanhado de milhares de anjos.",1],["Virá de maneira pessoal, literal, e todo olho O verá.",1]],
+  h:"Apocalipse 1:7 diz que todo olho O verá. Salmo 50:3 diz que Deus não guardará silêncio. Atos 1:11 diz que Ele voltará do mesmo modo como subiu."},
+ {q:"O que ocorrerá com os mortos e vivos, na volta de Cristo?",
+  v:[["1 Tessalonicenses 4:16-17", "1th 4:16-17"], ["Apocalipse 6:15-17", "rev 6:15-17"]],
+  p:["Mortos fiéis: ressuscitarão, serão ",["transformados","transform","arrebat","glorific","incorrupt","levad"]," e arrebatados. Vivos fiéis: serão transformados e ",["arrebatados","arrebat","transform","levad","encontr"],".<br>Os ímpios buscarão esconderijo nas ",["cavernas","cavern","rocha","pedra","gruta"]," e pedirão aos montes que ",["caiam","cai","cair"]," sobre eles."],
+  h:"1 Tessalonicenses 4:16-17 fala de ressurreição e de sermos arrebatados. Apocalipse 6:15-16 diz onde os ímpios se escondem e o que pedem aos montes."},
+ {q:"De quantas ressurreições a Bíblia fala?",
+  v:[["João 5:28-29", "john 5:28-29"], ["Daniel 12:2", "dan 12:2"]],
+  ord:"op", o:["Uma","Duas","Várias"], c:1,
+  p:["A primeira é a ressurreição da ",["vida","vida","justos","salvos"],", e a segunda é a ressurreição da ",["morte","morte","condena","perdid","impi","juizo"],"."],
+  h:"João 5:29 fala de duas ressurreições: uma para a vida e outra para a condenação."},
+ {q:"Quanto tempo existirá entre a primeira e a segunda ressurreição?",
+  v:[["Apocalipse 20:6", "rev 20:6"]],
+  o:["200 anos","500 anos","1000 anos"], c:2,
+  h:"Apocalipse 20:6 fala de um período de mil anos (o milênio)."},
+ {q:"Para onde irão os salvos após a volta de Cristo, e o que farão?",
+  v:[["Apocalipse 20:4, 6", "rev 20:4,6"], ["1 Coríntios 6:2", "1co 6:2"]],
+  s:"Marque V ou F em cada frase:",
+  i:[["Irão para o Céu e reinarão com Cristo durante mil anos.",1],["Receberão autoridade de julgar.",1],["Permanecerão vivos na Terra.",0]],
+  h:"Apocalipse 20:4 e 20:6 falam de reinar com Cristo mil anos. A Terra, nesse período, estará desolada."},
+ {q:"Como ficará a Terra durante esse período, e quem permanecerá nela?",
+  v:[["Jeremias 4:23-26", "jer 4:23-26"], ["Apocalipse 20:1-3", "rev 20:1-3"]],
+  p:["A Terra ficará sem ",["forma","forma"]," e ",["vazia","vazi","vazio"],", voltará a ser um abismo. Ficarão vivos apenas ",["Satanás","satan","diabo","dragao"]," e seus anjos."],
+  h:"Jeremias 4:23 diz que a Terra estava sem ... e vazia. Apocalipse 20:1-3 diz quem fica preso."},
+ {q:"O que ocorrerá ao fim dos mil anos?",
+  v:[["Apocalipse 20:5-9", "rev 20:5-9"], ["Apocalipse 21:2", "rev 21:2"]],
+  p:["Os ímpios ",["ressuscitarão","ressuscit","ressurg"],". Satanás será solto de sua ",["prisão","pris","carcere","masmorra"],". A Cidade Santa ",["descerá","desc","vira","vem"]," para a Terra com os salvos. Descerá fogo do Céu e ",["consumirá","consum","devor","destr","queim"]," os que rejeitaram a salvação."],
+  h:"Apocalipse 20:5, 7, 9 e 21:2 descrevem o que acontece com os ímpios, com Satanás e com a Cidade Santa."},
+ {q:"Que convite Jesus nos faz hoje?",
+  v:[["Mateus 11:28-29", "mat 11:28-29"]],
+  o:["Apartai-vos de Mim.","Vinde a Mim.","Nenhum convite."], c:1,
+  h:"Mateus 11:28 começa com o convite ‘Vinde a Mim’."},
+ {q:"Recapitulação", recap:1,
+  p:["Os sinais da vinda de Cristo estão se ",["cumprindo","cumpr"],". Um grande sinal é a ",["pregação","pregac","prega"]," do evangelho em todo o mundo. Jesus virá de modo pessoal, visível e literal, com ",["milhares","milhar","milhoes"]," de anjos. Depois da vinda inicia-se o ",["milênio","milenio","mil anos"],", quando os salvos estarão no ",["Céu","=ceu"]," e a Terra ficará sem forma e ",["vazia","vazi","vazio"],". No fim, a Nova ",["Jerusalém","jerusalem","cidade"]," descerá com os salvos, e os ímpios serão destruídos com ",["fogo","fogo","enxofre"],"."],
+  h:"Use as respostas que você já deu nas perguntas."}
+];
+var NQ = Q.length, TOTAL = NQ + 2;
+var $ = function(s){return document.querySelector(s)}, app = $("#app");
+var st = {i:-1,u:0}; try{var sv=JSON.parse(localStorage.getItem(KEY)); if(sv) st=sv;}catch(e){}
+function save(){try{localStorage.setItem(KEY,JSON.stringify(st))}catch(e){}}
+var muted=false, tries=0, sel={}, ac;
+
+function norm(s){return String(s).toLowerCase().normalize("NFD").replace(/[\u0300-\u036f]/g,"").replace(/[^a-z0-9 ]/g," ").replace(/\s+/g," ").trim()}
+function match(v,a){ if(a.charAt(0)==="=") return (" "+v+" ").indexOf(" "+norm(a.slice(1))+" ")>-1; return v.indexOf(norm(a))>-1; }
+function accepted(x){ return x.length>1 ? x.slice(1) : x; }
+function esc(s){return String(s).replace(/[&<>"]/g,function(c){return {"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;"}[c]})}
+function tone(seq){ if(muted) return; try{ ac=ac||new (window.AudioContext||window.webkitAudioContext)(); var t=ac.currentTime;
+  seq.forEach(function(n){var o=ac.createOscillator(),g=ac.createGain();o.type=n[2]||"sine";o.frequency.value=n[0];g.gain.setValueAtTime(.16,t);g.gain.exponentialRampToValueAtTime(.001,t+n[1]);o.connect(g);g.connect(ac.destination);o.start(t);o.stop(t+n[1]);t+=n[1]+.06}); }catch(e){} }
+var BAD=[[190,.18,"square"],[150,.3,"square"]], GOOD=[[660,.12],[880,.22]];
+
+/* ===== Pop-up bíblico ===== */
+var bibOpen=false, bibList=[], bibFocus=null;
+// ====== TEXTOS BÍBLICOS (ficam dentro do aplicativo, funcionam sem internet) ======
+// Tradução atual: João Ferreira de Almeida (domínio público).
+// Para trocar por outra tradução, substitua o texto de cada versículo abaixo.
+// Formato: "chave": [ [número do versículo, "texto"], ... ]
+var BIB = {
+ "mat 24:6-7":[[6, "E ouvireis falar de guerras e rumores de guerras; olhai não vos perturbeis; porque forçoso é que assim aconteça; mas ainda não é o fim."], [7, "Porquanto se levantará nação contra nação, e reino contra reino; e haverá fomes e terremotos em vários lugares."]],
+ "mat 24:29":[[29, "Logo depois da tribulação daqueles dias, escurecerá o sol, e a lua não dará a sua luz; as estrelas cairão do céu e os poderes dos céus serão abalados."]],
+ "2ti 3:1-4":[[1, "Sabe, porém, isto, que nos últimos dias sobrevirão tempos penosos;"], [2, "pois os homens serão amantes de si mesmos, gananciosos, presunçosos, soberbos, blasfemos, desobedientes a seus pais, ingratos, ímpios,"], [3, "sem afeição natural, implacáveis, caluniadores, incontinentes, cruéis, inimigos do bem,"], [4, "traidores, atrevidos, orgulhosos, mais amigos dos deleites do que amigos de Deus,"]],
+ "mat 24:4-5":[[4, "Respondeu-lhes Jesus: Acautelai-vos, que ninguém vos engane."], [5, "Porque muitos virão em meu nome, dizendo: Eu sou o Cristo; a muitos enganarão."]],
+ "mat 24:11":[[11, "Igualmente hão de surgir muitos falsos profetas, e enganarão a muitos;"]],
+ "mat 24:24":[[24, "porque hão de surgir falsos cristos e falsos profetas, e farão grandes sinais e prodígios; de modo que, se possível fora, enganariam até os escolhidos."]],
+ "mat 24:14":[[14, "E este evangelho do reino será pregado no mundo inteiro, em testemunho a todas as nações, e então virá o fim."]],
+ "1jo 4:1":[[1, "Amados, não creiais a todo espírito, mas provai se os espíritos vêm de Deus; porque muitos falsos profetas têm saído pelo mundo."]],
+ "john 7:17":[[17, "Se alguém quiser fazer a vontade de Deus, há de saber se a doutrina é dele, ou se eu falo por mim mesmo."]],
+ "isa 28:10":[[10, "Pois é preceito sobre preceito, preceito sobre preceito; regra sobre regra, regra sobre regra; um pouco aqui, um pouco ali."]],
+ "2pe 3:9":[[9, "O Senhor não retarda a sua promessa, ainda que alguns a têm por tardia; porém é longânimo para convosco, não querendo que ninguém se perca, senão que todos venham a arrepender-se."]],
+ "luk 21:28,34":[[28, "Ora, quando essas coisas começarem a acontecer, exultai e levantai as vossas cabeças, porque a vossa redenção se aproxima."], [34, "Olhai por vós mesmos; não aconteça que os vossos corações se carreguem de glutonaria, de embriaguez, e dos cuidados da vida, e aquele dia vos sobrevenha de improviso como um laço."]],
+ "mat 6:33":[[33, "Mas buscai primeiro o seu reino e a sua justiça, e todas estas coisas vos serão acrescentadas."]],
+ "john 14:1-3":[[1, "Não se turbe o vosso coração; credes em Deus, crede também em mim."], [2, "Na casa de meu Pai há muitas moradas; se não fosse assim, eu vo-lo teria dito; vou preparar-vos lugar."], [3, "E, se eu for e vos preparar lugar, virei outra vez, e vos tomarei para mim mesmo, para que onde eu estiver estejais vós também."]],
+ "mat 24:36":[[36, "Daquele dia e hora, porém, ninguém sabe, nem os anjos do céu, nem o Filho, senão só o Pai."]],
+ "mat 24:30-31":[[30, "Então aparecerá no céu o sinal do Filho do homem, e todas as tribos da terra se lamentarão, e verão vir o Filho do homem sobre as nuvens do céu, com poder e grande glória."], [31, "E ele enviará os seus anjos com grande clangor de trombeta, os quais lhe ajuntarão os escolhidos desde os quatro ventos, de uma à outra extremidade dos céus."]],
+ "rev 1:7":[[7, "Eis que vem com as nuvens, e todo olho o verá, até mesmo aqueles que o traspassaram; e todas as tribos da terra se lamentarão sobre ele. Sim. Amém."]],
+ "act 1:11":[[11, "os quais lhes disseram: Varões galileus, por que ficais aí olhando para o céu? Esse Jesus, que dentre vós foi elevado para o céu, há de vir assim como para o céu o vistes ir."]],
+ "2pe 3:10":[[10, "Virá, pois, como ladrão o dia do Senhor, no qual os céus passarão com grande estrondo, e os elementos, ardendo, se dissolverão, e a terra, e as obras que nela há, serão descobertas."]],
+ "psa 50:3":[[3, "O nosso Deus vem, e não guarda silêncio; diante dele há um fogo devorador, e grande tormenta ao seu redor."]],
+ "1th 4:16-17":[[16, "Porque o Senhor mesmo descerá do céu com grande brado, à voz do arcanjo, ao som da trombeta de Deus, e os que morreram em Cristo ressuscitarão primeiro."], [17, "Depois nós, os que ficarmos vivos seremos arrebatados juntamente com eles, nas nuvens, ao encontro do Senhor nos ares, e assim estaremos para sempre com o Senhor."]],
+ "rev 6:15-17":[[15, "E os reis da terra, e os grandes, e os chefes militares, e os ricos, e os poderosos, e todo escravo, e todo livre, se esconderam nas cavernas e nas rochas das montanhas;"], [16, "e diziam aos montes e aos rochedos: Caí sobre nós, e escondei-nos da face daquele que está assentado sobre o trono, e da ira do Cordeiro;"], [17, "porque é vindo o grande dia da ira deles; e quem poderá subsistir?"]],
+ "john 5:28-29":[[28, "Não vos admireis disso, porque vem a hora em que todos os que estão nos sepulcros ouvirão a sua voz e sairão:"], [29, "os que tiverem feito o bem, para a ressurreição da vida, e os que tiverem praticado o mal, para a ressurreição do juízo."]],
+ "dan 12:2":[[2, "E muitos dos que dormem no pó da terra ressuscitarão, uns para a vida eterna, e outros para vergonha e desprezo eterno."]],
+ "rev 20:6":[[6, "Bem-aventurado e santo é aquele que tem parte na primeira ressurreição; sobre estes não tem poder a segunda morte; mas serão sacerdotes de Deus e de Cristo, e reinarão com ele durante os mil anos."]],
+ "rev 20:4,6":[[4, "Então vi uns tronos; e aos que se assentaram sobre eles foi dado o poder de julgar; e vi as almas daqueles que foram degolados por causa do testemunho de Jesus e da palavra de Deus, e que não adoraram a besta nem a sua imagem, e não receberam o sinal na fronte nem nas mãos; e reviveram, e reinaram com Cristo durante mil anos."], [6, "Bem-aventurado e santo é aquele que tem parte na primeira ressurreição; sobre estes não tem poder a segunda morte; mas serão sacerdotes de Deus e de Cristo, e reinarão com ele durante os mil anos."]],
+ "1co 6:2":[[2, "Ou não sabeis vós que os santos hão de julgar o mundo? Ora, se o mundo há de ser julgado por vós, sois porventura indignos de julgar as coisas mínimas?"]],
+ "jer 4:23-26":[[23, "Observei a terra, e eis que era sem forma e vazia; também os céus, e não tinham a sua luz."], [24, "Observei os montes, e eis que estavam tremendo; e todos os outeiros estremeciam."], [25, "Observei e eis que não havia homem algum, e todas as aves do céu tinham fugido."], [26, "Vi também que a terra fértil era um deserto, e todas as suas cidades estavam derrubadas diante do Senhor, diante do furor da sua ira."]],
+ "rev 20:1-3":[[1, "E vi descer do céu um anjo, que tinha a chave do abismo e uma grande cadeia na sua mão."], [2, "Ele prendeu o dragão, a antiga serpente, que é o Diabo e Satanás, e o amarrou por mil anos."], [3, "Lançou-o no abismo, o qual fechou e selou sobre ele, para que não enganasse mais as nações até que os mil anos se completassem. Depois disto é necessário que ele seja solto por um pouco de tempo."]],
+ "rev 20:5-9":[[5, "Mas os outros mortos não reviveram, até que os mil anos se completassem. Esta é a primeira ressurreição."], [6, "Bem-aventurado e santo é aquele que tem parte na primeira ressurreição; sobre estes não tem poder a segunda morte; mas serão sacerdotes de Deus e de Cristo, e reinarão com ele durante os mil anos."], [7, "Ora, quando se completarem os mil anos, Satanás será solto da sua prisão,"], [8, "e sairá a enganar as nações que estão nos quatro cantos da terra, Gogue e Magogue, cujo número é como a areia do mar, a fim de ajuntá-las para a batalha."], [9, "E subiram sobre a largura da terra, e cercaram o arraial dos santos e a cidade querida; mas desceu fogo do céu, e os devorou;"]],
+ "rev 21:2":[[2, "E vi a santa cidade, a nova Jerusalém, que descia do céu da parte de Deus, adereçada como uma noiva ataviada para o seu noivo."]],
+ "mat 11:28-29":[[28, "Vinde a mim, todos os que estais cansados e oprimidos, e eu vos aliviarei."], [29, "Tomai sobre vós o meu jugo, e aprendei de mim, que sou manso e humilde de coração; e achareis descanso para as vossas almas."]]
+};
+var BIBNAME = "João Ferreira de Almeida (domínio público)";
+
+function openBible(list,opener,start){
+  bibList=list; bibFocus=opener||document.activeElement;
+  var tabs=$("#mtabs");
+  tabs.innerHTML = list.length>1 ? list.map(function(x,k){return '<button class="tab" data-k="'+k+'">'+esc(x[0])+'</button>'}).join("") : "";
+  tabs.style.display = list.length>1 ? "flex" : "none";
+  tabs.querySelectorAll(".tab").forEach(function(b){b.onclick=function(){showRef(+b.dataset.k)}});
+  $("#ov").classList.add("on"); $("#ov").setAttribute("aria-hidden","false");
+  document.body.classList.add("lock"); bibOpen=true;
+  try{history.pushState({bib:1},"")}catch(e){}   // o botão "voltar" do celular fecha o pop-up
+  showRef(start||0); $("#mx").focus();
+}
+function closeBible(fromPop){
+  if(!bibOpen) return;
+  bibOpen=false;
+  $("#ov").classList.remove("on"); $("#ov").setAttribute("aria-hidden","true");
+  document.body.classList.remove("lock");
+  if(!fromPop){ try{ if(history.state&&history.state.bib) history.back(); }catch(e){} }
+  try{ bibFocus&&bibFocus.focus&&bibFocus.focus(); }catch(e){}
+}
+function showRef(k){
+  var item=bibList[k], body=$("#mbody");
+  document.querySelectorAll("#mtabs .tab").forEach(function(b,j){b.classList.toggle("sel",j===k)});
+  body.scrollTop=0;
+  var sb=document.querySelector("#mtabs .tab.sel"); if(sb&&sb.scrollIntoView){ try{sb.scrollIntoView({inline:"center",block:"nearest"})}catch(e){} }
+  var vs=BIB[item[1]];
+  if(vs) draw(item,vs); else body.innerHTML='<h2>'+esc(item[0])+'</h2><div class="ld">Texto não encontrado.</div>';
+}
+function draw(item,vs){
+  var multi=vs.length>1;
+  $("#mbody").innerHTML='<h2>'+esc(item[0])+'</h2>'+vs.map(function(v){return '<p class="vs">'+(multi?'<sup>'+v[0]+'</sup>':'')+esc(v[1])+'</p>'}).join("")+'<div class="ver">Tradução: '+esc(BIBNAME)+'</div>';
+}
+$("#mx").onclick=function(){closeBible()};
+$("#mclose").onclick=function(){closeBible()};
+$("#ov").addEventListener("click",function(e){ if(e.target===this) closeBible(); });
+document.addEventListener("keydown",function(e){ if(e.key==="Escape"&&bibOpen) closeBible(); });
+window.addEventListener("popstate",function(){ if(bibOpen) closeBible(true); });
+
+function render(){
+  var i=st.i; tries=0; sel={};
+  $("#back").style.visibility = i>0 ? "visible" : "hidden";
+  $("#pb").style.width=(Math.max(i,0)/TOTAL*100)+"%";
+  $("#cnt").textContent = i<0 ? "" : i<NQ ? (Q[i].recap?"Recapitulação":"Pergunta "+(i+1)+" de "+(NQ-1)) : i===NQ ? "Compromisso de fé" : "Estudo concluído";
+  if(i<0){ app.innerHTML='<div class="card"><p class="q">Vamos começar</p><p class="intro">Pense em alguém que prometeu voltar: um pai que viajou, um amigo que se mudou. Cada dia de espera parece uma eternidade, mas a promessa mantém a esperança acesa. Jesus também deixou uma promessa de volta. Quando será? Como será? E o que vem depois?</p><p class="mut">Tente responder cada pergunta. Se errar, é só tentar de novo: você só avança quando acertar. Se ficar difícil, leia o texto bíblico indicado ou peça ajuda ao seu instrutor.</p><button class="btn" id="go">Começar</button></div>'; $("#go").onclick=function(){st.i=0;save();render()}; return; }
+  if(i<NQ) return question(Q[i],i);
+  if(i===NQ){ app.innerHTML='<div class="card"><p class="q">Compromisso de fé</p><p>Se quiser, marque o que você deseja assumir:</p><label class="chk"><input type="checkbox"><span>Creio que estamos vivendo no tempo do fim.</span></label><label class="chk"><input type="checkbox"><span>Desejo conhecer e praticar a doutrina que está de acordo com toda a Bíblia.</span></label><label class="chk"><input type="checkbox"><span>Creio que haverá duas ressurreições: uma para a vida e outra para a morte eterna.</span></label><label class="chk"><input type="checkbox"><span>Quero me preparar para estar entre os salvos na segunda vinda de Cristo.</span></label><button class="btn" id="nx">Concluir o estudo</button></div>'; $("#nx").onclick=function(){st.i=NQ+1;save();render()}; return; }
+  if(!st.d){st.d=1;save();}
+  app.innerHTML='<div class="card"><p class="q">Parabéns! Você concluiu o Estudo 4.</p><p>Agora você sabe que a volta de Jesus é certa, como ela será e o que vem depois. O próximo estudo será liberado pelo seu instrutor.</p>'+(st.u?'<p class="msg ok">Estudo 5 liberado!</p><a class="btn" href="'+NEXT_URL+'">Ir para o Estudo 5</a>':'<div class="tc"><input id="uc" placeholder="Código de liberação" autocapitalize="characters"><button class="btn sec" id="ub" style="margin:0">Liberar</button></div><div id="um" class="msg"></div>')+'</div>';
+  if(!st.u) $("#ub").onclick=function(){ if($("#uc").value.trim().toUpperCase()===NEXT_CODE){st.u=1;save();render()} else {$("#um").className="msg no";$("#um").textContent="Código incorreto. Peça ao seu instrutor.";tone(BAD)} };
+}
+
+function question(q,i){
+  var h='<div class="card" id="c"><div class="q">'+(q.recap?q.q:(i+1)+". "+q.q)+'</div>';
+  if(q.v) h+='<div class="ref">📖 '+q.v.map(function(x,k){return '<button class="refbtn" data-k="'+k+'">'+esc(x[0])+'</button>'}).join(" · ")+' <span class="mut">· toque para ler</span></div>'; else h+='<div class="ref"></div>';
+  var parts={
+    p:function(){ var k=0; return '<p class="s">'+q.p.map(function(x){return typeof x==="string"?x:'<input class="b" data-k="'+(k++)+'" autocomplete="off" autocapitalize="off" spellcheck="false" aria-label="Resposta '+k+'">'}).join("")+'</p>'; },
+    i:function(){ return (q.s?'<p class="sub">'+q.s+'</p>':'')+q.i.map(function(x,k){return '<div class="row"><span>'+x[0]+'</span><span class="vf" data-k="'+k+'"><button data-v="1" aria-label="Verdadeiro">V</button><button data-v="0" aria-label="Falso">F</button></span></div>'}).join(""); },
+    o:function(){ return q.o.map(function(x,k){return '<button class="opt" data-k="'+k+'">'+x+'</button>'}).join(""); }
+  };
+  (q.ord||"poi").split("").forEach(function(c){ if(q[c]) h+=parts[c](); });
+  h+='<div id="fb"></div><button class="btn" id="ck">Verificar</button></div>';
+  app.innerHTML=h;
+  document.querySelectorAll(".refbtn").forEach(function(b){b.onclick=function(){openBible(q.v,b,+b.dataset.k)}});
+  document.querySelectorAll(".vf button").forEach(function(b){b.onclick=function(){var p=b.parentNode;p.querySelectorAll("button").forEach(function(x){x.classList.remove("sel")});b.classList.add("sel");sel[p.dataset.k]=+b.dataset.v}});
+  document.querySelectorAll(".opt").forEach(function(b){b.onclick=function(){document.querySelectorAll(".opt").forEach(function(x){x.classList.remove("sel")});b.classList.add("sel");sel.c=+b.dataset.k}});
+  $("#ck").onclick=function(){check(q,i)};
+  document.querySelectorAll("input.b").forEach(function(f){f.addEventListener("keydown",function(e){if(e.key==="Enter")check(q,i)})});
+  var sa=st.a&&st.a[i]; if(sa){ putAns(q,sa); check(q,i,true); }
+}
+
+function canonAns(q){ var a={}; if(q.p) a.f=q.p.filter(function(x){return typeof x!=="string"}).map(function(x){return x[0]}); if(q.i){ a.v={}; q.i.forEach(function(x,k){ a.v[k]=x[1]; }); } if(q.o) a.c=q.c; return a; }
+function readAns(q){ var a={}; if(q.p) a.f=[].map.call(document.querySelectorAll("input.b"),function(x){return x.value}); if(q.i){ a.v={}; q.i.forEach(function(x,k){ if(sel[k]!==undefined) a.v[k]=sel[k]; }); } if(q.o&&sel.c!==undefined) a.c=sel.c; return a; }
+function putAns(q,a){
+  if(a.f) [].forEach.call(document.querySelectorAll("input.b"),function(x,k){ x.value=a.f[k]||""; });
+  if(a.v) Object.keys(a.v).forEach(function(k){ sel[k]=a.v[k]; var g=document.querySelector('.vf[data-k="'+k+'"]'); if(g) g.querySelectorAll("button").forEach(function(b){ b.classList.toggle("sel",+b.dataset.v===a.v[k]); }); });
+  if(a.c!==undefined){ sel.c=a.c; document.querySelectorAll(".opt").forEach(function(b){ b.classList.toggle("sel",+b.dataset.k===a.c); }); }
+}
+function answerText(q){
+  var a=[];
+  if(q.p) a.push(q.p.filter(function(x){return typeof x!=="string"}).map(function(x){return x[0]}).join(" · "));
+  if(q.i) a.push(q.i.map(function(x){return (x[1]?"V":"F")}).join(" · "));
+  if(q.o) a.push(q.o[q.c]);
+  return a.join(" | ");
+}
+function check(q,i,silent){
+  var ok=true, fb=$("#fb"), card=$("#c");
+  if(q.p){ var k=0; q.p.forEach(function(x){ if(typeof x==="string")return; var inp=document.querySelector('input[data-k="'+(k++)+'"]'); var v=norm(inp.value); var good=!!v&&accepted(x).some(function(a){return match(v,a)}); inp.classList.toggle("ok",good); inp.classList.toggle("no",!good); if(!good) ok=false; }); }
+  if(q.i){ q.i.forEach(function(x,k){ var g=document.querySelector('.vf[data-k="'+k+'"]'); var good=sel[k]===x[1]; g.classList.toggle("ok",good); g.classList.toggle("no",!good); if(!good) ok=false; }); }
+  if(q.o){ document.querySelectorAll(".opt").forEach(function(b){b.classList.remove("ok","no")}); var b=document.querySelector('.opt[data-k="'+sel.c+'"]'); if(sel.c===undefined) ok=false; else { b.classList.add(sel.c===q.c?"ok":"no"); if(sel.c!==q.c) ok=false; } }
+  if(ok) return acerto(q,i,silent);
+  if(silent) return;
+  tries++; tone(BAD); try{navigator.vibrate&&navigator.vibrate([80,60,80])}catch(e){}
+  card.classList.remove("shake"); void card.offsetWidth; card.classList.add("shake");
+  var m='<div class="msg no">Ainda não. Releia o texto e tente de novo.</div>';
+  if(tries>=2) m+='<div class="hint">💡 Dica: '+q.h+'</div>';
+  if(tries>=3) m+='<button class="btn sec" id="ti">Chamar o instrutor</button><div id="tb"></div>';
+  fb.innerHTML=m;
+  if(tries>=3) $("#ti").onclick=function(){ $("#tb").innerHTML='<div class="tc"><input id="tcd" type="password" placeholder="Código do instrutor"><button class="btn sec" id="tok" style="margin:0">OK</button></div><div id="tr"></div>'; $("#tok").onclick=function(){ if($("#tcd").value===TEACHER_CODE){ $("#tr").innerHTML='<div class="note">Resposta: '+answerText(q)+'</div><button class="btn" id="sk">Seguir adiante</button>'; $("#sk").onclick=function(){ st.a=st.a||{}; st.a[i]=canonAns(q); avancar(); }; } else {$("#tr").innerHTML='<div class="msg no">Código incorreto.</div>';tone(BAD)} } };
+}
+function acerto(q,i,silent){
+  if(!silent){ st.a=st.a||{}; st.a[i]=readAns(q); save(); tone(GOOD); }
+  document.querySelectorAll("input.b,.opt,.vf button").forEach(function(x){x.disabled=true});
+  var h='<div class="msg ok">Muito bem! ✔</div>'+(q.n?'<div class="note">'+q.n+'</div>':'')+'<button class="btn" id="nx">'+(i===NQ-1?"Continuar":"Próxima pergunta")+'</button>';
+  $("#fb").innerHTML=h; $("#ck").style.display="none"; $("#nx").onclick=avancar; if(!silent) $("#nx").focus();
+}
+function avancar(){ st.i++; save(); render(); window.scrollTo({top:0,behavior:"smooth"}); }
+
+function voltar(){ if(st.i<=0) return; closeBible(); st.i--; save(); render(); window.scrollTo({top:0,behavior:"smooth"}); }
+$("#back").onclick=voltar;
+$("#mute").onclick=function(){muted=!muted;this.textContent=muted?"🔇 Som desligado":"🔊 Som ligado"};
+$("#reset").onclick=function(){ st={i:-1,u:0}; save(); render(); };
+render();
+</script>
+</body>
+</html>

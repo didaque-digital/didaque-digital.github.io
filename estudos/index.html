@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="robots" content="noindex">
+<title>Didaquê Digital</title>
+<style>
+:root{--bg:#FFF8E7;--card:#fff;--tx:#222;--mut:#666;--navy:#1F3A5F;--or:#E07B39;--ok:#2E7D32;--line:#E6D9B8;--gold:#F4B43C}
+@media (prefers-color-scheme:dark){:root{--bg:#0F1B2D;--card:#172A45;--tx:#EDEFF2;--mut:#A9B4C4;--navy:#14263F;--or:#F0914F;--ok:#66BB6A;--line:#2B4466}}
+*{box-sizing:border-box}
+body{margin:0;background:var(--bg);color:var(--tx);font:17px/1.5 Calibri,"Segoe UI",system-ui,sans-serif;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}
+.wrap{max-width:640px;margin:0 auto;padding:0 14px 40px}
+.hero{background:radial-gradient(circle at 88% 20%,#f4b43c55,transparent 45%),linear-gradient(135deg,var(--navy),#2c527f);color:#fff;margin:0 -14px 16px;padding:26px 22px 22px;border-radius:0 0 24px 24px}
+.hero h1{font:700 34px/1.1 Georgia,serif;margin:0}
+.hero h1 span{color:#F0914F}
+.hero p{margin:8px 0 0;opacity:.92}
+.list{display:flex;flex-direction:column;gap:10px}
+a.it,div.it{display:flex;align-items:center;gap:14px;background:var(--card);border:1px solid var(--line);border-left:6px solid var(--or);border-radius:14px;padding:14px 16px;text-decoration:none;color:var(--tx)}
+.num{font:700 30px/1 Georgia,serif;color:var(--or);min-width:34px;text-align:center}
+.tt{flex:1;font:700 18px/1.25 Georgia,serif}
+.tag{font:14px Calibri,"Segoe UI",system-ui,sans-serif;color:var(--mut);margin-top:2px}
+.tag.ok{color:var(--ok);font-weight:700}
+div.it{opacity:.55;border-left-color:var(--line)}
+div.it .num{color:var(--mut)}
+.foot{margin-top:22px;font-size:14px;color:var(--mut);text-align:center}
+</style>
+</head>
+<body>
+<div class="wrap">
+  <div class="hero"><h1>Didaquê <span>Digital</span></h1><p>Escolha o estudo para continuar.</p></div>
+  <div id="quem" style="margin:0 0 12px;font-size:15px;color:var(--mut)"></div>
+  <div class="list" id="list"></div>
+  <div class="foot">Os estudos novos serão publicados aos poucos.<br><a href="../" style="color:inherit">← Voltar à página de boas-vindas</a></div>
+</div>
+<script>
+var E = [{"n": 1, "t": "A Bíblia", "ok": true}, {"n": 2, "t": "Criação e origem do mal", "ok": true}, {"n": 3, "t": "O plano da salvação", "ok": true}, {"n": 4, "t": "A volta de Jesus", "ok": true}, {"n": 5, "t": "A morte e a Nova Terra", "ok": false}, {"n": 6, "t": "Santuário e juízo", "ok": false}, {"n": 7, "t": "A lei de Deus e o sábado", "ok": false}, {"n": 8, "t": "Princípios de saúde", "ok": false}, {"n": 9, "t": "O dom de profecia", "ok": false}, {"n": 10, "t": "Dízimo e ofertas", "ok": false}, {"n": 11, "t": "A igreja remanescente", "ok": false}, {"n": 12, "t": "Vida cristã e o Espírito Santo", "ok": false}, {"n": 13, "t": "Batismo e missão", "ok": false}];
+var L = document.getElementById("list");
+(function(){ var q = document.getElementById("quem"), a = null; try{ a = JSON.parse(localStorage.getItem("didaque_aluno")); }catch(x){}
+  q.innerHTML = a && a.classe ? "👤 " + a.nome + " · classe " + a.classe + ' · <a href="../entrar/" style="color:inherit">trocar</a>' : '<a href="../entrar/" style="color:inherit">Entrar numa classe</a> para o instrutor acompanhar o seu estudo.'; })();
+function draw(){
+  L.innerHTML = "";
+  E.forEach(function(e){
+    var st = null; try{ st = JSON.parse(localStorage.getItem("didaque_e"+e.n+"_v1")); }catch(x){}
+    var done = st && st.d;
+    var tag = !e.ok ? "Em breve" : done ? "✔ Concluído" : (st && st.i >= 0 ? "Em andamento" : "Começar");
+    var el = document.createElement(e.ok ? "a" : "div");
+    el.className = "it";
+    el.innerHTML = '<div class="num">'+e.n+'</div><div class="tt">'+e.t+'<div class="'+(done?"tag ok":"tag")+'">'+tag+'</div></div>';
+    if(e.ok) el.href = "../estudo-"+e.n+"/";
+    L.appendChild(el);
+  });
+}
+draw();
+// descobre sozinho quais estudos já foram publicados (pasta estudo-N existe)
+E.forEach(function(e){
+  if(e.ok) return;
+  try{ fetch("../estudo-"+e.n+"/", {method:"HEAD", cache:"no-store"}).then(function(r){ if(r.ok){ e.ok = true; draw(); } }).catch(function(){}); }catch(x){}
+});
+</script>
+</body>
+</html>

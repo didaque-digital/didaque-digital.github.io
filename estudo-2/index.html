@@ -1,0 +1,304 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="robots" content="noindex">
+<title>Estudo 2 · Criação e Origem do Mal</title>
+<style>
+:root{--bg:#FFF8E7;--card:#fff;--tx:#222;--mut:#666;--navy:#1F3A5F;--qc:#1F3A5F;--or:#E07B39;--teal:#2A7F8E;--ok:#2E7D32;--bad:#C62828;--line:#E6D9B8;--inp:#FDF1D8;--gold:#F4B43C;box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}
+@media (prefers-color-scheme:dark){:root:not([data-theme="light"]){--bg:#0F1B2D;--card:#172A45;--tx:#EDEFF2;--mut:#A9B4C4;--navy:#14263F;--qc:#C9DAF5;--or:#F0914F;--teal:#6CC6D3;--ok:#66BB6A;--bad:#EF5350;--line:#2B4466;--inp:#1E3556}}
+:root[data-theme="dark"]{--bg:#0F1B2D;--card:#172A45;--tx:#EDEFF2;--mut:#A9B4C4;--navy:#14263F;--qc:#C9DAF5;--or:#F0914F;--teal:#6CC6D3;--ok:#66BB6A;--bad:#EF5350;--line:#2B4466;--inp:#1E3556}
+html{scroll-padding-top:env(safe-area-inset-top,0px)}
+body{margin:0;background:var(--bg);color:var(--tx);font:17px/1.55 Calibri,"Segoe UI",system-ui,sans-serif}
+body.lock{overflow:hidden}
+.wrap{max-width:640px;margin:0 auto;padding:0 14px 40px}
+.hero{background:radial-gradient(circle at 88% 20%,#f4b43c55,transparent 45%),linear-gradient(135deg,var(--navy),#2c527f);color:#fff;margin:0 -14px 14px;padding:22px 22px 20px;border-radius:0 0 24px 24px}
+.hero small{color:var(--gold);letter-spacing:.3em;font-weight:700;font-size:13px}
+.hero .n{font:700 56px/1 Georgia,serif;color:#F0914F;margin-top:2px}
+.hero h1{font:700 30px/1.15 Georgia,serif;margin:4px 0 0}
+.bar{height:8px;background:var(--line);border-radius:6px;overflow:hidden;margin:6px 0 4px}
+.bar i{display:block;height:100%;width:0;background:var(--or);transition:width .4s}
+.cnt{font-size:14px;color:var(--mut);margin-bottom:10px}
+.card{background:var(--card);border-radius:14px;padding:18px;border:1px solid var(--line);border-left:6px solid var(--or)}
+.q{font:700 19px/1.35 Georgia,serif;color:var(--qc)}
+.ref{margin:8px 0 14px}
+.refbtn{font:inherit;font-weight:700;color:var(--teal);background:transparent;border:0;border-bottom:2px dotted var(--teal);padding:2px 0;cursor:pointer;text-align:left}
+.s{line-height:2.3;margin:0 0 6px}
+.s+.row,.sub+.row{border-top:1px solid var(--line)}
+.sub{margin:12px 0 2px;color:var(--mut);font-size:15px}
+.intro{margin:0 0 10px}
+.mut{color:var(--mut);font-size:15px}
+a.btn{display:inline-block;text-decoration:none}
+input.b{font:inherit;border:2px solid var(--line);background:var(--inp);color:var(--tx);border-radius:8px;padding:1px 8px;width:9em;max-width:100%}
+input.ok,.opt.ok{border-color:var(--ok)!important;background:color-mix(in srgb,var(--ok) 15%,transparent)!important}
+input.no,.opt.no{border-color:var(--bad)!important}
+.opt{display:block;width:100%;text-align:left;font:inherit;color:var(--tx);background:var(--card);padding:11px 12px;border:2px solid var(--line);border-radius:10px;margin:8px 0;cursor:pointer}
+.opt.sel{border-color:var(--or)}
+.row{display:flex;justify-content:space-between;gap:10px;align-items:center;padding:8px 0;border-bottom:1px solid var(--line)}
+.vf{display:flex;gap:6px;flex:none}
+.vf button{width:44px;height:44px;border-radius:50%;border:2px solid var(--line);background:var(--card);color:var(--tx);font:700 16px inherit;cursor:pointer}
+.vf button.sel{background:var(--or);border-color:var(--or);color:#fff}
+.vf.ok button.sel{background:var(--ok);border-color:var(--ok)}
+.vf.no button.sel{background:var(--bad);border-color:var(--bad)}
+.btn{background:var(--or);color:#fff;border:0;border-radius:12px;padding:13px 22px;font:700 17px inherit;cursor:pointer;margin-top:16px}
+.btn.sec{background:transparent;color:var(--teal);border:2px solid var(--teal);padding:9px 16px;font-size:15px;margin-top:10px}
+.btn:focus-visible,.opt:focus-visible,.vf button:focus-visible,input:focus-visible,a:focus-visible,.refbtn:focus-visible,.xbtn:focus-visible,.tab:focus-visible{outline:3px solid var(--teal);outline-offset:2px}
+.msg{margin-top:12px;font-weight:700}.msg.ok{color:var(--ok)}.msg.no{color:var(--bad)}
+.hint,.note{margin-top:10px;padding:10px 12px;border-radius:10px;background:var(--inp);font-size:15px}
+.note{border-left:4px solid var(--teal)}
+.shake{animation:sh .35s}
+@keyframes sh{20%,60%{transform:translateX(-7px)}40%,80%{transform:translateX(7px)}}
+.foot{display:flex;justify-content:space-between;margin-top:18px;font-size:14px;color:var(--mut)}
+.foot a.home{color:var(--mut);text-decoration:underline;padding:6px}
+.foot button{background:none;border:0;color:var(--mut);font:inherit;text-decoration:underline;cursor:pointer;padding:6px}
+.tc{display:flex;gap:8px;margin-top:8px}.tc input{flex:1;min-width:0;font:inherit;padding:8px;border-radius:8px;border:2px solid var(--line);background:var(--inp);color:var(--tx)}
+.chk{display:flex;gap:10px;align-items:flex-start;padding:8px 0}.chk input{width:22px;height:22px;margin-top:3px;accent-color:var(--or)}
+/* ===== Pop-up do texto bíblico ===== */
+.ov{position:fixed;inset:0;z-index:100;display:none;align-items:flex-end;justify-content:center;background:rgba(10,20,40,.6);-webkit-backdrop-filter:blur(3px);backdrop-filter:blur(3px)}
+.ov.on{display:flex;animation:fd .2s}
+.md{background:var(--card);color:var(--tx);width:100%;max-width:640px;max-height:84vh;max-height:84dvh;display:flex;flex-direction:column;overflow:hidden;border-radius:24px 24px 0 0;border-top:6px solid var(--or);box-shadow:0 -10px 40px rgba(0,0,0,.35);animation:up .28s ease-out}
+.mh{display:flex;align-items:center;justify-content:space-between;gap:10px;padding:14px 12px 8px 20px}
+.mh b{font:700 13px/1 Calibri,system-ui,sans-serif;letter-spacing:.2em;color:var(--or);text-transform:uppercase}
+.xbtn{flex:none;width:44px;height:44px;border-radius:50%;border:0;background:var(--inp);color:var(--tx);font:400 26px/1 system-ui,sans-serif;cursor:pointer;display:flex;align-items:center;justify-content:center}
+.tabs{display:flex;gap:8px;padding:0 20px 8px;overflow-x:auto}
+.tab{flex:none;font:inherit;font-weight:700;font-size:15px;color:var(--teal);background:transparent;border:2px solid var(--teal);border-radius:999px;padding:6px 14px;cursor:pointer}
+.tab.sel{background:var(--teal);color:#fff}
+.mb{padding:6px 20px 12px;overflow-y:auto;-webkit-overflow-scrolling:touch;min-height:120px}
+.mb h2{font:700 24px/1.2 Georgia,serif;color:var(--qc);margin:4px 0 12px}
+.vs{font:20px/1.75 Georgia,serif;margin:0 0 10px}
+.vs sup{font:700 12px Calibri,system-ui,sans-serif;color:var(--or);margin-right:3px}
+.ver{font-size:13px;color:var(--mut);margin-top:12px}
+.ld{color:var(--mut);padding:24px 0;text-align:center}
+.mf{padding:6px 20px calc(16px + env(safe-area-inset-bottom,0px))}
+.mf .btn{width:100%;margin-top:6px}
+@keyframes up{from{transform:translateY(40px);opacity:0}to{transform:none;opacity:1}}
+@keyframes fd{from{opacity:0}to{opacity:1}}
+@media (min-width:700px){.ov{align-items:center}.md{border-radius:24px;max-height:80vh}.mf{padding-bottom:18px}}
+@media (prefers-reduced-motion:reduce){.shake,.md,.ov.on{animation:none}.bar i{transition:none}}
+</style>
+</head>
+<body>
+<div class="wrap">
+  <div class="hero"><small>ESTUDO</small><div class="n">2</div><h1>Criação e Origem do Mal</h1></div>
+  <div class="bar"><i id="pb"></i></div>
+  <div class="cnt" id="cnt"></div>
+  <main id="app"></main>
+  <div class="foot"><button id="mute">🔊 Som ligado</button><a class="home" href="../estudos/">Estudos</a><button id="back" aria-label="Voltar à pergunta anterior">← Voltar</button><button id="reset">Recomeçar</button></div>
+</div>
+
+<!-- Pop-up do texto bíblico -->
+<div class="ov" id="ov" aria-hidden="true">
+  <div class="md" role="dialog" aria-modal="true" aria-labelledby="mt">
+    <div class="mh"><b id="mt">📖 Texto bíblico</b><button class="xbtn" id="mx" aria-label="Fechar">×</button></div>
+    <div class="tabs" id="mtabs"></div>
+    <div class="mb" id="mbody"></div>
+    <div class="mf"><button class="btn" id="mclose">Fechar e voltar à pergunta</button></div>
+  </div>
+</div>
+
+<script>
+// ====== CONFIGURAÇÃO (edite aqui) ======
+var TEACHER_CODE = "1234";    // código do instrutor (mostra a resposta)
+var NEXT_CODE = "ESTUDO3";    // código que libera o próximo estudo
+var NEXT_URL = "../estudo-3/"; // endereço da página do próximo estudo
+var KEY = "didaque_e2_v1";
+
+// Cada resposta: [texto exibido, trechos aceitos...]  (sem acento, minúsculas; "=" no início = palavra exata)
+var Q = [
+ {q:"Como foi formado o Universo?", r:"Hebreus 11:3; Salmo 33:6, 9", v:[["Hebreus 11:3", "heb 11:3"], ["Salmo 33:6, 9", "psa 33:6,9"]],
+  p:["Mediante a Palavra de ",["Deus","deus","senhor"]," Ele falou e tudo se ",["fez","fez","fiz"],", ordenou e tudo passou a ",["existir","exist"],"."],
+  h:"Leia o Salmo 33:9. Quem falou, e o que aconteceu quando Ele ordenou?"},
+ {q:"Quem participou da criação?", r:"Gênesis 1:1-2; João 1:1-3; Colossenses 1:16", v:[["Gênesis 1:1-2", "gen 1:1-2"], ["João 1:1-3", "john 1:1-3"], ["Colossenses 1:16", "col 1:16"]],
+  p:["No princípio criou ",["Deus","deus","elohim"]," os céus e a Terra. O ",["Espírito","espirit"]," de Deus pairava sobre as águas. Todas as coisas foram feitas por meio de ",["Cristo","cristo","jesus","filho","verbo","palavra"],"."],
+  h:"Em Gênesis 1:2 aparece o ... de Deus. Em João 1:1-3, o Verbo (Jesus) é aquele por meio de quem tudo foi feito.",
+  n:"A Bíblia não usa a palavra “Trindade”, mas mostra as três Pessoas: Pai, Filho e Espírito Santo (Mt 28:19; 2Co 13:13). Há um só Deus, em três Pessoas coeternas."},
+ {q:"Em quantos dias Deus criou o mundo, e o que fez no sétimo?", r:"Êxodo 20:11; Gênesis 2:1-3", v:[["Êxodo 20:11", "exo 20:11"], ["Gênesis 2:1-3", "gen 2:1-3"]],
+  p:["Em ",["seis","seis","=6"]," dias fez o Senhor os céus, a Terra e tudo o que neles há. No sétimo dia, Deus ",["descansou","descans","repous"],"."],
+  h:"Leia Êxodo 20:11 com atenção: quantos dias de trabalho, e o que Deus fez no sétimo?",
+  n:"A palavra hebraica “yom”, acompanhada de numeral ordinal, indica um dia de 24 horas."},
+ {q:"Como foram criados o homem e a mulher?", r:"Gênesis 1:26, 27; 2:7, 18-25", v:[["Gênesis 1:26-27", "gen 1:26-27"], ["Gênesis 2:7", "gen 2:7"], ["Gênesis 2:18-25", "gen 2:18-25"]],
+  p:["O homem foi criado do ",["pó","=po","poeira"]," da terra. A mulher, da ",["costela","costel"]," de Adão. Ambos, à ",["imagem","imagem","semelhanca"]," de Deus."],
+  h:"Gênesis 2:7 diz de que o homem foi formado. Em 2:21-22, Deus tirou algo do corpo de Adão para formar a mulher."},
+ {q:"O que Deus deu ao primeiro casal, e sob que condição viveriam para sempre?", r:"Gênesis 2:8, 15-17", v:[["Gênesis 2:8, 15-17", "gen 2:8-17"]],
+  p:["Receberam um lindo ",["jardim","jardim","eden","paraiso"],". Não poderiam comer da árvore do conhecimento do ",["bem","=bem"]," e do ",["mal","=mal"],". A desobediência traria duas consequências: 1) deixar o ",["jardim","jardim","eden","paraiso","lar"]," e 2) ficar sujeitos à ",["morte","mort"],"."],
+  h:"Leia Gênesis 2:16-17. O que aconteceria no dia em que comessem do fruto proibido?"},
+ {q:"Como era Lúcifer, e que pecados cometeu?", r:"Ezequiel 28:14, 15; Isaías 14:12-14", v:[["Ezequiel 28:14, 15", "eze 28:14-15"], ["Isaías 14:12-14", "isa 14:12-14"]],
+  p:["“Perfeito eras nos teus ",["caminhos","caminho","proceder","conduta","atos","modo"],"”, até cometer ",["pecado","pecad","iniquidade","maldade","rebeli","injusti"],"."],
+  s:"Marque V ou F em cada frase:",
+  i:[["Queria assentar-se no trono de Deus.",1],["Pretendia ser semelhante ao Altíssimo.",1],["Queria o lugar de Deus e ser adorado.",1],["Amou a Deus.",0]],
+  h:"Leia Isaías 14:13-14: Lúcifer dizia “subirei”, “serei semelhante ao Altíssimo”. Isso é amar a Deus?"},
+ {q:"Qual foi o resultado da rebeldia desse anjo?", r:"Apocalipse 12:7-9", v:[["Apocalipse 12:7-9", "rev 12:7-9"]],
+  p:["Houve no Céu uma grande ",["guerra","guerra","batalha","luta","peleja","conflito"]," entre Cristo e ",["Satanás","satan","diabo","dragao","lucifer","serpente"],"."],
+  h:"Leia Apocalipse 12:7-9: houve uma luta no Céu. Quem é o grande dragão do verso 9?",
+  n:"O mal surgiu no Céu, num anjo de luz que se rebelou e passou a se chamar Satanás. A terça parte dos anjos o seguiu, e todos foram expulsos."},
+ {q:"O que a serpente disse à mulher, contrariando Deus?", r:"Gênesis 3:1-5", v:[["Gênesis 3:1-5", "gen 3:1-5"]],
+  p:["“É certo que não ",["morrereis","morr"],". Sereis como ",["Deus","deus"],".”"],
+  h:"Leia Gênesis 3:4-5. No verso 4 a serpente contradiz o aviso de Deus; no verso 5 promete que seriam como..."},
+ {q:"Que certeza Deus deu a Adão e Eva quando pecaram?", r:"Gênesis 3:15", v:[["Gênesis 3:15", "gen 3:15"]],
+  p:["Jesus Cristo, descendente da mulher, esmagaria a cabeça da ",["serpente","serpent","satan","diabo","cobra","dragao"],"."],
+  h:"Releia Gênesis 3:15: Deus fala com quem quando promete que a cabeça seria ferida?",
+  n:"Ele deixaria o Céu, nasceria de mulher e, por Sua morte e ressurreição, acabaria com o domínio de Satanás."},
+ {q:"De que maneira Satanás nos engana hoje?", r:"2 Coríntios 11:14, 15; Mateus 24:24", v:[["2 Coríntios 11:14, 15", "2co 11:14-15"], ["Mateus 24:24", "mat 24:24"]],
+  p:["Transformando-se em ",["anjo","anjo"]," de luz. Realizando ",["sinais","sinal","milagre","maravilha"]," e prodígios."],
+  h:"2 Coríntios 11:14 diz em que Satanás se disfarça. Mateus 24:24 fala de grandes ... e prodígios."},
+ {q:"Como podemos vencê-lo?", r:"Efésios 6:10-18", v:[["Efésios 6:10-18", "eph 6:10-18"]],
+  p:["Revestindo-nos de toda a ",["armadura","armad"]," de Deus. Tendo o escudo da ",["fé","=fe"],", seguindo a Palavra de ",["Deus","deus"],", orando em ",["todo","todo"]," o tempo."],
+  h:"Leia Efésios 6:11, 16, 17 e 18. Cada peça da armadura tem um significado."},
+ {q:"Recapitulação", recap:1,
+  p:["Deus falou e tudo se ",["fez","fez","fiz"],". O Universo foi criado em ",["seis","seis","=6"]," dias, com a participação do Pai, do Filho e do Espírito ",["Santo","santo"],". O homem foi criado do ",["pó","=po","poeira"]," da terra e a mulher, da ",["costela","costel"]," de Adão. Lúcifer, um anjo de ",["luz","=luz"],", quis tomar o ",["trono","trono","lugar","posto"]," de Deus e cometeu ",["pecado","pecad","iniquidade","rebeli","maldade"],", que é desobediência à lei de Deus. Eva foi ",["enganada","engan","seduzid"]," pela serpente, mas Jesus esmagaria a cabeça dela."],
+  h:"Use as respostas que você já deu nas perguntas."}
+];
+var NQ = Q.length, TOTAL = NQ + 2;
+var $ = function(s){return document.querySelector(s)}, app = $("#app");
+var st = {i:-1,u:0}; try{var sv=JSON.parse(localStorage.getItem(KEY)); if(sv) st=sv;}catch(e){}
+function save(){try{localStorage.setItem(KEY,JSON.stringify(st))}catch(e){}}
+var muted=false, tries=0, sel={}, ac;
+
+function norm(s){return String(s).toLowerCase().normalize("NFD").replace(/[\u0300-\u036f]/g,"").replace(/[^a-z0-9 ]/g," ").replace(/\s+/g," ").trim()}
+function match(v,a){ if(a.charAt(0)==="=") return (" "+v+" ").indexOf(" "+norm(a.slice(1))+" ")>-1; return v.indexOf(norm(a))>-1; }
+function accepted(x){ return x.length>1 ? x.slice(1) : x; }
+function esc(s){return String(s).replace(/[&<>"]/g,function(c){return {"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;"}[c]})}
+function tone(seq){ if(muted) return; try{ ac=ac||new (window.AudioContext||window.webkitAudioContext)(); var t=ac.currentTime;
+  seq.forEach(function(n){var o=ac.createOscillator(),g=ac.createGain();o.type=n[2]||"sine";o.frequency.value=n[0];g.gain.setValueAtTime(.16,t);g.gain.exponentialRampToValueAtTime(.001,t+n[1]);o.connect(g);g.connect(ac.destination);o.start(t);o.stop(t+n[1]);t+=n[1]+.06}); }catch(e){} }
+var BAD=[[190,.18,"square"],[150,.3,"square"]], GOOD=[[660,.12],[880,.22]];
+
+/* ===== Pop-up bíblico ===== */
+var bibOpen=false, bibList=[], bibFocus=null;
+// ====== TEXTOS BÍBLICOS (ficam dentro do aplicativo, funcionam sem internet) ======
+// Tradução atual: João Ferreira de Almeida (domínio público).
+// Para trocar por outra tradução, substitua o texto de cada versículo abaixo.
+// Formato: "chave": [ [número do versículo, "texto"], ... ]
+var BIB = {
+ "heb 11:3":[[3, "Pela fé entendemos que os mundos foram criados pela palavra de Deus; de modo que o visível não foi feito daquilo que se vê."]],
+ "psa 33:6,9":[[6, "Pela palavra do Senhor foram feitos os céus, e todo o exército deles pelo sopro da sua boca."], [9, "Pois ele falou, e tudo se fez; ele mandou, e logo tudo apareceu."]],
+ "gen 1:1-2":[[1, "No princípio criou Deus os céus e a terra."], [2, "A terra era sem forma e vazia; e havia trevas sobre a face do abismo, mas o Espírito de Deus pairava sobre a face das águas."]],
+ "john 1:1-3":[[1, "No princípio era o Verbo, e o Verbo estava com Deus, e o Verbo era Deus."], [2, "Ele estava no princípio com Deus."], [3, "Todas as coisas foram feitas por intermédio dele, e sem ele nada do que foi feito se fez."]],
+ "col 1:16":[[16, "porque nele foram criadas todas as coisas nos céus e na terra, as visíveis e as invisíveis, sejam tronos, sejam dominações, sejam principados, sejam potestades; tudo foi criado por ele e para ele."]],
+ "exo 20:11":[[11, "Porque em seis dias fez o Senhor o céu e a terra, o mar e tudo o que neles há, e ao sétimo dia descansou; por isso o Senhor abençoou o dia do sábado, e o santificou."]],
+ "gen 2:1-3":[[1, "Assim foram acabados os céus e a terra, com todo o seu exército."], [2, "Ora, havendo Deus completado no dia sétimo a obra que tinha feito, descansou nesse dia de toda a obra que fizera."], [3, "Abençoou Deus o sétimo dia, e o santificou; porque nele descansou de toda a sua obra que criara e fizera."]],
+ "gen 1:26-27":[[26, "E disse Deus: Façamos o homem à nossa imagem, conforme a nossa semelhança; domine ele sobre os peixes do mar, sobre as aves do céu, sobre os animais domésticos, e sobre toda a terra, e sobre todo réptil que se arrasta sobre a terra."], [27, "Criou, pois, Deus o homem à sua imagem; à imagem de Deus o criou; homem e mulher os criou."]],
+ "gen 2:7":[[7, "E formou o Senhor Deus o homem do pó da terra, e soprou-lhe nas narinas o fôlego da vida; e o homem tornou-se alma vivente."]],
+ "gen 2:18-25":[[18, "Disse mais o Senhor Deus: Não é bom que o homem esteja só; far-lhe-ei uma ajudadora que lhe seja idônea."], [19, "Da terra formou, pois, o Senhor Deus todos os animais do campo e todas as aves do céu, e os trouxe ao homem, para ver como lhes chamaria; e tudo o que o homem chamou a todo ser vivente, isso foi o seu nome."], [20, "Assim o homem deu nomes a todos os animais domésticos, às aves do céu e a todos os animais do campo; mas para o homem não se achava ajudadora idônea."], [21, "Então o Senhor Deus fez cair um sono pesado sobre o homem, e este adormeceu; tomou-lhe, então, uma das costelas, e fechou a carne em seu lugar;"], [22, "e da costela que o Senhor Deus lhe tomara, formou a mulher e a trouxe ao homem."], [23, "Então disse o homem: Esta é agora osso dos meus ossos, e carne da minha carne; ela será chamada varoa, porquanto do varão foi tomada."], [24, "Portanto deixará o homem a seu pai e a sua mãe, e unir-se-á à sua mulher, e serão uma só carne."], [25, "E ambos estavam nus, o homem e sua mulher; e não se envergonhavam."]],
+ "gen 2:8-17":[[8, "Então plantou o Senhor Deus um jardim, da banda do oriente, no Éden; e pôs ali o homem que tinha formado."], [15, "Tomou, pois, o Senhor Deus o homem, e o pôs no jardim do Éden para o lavrar e guardar."], [16, "Ordenou o Senhor Deus ao homem, dizendo: De toda árvore do jardim podes comer livremente;"], [17, "mas da árvore do conhecimento do bem e do mal, dessa não comerás; porque no dia em que dela comeres, certamente morrerás."]],
+ "eze 28:14-15":[[14, "Eu te coloquei com o querubim da guarda; estiveste sobre o monte santo de Deus; andaste no meio das pedras afogueadas."], [15, "Perfeito eras nos teus caminhos, desde o dia em que foste criado, até que em ti se achou iniquidade."]],
+ "isa 14:12-14":[[12, "Como caíste do céu, ó estrela da manhã, filha da alva! como foste lançado por terra tu que prostravas as nações!"], [13, "E tu dizias no teu coração: Eu subirei ao céu; acima das estrelas de Deus exaltarei o meu trono; e no monte da congregação me assentarei, nas extremidades do norte;"], [14, "subirei acima das alturas das nuvens, e serei semelhante ao Altíssimo."]],
+ "rev 12:7-9":[[7, "Então houve guerra no céu: Miguel e os seus anjos batalhavam contra o dragão. E o dragão e os seus anjos batalhavam,"], [8, "mas não prevaleceram, nem mais o seu lugar se achou no céu."], [9, "E foi precipitado o grande dragão, a antiga serpente, que se chama o Diabo e Satanás, que engana todo o mundo; foi precipitado na terra, e os seus anjos foram precipitados com ele."]],
+ "gen 3:1-5":[[1, "Ora, a serpente era o mais astuto de todos os animais do campo, que o Senhor Deus tinha feito. E esta disse à mulher: É assim que Deus disse: Não comereis de toda árvore do jardim?"], [2, "Respondeu a mulher à serpente: Do fruto das árvores do jardim podemos comer,"], [3, "mas do fruto da árvore que está no meio do jardim, disse Deus: Não comereis dele, nem nele tocareis, para que não morrais."], [4, "Disse a serpente à mulher: Certamente não morrereis."], [5, "Porque Deus sabe que no dia em que comerdes desse fruto, vossos olhos se abrirão, e sereis como Deus, conhecendo o bem e o mal."]],
+ "gen 3:15":[[15, "Porei inimizade entre ti e a mulher, e entre a tua descendência e a sua descendência; esta te ferirá a cabeça, e tu lhe ferirás o calcanhar."]],
+ "2co 11:14-15":[[14, "E não é de admirar, porquanto o próprio Satanás se disfarça em anjo de luz."], [15, "Não é muito, pois, que também os seus ministros se disfarcem em ministros da justiça; o fim dos quais será conforme as suas obras."]],
+ "mat 24:24":[[24, "porque hão de surgir falsos cristos e falsos profetas, e farão grandes sinais e prodígios; de modo que, se possível fora, enganariam até os escolhidos."]],
+ "eph 6:10-18":[[10, "Finalmente, fortalecei-vos no Senhor e na força do seu poder."], [11, "Revesti-vos de toda a armadura de Deus, para poderdes permanecer firmes contra as ciladas do Diabo;"], [12, "pois não é contra carne e sangue que temos que lutar, mas sim contra os principados, contra as potestades, contra os príncipes do mundo destas trevas, contra as hostes espirituais da iniquidade nas regiões celestes."], [13, "Portanto tomai toda a armadura de Deus, para que possais resistir no dia mau e, havendo feito tudo, permanecer firmes."], [14, "Estai, pois, firmes, tendo cingidos os vossos lombos com a verdade, e vestida a couraça da justiça,"], [15, "e calçando os pés com a preparação do evangelho da paz,"], [16, "tomando, sobretudo, o escudo da fé, com o qual podereis apagar todos os dardos inflamados do Maligno."], [17, "Tomai também o capacete da salvação, e a espada do Espírito, que é a palavra de Deus;"], [18, "com toda a oração e súplica orando em todo tempo no Espírito e, para o mesmo fim, vigiando com toda a perseverança e súplica, por todos os santos,"]]
+};
+var BIBNAME = "João Ferreira de Almeida (domínio público)";
+
+function openBible(list,opener){
+  bibList=list; bibFocus=opener||document.activeElement;
+  var tabs=$("#mtabs");
+  tabs.innerHTML = list.length>1 ? list.map(function(x,k){return '<button class="tab" data-k="'+k+'">'+esc(x[0])+'</button>'}).join("") : "";
+  tabs.style.display = list.length>1 ? "flex" : "none";
+  tabs.querySelectorAll(".tab").forEach(function(b){b.onclick=function(){showRef(+b.dataset.k)}});
+  $("#ov").classList.add("on"); $("#ov").setAttribute("aria-hidden","false");
+  document.body.classList.add("lock"); bibOpen=true;
+  try{history.pushState({bib:1},"")}catch(e){}   // o botão "voltar" do celular fecha o pop-up
+  showRef(0); $("#mx").focus();
+}
+function closeBible(fromPop){
+  if(!bibOpen) return;
+  bibOpen=false;
+  $("#ov").classList.remove("on"); $("#ov").setAttribute("aria-hidden","true");
+  document.body.classList.remove("lock");
+  if(!fromPop){ try{ if(history.state&&history.state.bib) history.back(); }catch(e){} }
+  try{ bibFocus&&bibFocus.focus&&bibFocus.focus(); }catch(e){}
+}
+function showRef(k){
+  var item=bibList[k], body=$("#mbody");
+  document.querySelectorAll("#mtabs .tab").forEach(function(b,j){b.classList.toggle("sel",j===k)});
+  body.scrollTop=0;
+  var vs=BIB[item[1]];
+  if(vs) draw(item,vs); else body.innerHTML='<h2>'+esc(item[0])+'</h2><div class="ld">Texto não encontrado.</div>';
+}
+function draw(item,vs){
+  var multi=vs.length>1;
+  $("#mbody").innerHTML='<h2>'+esc(item[0])+'</h2>'+vs.map(function(v){return '<p class="vs">'+(multi?'<sup>'+v[0]+'</sup>':'')+esc(v[1])+'</p>'}).join("")+'<div class="ver">Tradução: '+esc(BIBNAME)+'</div>';
+}
+$("#mx").onclick=function(){closeBible()};
+$("#mclose").onclick=function(){closeBible()};
+$("#ov").addEventListener("click",function(e){ if(e.target===this) closeBible(); });
+document.addEventListener("keydown",function(e){ if(e.key==="Escape"&&bibOpen) closeBible(); });
+window.addEventListener("popstate",function(){ if(bibOpen) closeBible(true); });
+
+function render(){
+  var i=st.i; tries=0; sel={};
+  $("#back").style.visibility = i>0 ? "visible" : "hidden";
+  $("#pb").style.width=(Math.max(i,0)/TOTAL*100)+"%";
+  $("#cnt").textContent = i<0 ? "" : i<NQ ? (Q[i].recap?"Recapitulação":"Pergunta "+(i+1)+" de "+(NQ-1)) : i===NQ ? "Compromisso de fé" : "Estudo concluído";
+  if(i<0){ app.innerHTML='<div class="card"><p class="q">Vamos começar</p><p class="intro">Imagine que você encontra um celular no meio da mata. Ninguém pensaria que ele se montou sozinho. Agora pense no seu coração, que bate cerca de 100 mil vezes por dia sem você pedir. Quem planejou isso? E, se tudo foi feito por um Deus bom, de onde vieram a dor, a mentira e a maldade? Vamos descobrir na Bíblia.</p><p class="mut">Tente responder cada pergunta. Se errar, é só tentar de novo: você só avança quando acertar. Se ficar difícil, leia o texto bíblico indicado ou peça ajuda ao seu instrutor.</p><button class="btn" id="go">Começar</button></div>'; $("#go").onclick=function(){st.i=0;save();render()}; return; }
+  if(i<NQ) return question(Q[i],i);
+  if(i===NQ){ app.innerHTML='<div class="card"><p class="q">Compromisso de fé</p><p>Se quiser, marque o que você deseja assumir:</p><label class="chk"><input type="checkbox"><span>Aceito que o Universo foi criado com a participação das três Pessoas da Divindade.</span></label><label class="chk"><input type="checkbox"><span>Creio no poder de Deus que criou a Terra em seis dias literais.</span></label><label class="chk"><input type="checkbox"><span>Creio que o mal surgiu com um anjo criado perfeito que se rebelou contra Deus.</span></label><label class="chk"><input type="checkbox"><span>No conflito entre o bem e o mal, quero ficar ao lado de Deus e de Sua Palavra.</span></label><button class="btn" id="nx">Concluir o estudo</button></div>'; $("#nx").onclick=function(){st.i=NQ+1;save();render()}; return; }
+  if(!st.d){st.d=1;save();}
+  app.innerHTML='<div class="card"><p class="q">Parabéns! Você concluiu o Estudo 2.</p><p>Agora você sabe que o Universo tem um Criador e de onde veio o mal. O próximo estudo será liberado pelo seu instrutor.</p>'+(st.u?'<p class="msg ok">Estudo 3 liberado!</p><a class="btn" href="'+NEXT_URL+'">Ir para o Estudo 3</a>':'<div class="tc"><input id="uc" placeholder="Código de liberação" autocapitalize="characters"><button class="btn sec" id="ub" style="margin:0">Liberar</button></div><div id="um" class="msg"></div>')+'</div>';
+  if(!st.u) $("#ub").onclick=function(){ if($("#uc").value.trim().toUpperCase()===NEXT_CODE){st.u=1;save();render()} else {$("#um").className="msg no";$("#um").textContent="Código incorreto. Peça ao seu instrutor.";tone(BAD)} };
+}
+
+function question(q,i){
+  var h='<div class="card" id="c"><div class="q">'+(q.recap?q.q:(i+1)+". "+q.q)+'</div>';
+  if(q.r) h+='<div class="ref"><button class="refbtn" id="rb">📖 '+q.r+' · ler texto</button></div>'; else h+='<div class="ref"></div>';
+  if(q.p){ var k=0; h+='<p class="s">'+q.p.map(function(x){return typeof x==="string"?x:'<input class="b" data-k="'+(k++)+'" autocomplete="off" autocapitalize="off" spellcheck="false" aria-label="Resposta '+k+'">'}).join("")+'</p>'; }
+  if(q.i){ if(q.s) h+='<p class="sub">'+q.s+'</p>'; h+=q.i.map(function(x,k){return '<div class="row"><span>'+x[0]+'</span><span class="vf" data-k="'+k+'"><button data-v="1" aria-label="Verdadeiro">V</button><button data-v="0" aria-label="Falso">F</button></span></div>'}).join(""); }
+  if(q.o) h+=q.o.map(function(x,k){return '<button class="opt" data-k="'+k+'">'+x+'</button>'}).join("");
+  h+='<div id="fb"></div><button class="btn" id="ck">Verificar</button></div>';
+  app.innerHTML=h;
+  var rb=$("#rb"); if(rb) rb.onclick=function(){openBible(q.v,rb)};
+  document.querySelectorAll(".vf button").forEach(function(b){b.onclick=function(){var p=b.parentNode;p.querySelectorAll("button").forEach(function(x){x.classList.remove("sel")});b.classList.add("sel");sel[p.dataset.k]=+b.dataset.v}});
+  document.querySelectorAll(".opt").forEach(function(b){b.onclick=function(){document.querySelectorAll(".opt").forEach(function(x){x.classList.remove("sel")});b.classList.add("sel");sel.c=+b.dataset.k}});
+  $("#ck").onclick=function(){check(q,i)};
+  document.querySelectorAll("input.b").forEach(function(f){f.addEventListener("keydown",function(e){if(e.key==="Enter")check(q,i)})});
+  var sa=st.a&&st.a[i]; if(sa){ putAns(q,sa); check(q,i,true); }
+}
+
+function canonAns(q){ var a={}; if(q.p) a.f=q.p.filter(function(x){return typeof x!=="string"}).map(function(x){return x[0]}); if(q.i){ a.v={}; q.i.forEach(function(x,k){ a.v[k]=x[1]; }); } if(q.o) a.c=q.c; return a; }
+function readAns(q){ var a={}; if(q.p) a.f=[].map.call(document.querySelectorAll("input.b"),function(x){return x.value}); if(q.i){ a.v={}; q.i.forEach(function(x,k){ if(sel[k]!==undefined) a.v[k]=sel[k]; }); } if(q.o&&sel.c!==undefined) a.c=sel.c; return a; }
+function putAns(q,a){
+  if(a.f) [].forEach.call(document.querySelectorAll("input.b"),function(x,k){ x.value=a.f[k]||""; });
+  if(a.v) Object.keys(a.v).forEach(function(k){ sel[k]=a.v[k]; var g=document.querySelector('.vf[data-k="'+k+'"]'); if(g) g.querySelectorAll("button").forEach(function(b){ b.classList.toggle("sel",+b.dataset.v===a.v[k]); }); });
+  if(a.c!==undefined){ sel.c=a.c; document.querySelectorAll(".opt").forEach(function(b){ b.classList.toggle("sel",+b.dataset.k===a.c); }); }
+}
+function answerText(q){
+  var a=[];
+  if(q.p) a.push(q.p.filter(function(x){return typeof x!=="string"}).map(function(x){return x[0]}).join(" · "));
+  if(q.i) a.push(q.i.map(function(x){return (x[1]?"V":"F")}).join(" · "));
+  if(q.o) a.push(q.o[q.c]);
+  return a.join(" | ");
+}
+function check(q,i,silent){
+  var ok=true, fb=$("#fb"), card=$("#c");
+  if(q.p){ var k=0; q.p.forEach(function(x){ if(typeof x==="string")return; var inp=document.querySelector('input[data-k="'+(k++)+'"]'); var v=norm(inp.value); var good=!!v&&accepted(x).some(function(a){return match(v,a)}); inp.classList.toggle("ok",good); inp.classList.toggle("no",!good); if(!good) ok=false; }); }
+  if(q.i){ q.i.forEach(function(x,k){ var g=document.querySelector('.vf[data-k="'+k+'"]'); var good=sel[k]===x[1]; g.classList.toggle("ok",good); g.classList.toggle("no",!good); if(!good) ok=false; }); }
+  if(q.o){ document.querySelectorAll(".opt").forEach(function(b){b.classList.remove("ok","no")}); var b=document.querySelector('.opt[data-k="'+sel.c+'"]'); if(sel.c===undefined) ok=false; else { b.classList.add(sel.c===q.c?"ok":"no"); if(sel.c!==q.c) ok=false; } }
+  if(ok) return acerto(q,i,silent);
+  if(silent) return;
+  tries++; tone(BAD); try{navigator.vibrate&&navigator.vibrate([80,60,80])}catch(e){}
+  card.classList.remove("shake"); void card.offsetWidth; card.classList.add("shake");
+  var m='<div class="msg no">Ainda não. Releia o texto e tente de novo.</div>';
+  if(tries>=2) m+='<div class="hint">💡 Dica: '+q.h+'</div>';
+  if(tries>=3) m+='<button class="btn sec" id="ti">Chamar o instrutor</button><div id="tb"></div>';
+  fb.innerHTML=m;
+  if(tries>=3) $("#ti").onclick=function(){ $("#tb").innerHTML='<div class="tc"><input id="tcd" type="password" placeholder="Código do instrutor"><button class="btn sec" id="tok" style="margin:0">OK</button></div><div id="tr"></div>'; $("#tok").onclick=function(){ if($("#tcd").value===TEACHER_CODE){ $("#tr").innerHTML='<div class="note">Resposta: '+answerText(q)+'</div><button class="btn" id="sk">Seguir adiante</button>'; $("#sk").onclick=function(){ st.a=st.a||{}; st.a[i]=canonAns(q); avancar(); }; } else {$("#tr").innerHTML='<div class="msg no">Código incorreto.</div>';tone(BAD)} } };
+}
+function acerto(q,i,silent){
+  if(!silent){ st.a=st.a||{}; st.a[i]=readAns(q); save(); tone(GOOD); }
+  document.querySelectorAll("input.b,.opt,.vf button").forEach(function(x){x.disabled=true});
+  var h='<div class="msg ok">Muito bem! ✔</div>'+(q.n?'<div class="note">'+q.n+'</div>':'')+'<button class="btn" id="nx">'+(i===NQ-1?"Continuar":"Próxima pergunta")+'</button>';
+  $("#fb").innerHTML=h; $("#ck").style.display="none"; $("#nx").onclick=avancar; if(!silent) $("#nx").focus();
+}
+function avancar(){ st.i++; save(); render(); window.scrollTo({top:0,behavior:"smooth"}); }
+
+function voltar(){ if(st.i<=0) return; closeBible(); st.i--; save(); render(); window.scrollTo({top:0,behavior:"smooth"}); }
+$("#back").onclick=voltar;
+$("#mute").onclick=function(){muted=!muted;this.textContent=muted?"🔇 Som desligado":"🔊 Som ligado"};
+$("#reset").onclick=function(){ st={i:-1,u:0}; save(); render(); };
+render();
+</script>
+</body>
+</html>

@@ -1,0 +1,61 @@
+rules_version = '2';
+service cloud.firestore {
+  match /databases/{database}/documents {
+
+    function logado() { return request.auth != null; }
+    function ehInstrutor() {
+      return logado() && exists(/databases/$(database)/documents/instrutores/$(request.auth.uid));
+    }
+
+    // Documento de convite: só você mexe, pelo console do Firebase
+    match /config/{doc} {
+      allow read, write: if false;
+    }
+
+    // Administrador: documento do próprio instrutor com o campo admin = true (definido pelo console)
+    function ehAdmin() {
+      return logado()
+        && exists(/databases/$(database)/documents/instrutores/$(request.auth.uid))
+        && get(/databases/$(database)/documents/instrutores/$(request.auth.uid)).data.admin == true;
+    }
+
+    // Cadastro de instrutores: por código de convite ou aprovado pelo administrador
+    match /instrutores/{uid} {
+  allow read: if logado() && request.auth.uid == uid;
+  allow create: if logado() && request.auth.uid == uid
+    && request.auth.token.firebase.sign_in_provider == 'google.com'
+    && (
+      request.resource.data.keys().hasOnly(['nome','email','criadoEm'])
+      || (request.resource.data.keys().hasOnly(['nome','email','convite','criadoEm'])
+          && request.resource.data.convite == get(/databases/$(database)/documents/config/convite).data.codigo)
+    );
+  allow update, delete: if false;
+}
+
+    // Pedidos de acesso de novos instrutores
+    match /solicitacoes/{uid} {
+      allow get: if logado() && (request.auth.uid == uid || ehAdmin());
+      allow list: if ehAdmin();
+      allow create, update: if logado() && request.auth.uid == uid && request.resource.data.status == "pendente";
+      allow delete: if ehAdmin();
+    }
+
+    // Classes
+    match /classes/{codigo} {
+      allow get: if logado();
+      allow list: if logado() && resource.data.instrutorUid == request.auth.uid;
+      allow create: if ehInstrutor() && request.resource.data.instrutorUid == request.auth.uid;
+      allow update, delete: if logado() && resource.data.instrutorUid == request.auth.uid;
+
+      // Alunos da classe (documento = nome do aluno na classe)
+      match /alunos/{alunoId} {
+        allow get: if logado() && exists(/databases/$(database)/documents/classes/$(codigo));
+        allow list: if logado()
+          && get(/databases/$(database)/documents/classes/$(codigo)).data.instrutorUid == request.auth.uid;
+        allow create, update: if logado() && exists(/databases/$(database)/documents/classes/$(codigo));
+        allow delete: if logado()
+          && get(/databases/$(database)/documents/classes/$(codigo)).data.instrutorUid == request.auth.uid;
+      }
+    }
+  }
+}

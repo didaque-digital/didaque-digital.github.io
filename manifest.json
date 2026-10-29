@@ -1,0 +1,19 @@
+{
+  "id": "/didaque-digital/app/",
+  "name": "Didaquê Digital",
+  "short_name": "Didaquê",
+  "description": "Estudos bíblicos guiados por instrutor, respondidos direto no celular ou tablet.",
+  "lang": "pt-BR",
+  "dir": "ltr",
+  "start_url": "/didaque-digital/app/",
+  "scope": "/didaque-digital/app/",
+  "display": "standalone",
+  "orientation": "any",
+  "background_color": "#f6f4ef",
+  "theme_color": "#0c1a2e",
+  "icons": [
+    { "src": "icons/icon-192.png", "sizes": "192x192", "type": "image/png", "purpose": "any" },
+    { "src": "icons/icon-512.png", "sizes": "512x512", "type": "image/png", "purpose": "any" },
+    { "src": "icons/icon-maskable-512.png", "sizes": "512x512", "type": "image/png", "purpose": "maskable" }
+  ]
+}
