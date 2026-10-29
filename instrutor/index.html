@@ -20,6 +20,9 @@ h2{font:700 20px Georgia,serif;margin:18px 0 6px}
 .btn{background:var(--or);color:#fff;border:0;border-radius:12px;padding:12px 18px;font:700 16px inherit;cursor:pointer}
 .btn.sec{background:transparent;color:var(--teal);border:2px solid var(--teal);padding:8px 14px;font-size:15px}
 .btn.sm{padding:6px 12px;font-size:14px}
+.btn.sec.sm{padding:4px 10px;font-size:14px}
+.btn.del{background:var(--bad)}
+.btn.sec.perig{color:var(--bad);border-color:var(--bad)}
 input,select{font:inherit;padding:10px;border:2px solid var(--line);border-radius:10px;background:var(--inp);color:var(--tx);max-width:100%}
 .row{display:flex;gap:8px;flex-wrap:wrap;align-items:center}
 .mut{color:var(--mut);font-size:14px}
@@ -38,6 +41,7 @@ input,select{font:inherit;padding:10px;border:2px solid var(--line);border-radiu
 .esp{color:var(--bad);font-weight:700}
 .stu{color:var(--tx)}
 .tag{font-size:13px;color:var(--mut)}
+.aviso{background:color-mix(in srgb,var(--bad) 10%,var(--card));border:1px solid var(--bad);border-radius:10px;padding:10px 12px;margin-top:8px}
 .gbtn{display:flex;align-items:center;width:100%;max-width:340px;padding:2px;border:0;border-radius:8px;background:#4285F4;color:#fff;cursor:pointer;font:600 17px Roboto,"Segoe UI",system-ui,sans-serif;box-shadow:0 1px 3px rgba(0,0,0,.35)}
 .gbtn:hover{background:#3b78e0}.gbtn:active{background:#3367d6}
 .gbtn .gl{background:#fff;width:46px;height:46px;flex:none;display:flex;align-items:center;justify-content:center;border-radius:6px}
@@ -54,7 +58,7 @@ a.link{color:var(--teal);cursor:pointer;text-decoration:underline;background:non
 <script type="module">
 import { auth, db } from "../comum/fb.js";
 import { GoogleAuthProvider, signInWithPopup, signOut, onAuthStateChanged } from "https://www.gstatic.com/firebasejs/12.13.0/firebase-auth.js";
-import { doc, getDoc, setDoc, deleteDoc, collection, query, where, onSnapshot, updateDoc, serverTimestamp } from "https://www.gstatic.com/firebasejs/12.13.0/firebase-firestore.js";
+import { doc, getDoc, getDocs, setDoc, deleteDoc, writeBatch, collection, query, where, onSnapshot, updateDoc, serverTimestamp } from "https://www.gstatic.com/firebasejs/12.13.0/firebase-firestore.js";
 
 const $ = s => document.querySelector(s), main = $("#main");
 const esc = s => String(s == null ? "" : s).replace(/[&<>"]/g, c => ({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;"}[c]));
@@ -62,6 +66,8 @@ const TITULOS = ["A Bíblia","Criação e origem do mal","O plano da salvação"
 // Número do administrador para o botão de WhatsApp (só dígitos, com 55 + DDD). Deixe "" para esconder o botão.
 const ADMIN_WHATSAPP = "";
 let user = null, unsubClasses = null, unsubAlunos = null, unsubSol = null, ehAdmin = false, aberto = {}, alunos = [], classeAtual = null;
+// Estados de edição/confirmação (sobrevivem às atualizações ao vivo)
+let editC = {}, delC = {}, editA = {}, remA = {};
 
 /* ===== Dados dos estudos (lidos direto da página de cada estudo) ===== */
 const cache = {};
@@ -166,8 +172,8 @@ async function telaConvite() {
 
 /* ===== Lista de classes ===== */
 function telaClasses() {
-  pararTudo(); classeAtual = null;
-  main.innerHTML = '<div id="adm"></div><h2>Minhas classes</h2><div id="lista"></div>' +
+  pararTudo(); classeAtual = null; editC = {}; delC = {};
+  main.innerHTML = '<div id="adm"></div><h2>Minhas classes</h2><div id="lista"></div><div id="mc" class="msg"></div>' +
     '<div class="card"><div class="row"><input id="nc" placeholder="Nome da nova classe (ex.: Turma de sábado)" style="flex:1;min-width:200px"><button class="btn" id="criar">Criar classe</button></div><div id="m" class="msg"></div></div>' +
     '<h2>Guia do instrutor</h2><div class="card"><p class="mut" style="margin-top:0">Veja todas as perguntas de um estudo com as respostas esperadas.</p><button class="btn sec" id="guia">Abrir o guia</button></div>';
   $("#guia").onclick = telaGuia;
@@ -177,10 +183,71 @@ function telaClasses() {
     const L = $("#lista"); if (!L) return;
     const cs = []; snap.forEach(d => cs.push(d.data()));
     cs.sort((a, b) => (b.criadoEm && b.criadoEm.seconds || 0) - (a.criadoEm && a.criadoEm.seconds || 0));
-    L.innerHTML = cs.length ? cs.map(c => '<div class="card"><div class="row" style="justify-content:space-between"><div><b>' + esc(c.nome) + '</b><div class="mut">Código: <b>' + esc(c.codigo) + '</b></div></div><button class="btn sm" data-c="' + esc(c.codigo) + '" data-n="' + esc(c.nome) + '">Abrir</button></div></div>').join("")
+    L.innerHTML = cs.length ? cs.map(cardClasse).join("")
       : '<div class="card mut">Você ainda não tem classes. Crie a primeira abaixo.</div>';
-    L.querySelectorAll("button[data-c]").forEach(b => b.onclick = () => telaClasse(b.dataset.c, b.dataset.n));
+    ligarClasses(L);
   }, e => console.error(e));
+}
+function cardClasse(c) {
+  const cod = esc(c.codigo);
+  if (editC[c.codigo] !== undefined) {
+    return '<div class="card"><div class="mut">Código: <b>' + cod + '</b></div><div class="row" style="margin-top:6px"><input data-ec="' + cod + '" value="' + esc(editC[c.codigo]) + '" placeholder="Nome da classe" style="flex:1;min-width:180px"><button class="btn sm" data-sv="' + cod + '">Salvar</button><button class="btn sec sm" data-cn="' + cod + '">Cancelar</button></div></div>';
+  }
+  if (delC[c.codigo]) {
+    return '<div class="card"><b>' + esc(c.nome) + '</b><div class="mut">Código: <b>' + cod + '</b></div><div class="aviso">Apagar esta classe? Todos os alunos dela e o progresso deles serão apagados. <b>Isso não pode ser desfeito.</b><div class="row" style="margin-top:8px"><button class="btn sm del" data-dy="' + cod + '">Sim, apagar</button><button class="btn sec sm" data-dn="' + cod + '">Cancelar</button></div></div></div>';
+  }
+  return '<div class="card"><div class="row" style="justify-content:space-between"><div><b>' + esc(c.nome) + '</b><div class="mut">Código: <b>' + cod + '</b></div></div><div class="row"><button class="btn sm" data-c="' + cod + '" data-n="' + esc(c.nome) + '">Abrir</button><button class="btn sec sm" data-ed="' + cod + '" data-n="' + esc(c.nome) + '">Editar</button><button class="btn sec sm perig" data-ap="' + cod + '">Apagar</button></div></div></div>';
+}
+function ligarClasses(L) {
+  const ativo = document.activeElement, focoC = ativo && ativo.dataset && ativo.dataset.ec;
+  L.querySelectorAll("button[data-c]").forEach(b => b.onclick = () => telaClasse(b.dataset.c, b.dataset.n));
+  L.querySelectorAll("button[data-ed]").forEach(b => b.onclick = () => { editC[b.dataset.ed] = b.dataset.n; delete delC[b.dataset.ed]; redesenharClasses(); });
+  L.querySelectorAll("button[data-ap]").forEach(b => b.onclick = () => { delC[b.dataset.ap] = true; delete editC[b.dataset.ap]; redesenharClasses(); });
+  L.querySelectorAll("button[data-cn]").forEach(b => b.onclick = () => { delete editC[b.dataset.cn]; redesenharClasses(); });
+  L.querySelectorAll("button[data-dn]").forEach(b => b.onclick = () => { delete delC[b.dataset.dn]; redesenharClasses(); });
+  L.querySelectorAll("input[data-ec]").forEach(i => {
+    i.oninput = () => { editC[i.dataset.ec] = i.value; };
+    i.onkeydown = e => { if (e.key === "Enter") salvarClasse(i.dataset.ec); };
+  });
+  L.querySelectorAll("button[data-sv]").forEach(b => b.onclick = () => salvarClasse(b.dataset.sv));
+  L.querySelectorAll("button[data-dy]").forEach(b => b.onclick = () => apagarClasse(b.dataset.dy, b));
+  if (focoC) { const i = L.querySelector('input[data-ec="' + focoC + '"]'); if (i) { i.focus(); i.setSelectionRange(i.value.length, i.value.length); } }
+}
+// Força redesenho a partir do último estado (relê o cache do Firestore)
+async function redesenharClasses() {
+  const L = $("#lista"); if (!L) return;
+  try {
+    const snap = await getDocs(query(collection(db, "classes"), where("instrutorUid", "==", user.uid)));
+    const cs = []; snap.forEach(d => cs.push(d.data()));
+    cs.sort((a, b) => (b.criadoEm && b.criadoEm.seconds || 0) - (a.criadoEm && a.criadoEm.seconds || 0));
+    L.innerHTML = cs.length ? cs.map(cardClasse).join("") : '<div class="card mut">Você ainda não tem classes. Crie a primeira abaixo.</div>';
+    ligarClasses(L);
+  } catch (e) { console.error(e); }
+}
+async function salvarClasse(cod) {
+  const nome = (editC[cod] || "").trim(), m = $("#mc");
+  if (!nome) { m.textContent = "O nome da classe não pode ficar vazio."; return; }
+  try {
+    await updateDoc(doc(db, "classes", cod), { nome: nome });
+    delete editC[cod]; m.textContent = "";
+    redesenharClasses();
+  } catch (e) { console.error(e); m.textContent = "Não foi possível renomear a classe. (" + (e.code || e.message) + ")"; }
+}
+async function apagarClasse(cod, btn) {
+  const m = $("#mc"); if (btn) btn.disabled = true;
+  try {
+    // 1) apaga os alunos da classe (o Firestore não apaga subcoleções sozinho)
+    const snap = await getDocs(collection(db, "classes", cod, "alunos"));
+    const ds = snap.docs;
+    for (let i = 0; i < ds.length; i += 400) {
+      const b = writeBatch(db);
+      ds.slice(i, i + 400).forEach(d => b.delete(d.ref));
+      await b.commit();
+    }
+    // 2) apaga a classe
+    await deleteDoc(doc(db, "classes", cod));
+    delete delC[cod]; m.textContent = "";
+  } catch (e) { console.error(e); m.textContent = "Não foi possível apagar a classe. (" + (e.code || e.message) + ")"; if (btn) btn.disabled = false; }
 }
 function pedidosAdmin() {
   unsubSol = onSnapshot(collection(db, "solicitacoes"), snap => {
@@ -213,11 +280,11 @@ async function criarClasse() {
 
 /* ===== Uma classe: acompanhamento ao vivo ===== */
 function telaClasse(cod, nome) {
-  pararTudo(); classeAtual = cod; aberto = {}; alunos = [];
+  pararTudo(); classeAtual = cod; aberto = {}; alunos = []; editA = {}; remA = {};
   main.innerHTML = '<p><a class="link" id="voltar">← Minhas classes</a></p>' +
     '<div class="card"><div class="mut">' + esc(nome) + '</div><div class="code">' + esc(cod) + '</div>' +
     '<p class="mut" style="margin:6px 0 10px">Passe este código aos alunos. Eles entram em <b>Sou aluno</b>.</p><button class="btn sec sm" id="cp">Copiar código</button></div>' +
-    '<h2>Alunos</h2><div id="al"><div class="card mut">Aguardando os alunos entrarem…</div></div>' + guiaBloco();
+    '<h2>Alunos</h2><div id="ma" class="msg"></div><div id="al"><div class="card mut">Aguardando os alunos entrarem…</div></div>' + guiaBloco();
   $("#voltar").onclick = telaClasses;
   ligarGuia();
   $("#cp").onclick = () => { try { navigator.clipboard.writeText(cod); $("#cp").textContent = "Copiado ✔"; } catch (e) {} };
@@ -250,17 +317,56 @@ async function desenhar() {
     const erros = n ? totalErros(d, n) : 0;
     const concl = Object.keys(d.concluidos || {}).map(k => k.replace("e", "")).sort((a, b) => a - b).join(", ");
     const rein = n && d.reinicios ? (d.reinicios["e" + n] || 0) : 0;
+    const id = esc(d._id);
+    const painelEdicao = editA[d._id] !== undefined
+      ? '<div class="row" style="margin-top:8px"><input data-ea="' + id + '" value="' + esc(editA[d._id]) + '" placeholder="Nome do aluno" style="flex:1;min-width:160px"><button class="btn sm" data-sa="' + id + '">Salvar</button><button class="btn sec sm" data-ca="' + id + '">Cancelar</button></div>' : '';
+    const painelRemocao = remA[d._id]
+      ? '<div class="aviso">Remover <b>' + esc(d.nome) + '</b> desta classe? O progresso dele(a) será apagado. <b>Isso não pode ser desfeito.</b><div class="row" style="margin-top:8px"><button class="btn sm del" data-ry="' + id + '">Sim, remover</button><button class="btn sec sm" data-rn="' + id + '">Cancelar</button></div></div>' : '';
     html.push('<div class="card alu' + (chamou ? ' call' : '') + '"><div class="row" style="justify-content:space-between"><span class="nm">' + esc(d.nome) + '</span><span class="tag">' + quando(d.atualizadoEm) + '</span></div>' +
-      (chamou ? '<div style="margin:6px 0"><span class="badge red">🔔 Chamou o instrutor · pergunta ' + ((d.chamou.pergunta != null ? d.chamou.pergunta + 1 : "?")) + '</span> <button class="btn sm" data-at="' + esc(d._id) + '">Atendido</button></div>' : '') +
+      (chamou ? '<div style="margin:6px 0"><span class="badge red">🔔 Chamou o instrutor · pergunta ' + ((d.chamou.pergunta != null ? d.chamou.pergunta + 1 : "?")) + '</span> <button class="btn sm" data-at="' + id + '">Atendido</button></div>' : '') +
       '<div>' + esc(status) + '</div><div class="bar"><i style="width:' + pct + '%"></i></div>' +
-      '<div><span class="badge">Erros: ' + erros + '</span>' + (rein ? '<span class="badge">↻ recomeçou ' + rein + 'x</span>' : '') + (concl ? '<span class="badge ok">Concluídos: ' + esc(concl) + '</span>' : '') + ' <button class="link a" data-t="' + esc(d._id) + '">' + (aberto[d._id] ? "Ocultar detalhes" : "Ver detalhes e respostas") + '</button></div>' +
+      '<div><span class="badge">Erros: ' + erros + '</span>' + (rein ? '<span class="badge">↻ recomeçou ' + rein + 'x</span>' : '') + (concl ? '<span class="badge ok">Concluídos: ' + esc(concl) + '</span>' : '') + ' <button class="link a" data-t="' + id + '">' + (aberto[d._id] ? "Ocultar detalhes" : "Ver detalhes e respostas") + '</button></div>' +
+      '<div class="row" style="margin-top:8px"><button class="btn sec sm" data-ra="' + id + '" data-n="' + esc(d.nome) + '">✎ Renomear</button><button class="btn sec sm perig" data-rm="' + id + '">Remover da classe</button></div>' +
+      painelEdicao + painelRemocao +
       (aberto[d._id] ? detalhe(d, Q, n, i) : '') + '</div>');
   }
+  // guarda o foco do campo de nome (se estiver digitando) para restaurar após o redesenho
+  const ativo = document.activeElement, focoA = ativo && ativo.dataset && ativo.dataset.ea;
+  if (!$("#al")) return;
   box.innerHTML = html.join("");
   box.querySelectorAll("button[data-t]").forEach(b => b.onclick = () => { aberto[b.dataset.t] = !aberto[b.dataset.t]; desenhar(); });
   box.querySelectorAll("button[data-at]").forEach(b => b.onclick = async () => {
     try { await updateDoc(doc(db, "classes", classeAtual, "alunos", b.dataset.at), { "chamou.atendido": true }); } catch (e) { console.error(e); }
   });
+  // renomear aluno
+  box.querySelectorAll("button[data-ra]").forEach(b => b.onclick = () => { editA[b.dataset.ra] = b.dataset.n; delete remA[b.dataset.ra]; desenhar(); });
+  box.querySelectorAll("button[data-ca]").forEach(b => b.onclick = () => { delete editA[b.dataset.ca]; desenhar(); });
+  box.querySelectorAll("input[data-ea]").forEach(i => {
+    i.oninput = () => { editA[i.dataset.ea] = i.value; };
+    i.onkeydown = e => { if (e.key === "Enter") salvarAluno(i.dataset.ea); };
+  });
+  box.querySelectorAll("button[data-sa]").forEach(b => b.onclick = () => salvarAluno(b.dataset.sa));
+  // remover aluno
+  box.querySelectorAll("button[data-rm]").forEach(b => b.onclick = () => { remA[b.dataset.rm] = true; delete editA[b.dataset.rm]; desenhar(); });
+  box.querySelectorAll("button[data-rn]").forEach(b => b.onclick = () => { delete remA[b.dataset.rn]; desenhar(); });
+  box.querySelectorAll("button[data-ry]").forEach(b => b.onclick = () => removerAluno(b.dataset.ry, b));
+  if (focoA) { const i = box.querySelector('input[data-ea="' + focoA + '"]'); if (i) { i.focus(); i.setSelectionRange(i.value.length, i.value.length); } }
+}
+async function salvarAluno(id) {
+  const nome = (editA[id] || "").trim(), m = $("#ma");
+  if (!nome) { m.textContent = "O nome do aluno não pode ficar vazio."; return; }
+  try {
+    await updateDoc(doc(db, "classes", classeAtual, "alunos", id), { nome: nome });
+    delete editA[id]; m.textContent = "";
+    desenhar();
+  } catch (e) { console.error(e); m.textContent = "Não foi possível renomear o aluno. (" + (e.code || e.message) + ")"; }
+}
+async function removerAluno(id, btn) {
+  const m = $("#ma"); if (btn) btn.disabled = true;
+  try {
+    await deleteDoc(doc(db, "classes", classeAtual, "alunos", id));
+    delete remA[id]; delete editA[id]; delete aberto[id]; m.textContent = "";
+  } catch (e) { console.error(e); m.textContent = "Não foi possível remover o aluno. (" + (e.code || e.message) + ")"; if (btn) btn.disabled = false; }
 }
 
 function detalhe(d, Q, n, i) {
