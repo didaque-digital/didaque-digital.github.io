@@ -370,6 +370,23 @@ function telaGuia() {
   $("#voltar").onclick = telaClasses;
   ligarGuia();
 }
+  function lerMeta(t) {
+  const g = re => { const x = t.match(re); return x ? x[1] : ""; };
+  const m = {
+    titulo: g(/<h1>([\s\S]*?)<\/h1>/).replace(/<[^>]*>/g, "").trim(),
+    prof: g(/var TEACHER_CODE\s*=\s*"([^"]*)"/),
+    prox: g(/var NEXT_CODE\s*=\s*"([^"]*)"/),
+    intro: g(/<p class="intro">([\s\S]*?)<\/p>/),
+    comp: [], bib: null
+  };
+  const re = /<label class="chk"><input type="checkbox"><span>([\s\S]*?)<\/span>/g; let x;
+  while ((x = re.exec(t))) m.comp.push(x[1]);
+  try {
+    const c = t.indexOf("var BIB = "), d = t.indexOf(";\nvar BIBNAME", c);
+    if (c >= 0 && d > c) m.bib = (new Function("return " + t.slice(c + 10, d)))();
+  } catch (e) { console.error(e); }
+  return m;
+}
 </script>
 </body>
 </html>
