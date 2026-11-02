@@ -45,6 +45,7 @@ input,select{font:inherit;padding:10px;border:2px solid var(--line);border-radiu
 a.link{color:var(--teal);cursor:pointer;text-decoration:underline;background:none;border:0;font:inherit;padding:0}
 .cods{border-left-color:var(--gold)}
 .cdl{margin-top:8px}
+details.cods summary{cursor:pointer;font-size:17px}
 .cd,.cd2{font:700 22px/1.2 Georgia,serif;letter-spacing:.12em;color:var(--or)}
 .cd2{font-size:17px}
 .gqq{font:700 18px/1.3 Georgia,serif;margin-bottom:4px}
@@ -110,10 +111,21 @@ function lerMeta(t) {
 }
 function blocoCodigos(Q, n) {
   const m = Q.meta || {};
-  if (!m.prof && !m.prox) return '<div class="card mut">Não encontrei os códigos deste estudo.</div>';
-  return '<div class="card cods"><b>🔑 Códigos do Estudo ' + n + '</b>' +
-    '<div class="cdl"><span class="cd">' + esc(m.prof) + '</span><div class="mut">Código do instrutor. O aluno digita depois de errar 3 vezes: aparece a resposta e ele pode seguir adiante.</div></div>' +
-    '<div class="cdl"><span class="cd">' + esc(m.prox) + '</span><div class="mut">Código de liberação. No fim do estudo, o aluno digita para abrir o próximo estudo.</div></div></div>';
+  const lin = (cod, txt) => '<div class="cdl"><span class="cd">' + esc(cod) + '</span><div class="mut">' + txt + '</div></div>';
+  let h = '<summary><b>🔑 Códigos</b> <span class="mut">· Estudo ' + n + ' (toque para abrir)</span></summary>';
+  if (!m.prof && !m.prox) h += '<p class="mut">Não encontrei os códigos deste estudo.</p>';
+  if (m.prof) h += lin(m.prof, 'Código do instrutor. O aluno digita depois de errar 3 vezes: aparece a resposta e ele pode seguir adiante.');
+  if (m.prox) h += lin(m.prox, 'Código de liberação. No fim do estudo, o aluno digita para abrir o próximo estudo.');
+  return h;
+}
+async function mostrarCodigos() {
+  const box = $("#cods"), sel = $("#sel"); if (!box || !sel) return;
+  const n = +sel.value, aberta = !!box.querySelector("details[open]");
+  try {
+    const Q = await carregarEstudo(n);
+    if (+$("#sel").value !== n) return;
+    box.innerHTML = '<details class="card cods"' + (aberta ? ' open' : '') + '>' + blocoCodigos(Q, n) + '</details>';
+  } catch (e) { box.innerHTML = '<div class="card mut">Códigos: este estudo ainda não foi publicado.</div>'; }
 }
 function textoBiblico(q, m) {
   if (!m || !m.bib || !q.v) return "";
@@ -124,7 +136,7 @@ function textoBiblico(q, m) {
 // Mesma aparência do estudo do aluno, com as lacunas já preenchidas (não editável)
 function guiaHtml(Q, n) {
   const m = Q.meta || {};
-  let h = '<h2>Estudo ' + n + (m.titulo ? ' · ' + esc(m.titulo) : '') + '</h2>' + blocoCodigos(Q, n);
+  let h = '<h2>Estudo ' + n + (m.titulo ? ' · ' + esc(m.titulo) : '') + '</h2>';
   if (m.intro) h += '<div class="card"><div class="tag">Introdução do estudo (leia para o aluno)</div><p style="margin:6px 0 0">' + esc(m.intro) + '</p></div>';
   h += Q.map((q, k) => {
     let c = '<div class="card gq"><div class="gqq">' + (q.recap ? esc(q.q) : (k + 1) + ". " + esc(q.q)) + '</div>';
@@ -298,7 +310,7 @@ async function desenhar() {
   alunos.sort((a, b) => ((b.chamou && !b.chamou.atendido) ? 1 : 0) - ((a.chamou && !a.chamou.atendido) ? 1 : 0)
     || (b.atualizadoEm && b.atualizadoEm.seconds || 0) - (a.atualizadoEm && a.atualizadoEm.seconds || 0));
   const html = [];
-  const sel = $("#sel"); if (sel && !sel.dataset.m && alunos[0] && alunos[0].estudo) sel.value = alunos[0].estudo;
+  const sel = $("#sel"); if (sel && !sel.dataset.m && alunos[0] && alunos[0].estudo && sel.value != alunos[0].estudo) { sel.value = alunos[0].estudo; mostrarCodigos(); }
   for (const d of alunos) {
     const n = d.estudo, st = n ? d["e" + n] : null;
     let Q = null; if (n) { try { Q = await carregarEstudo(n); } catch (e) {} }
@@ -316,7 +328,7 @@ async function desenhar() {
     const concl = Object.keys(d.concluidos || {}).map(k => k.replace("e", "")).sort((a, b) => a - b).join(", ");
     const rein = n && d.reinicios ? (d.reinicios["e" + n] || 0) : 0;
     html.push('<div class="card alu' + (chamou ? ' call' : '') + '"><div class="row" style="justify-content:space-between"><span class="nm">' + esc(d.nome) + '</span><span class="tag">' + quando(d.atualizadoEm) + '</span></div>' +
-      (chamou ? '<div style="margin:6px 0"><span class="badge red">🔔 Chamou o instrutor · pergunta ' + ((d.chamou.pergunta != null ? d.chamou.pergunta + 1 : "?")) + '</span> <button class="btn sm" data-at="' + esc(d._id) + '">Atendido</button>' + (Q && Q.meta && Q.meta.prof ? '<div class="mut" style="margin-top:4px">Código do instrutor: <b class="cd2">' + esc(Q.meta.prof) + '</b></div>' : '') + '</div>' : '') +
+      (chamou ? '<div style="margin:6px 0"><span class="badge red">🔔 Chamou o instrutor · pergunta ' + ((d.chamou.pergunta != null ? d.chamou.pergunta + 1 : "?")) + '</span> <button class="btn sm" data-at="' + esc(d._id) + '">Atendido</button></div>' : '') +
       '<div>' + esc(status) + '</div><div class="bar"><i style="width:' + pct + '%"></i></div>' +
       '<div><span class="badge">Erros: ' + erros + '</span>' + (rein ? '<span class="badge">↻ recomeçou ' + rein + 'x</span>' : '') + (concl ? '<span class="badge ok">Concluídos: ' + esc(concl) + '</span>' : '') + ' <button class="link a" data-t="' + esc(d._id) + '">' + (aberto[d._id] ? "Ocultar detalhes" : "Ver detalhes e respostas") + '</button></div>' +
       (aberto[d._id] ? detalhe(d, Q, n, i) : '') + '</div>');
@@ -348,14 +360,16 @@ function detalhe(d, Q, n, i) {
       '<div class="esp">Resposta esperada: ' + esc(esperado(q)) + '</div>' +
       (resp ? '<div class="stu">Aluno respondeu: ' + esc(resp) + ' ✔</div>' : '') + ult + '</div>');
   }
-  return '<div style="margin-top:8px">' + blocoCodigos(Q, n) + h.join("") + '</div>';
+  return '<div style="margin-top:8px">' + h.join("") + '</div>';
 }
 
 /* ===== Guia do instrutor ===== */
 function guiaBloco() {
-  return '<h2>Guia do instrutor</h2><div class="card row"><select id="sel" onchange="this.dataset.m=1">' + TITULOS.map((t, k) => '<option value="' + (k + 1) + '">Estudo ' + (k + 1) + ' · ' + esc(t) + '</option>').join("") + '</select><button class="btn" id="ver">Ver guia</button></div><div id="g"></div>';
+  return '<h2>Guia do instrutor</h2><div class="card row"><select id="sel" onchange="this.dataset.m=1">' + TITULOS.map((t, k) => '<option value="' + (k + 1) + '">Estudo ' + (k + 1) + ' · ' + esc(t) + '</option>').join("") + '</select><button class="btn" id="ver">Ver guia</button></div><div id="g"></div><div id="cods"></div>';
 }
 function ligarGuia() {
+  $("#sel").addEventListener("change", mostrarCodigos);
+  mostrarCodigos();
   $("#ver").onclick = async () => {
     const n = +$("#sel").value, g = $("#g"); g.innerHTML = '<div class="card mut">Carregando…</div>';
     try {
@@ -369,23 +383,6 @@ function telaGuia() {
   main.innerHTML = '<p><a class="link" id="voltar">← Minhas classes</a></p>' + guiaBloco();
   $("#voltar").onclick = telaClasses;
   ligarGuia();
-}
-  function lerMeta(t) {
-  const g = re => { const x = t.match(re); return x ? x[1] : ""; };
-  const m = {
-    titulo: g(/<h1>([\s\S]*?)<\/h1>/).replace(/<[^>]*>/g, "").trim(),
-    prof: g(/var TEACHER_CODE\s*=\s*"([^"]*)"/),
-    prox: g(/var NEXT_CODE\s*=\s*"([^"]*)"/),
-    intro: g(/<p class="intro">([\s\S]*?)<\/p>/),
-    comp: [], bib: null
-  };
-  const re = /<label class="chk"><input type="checkbox"><span>([\s\S]*?)<\/span>/g; let x;
-  while ((x = re.exec(t))) m.comp.push(x[1]);
-  try {
-    const c = t.indexOf("var BIB = "), d = t.indexOf(";\nvar BIBNAME", c);
-    if (c >= 0 && d > c) m.bib = (new Function("return " + t.slice(c + 10, d)))();
-  } catch (e) { console.error(e); }
-  return m;
 }
 </script>
 </body>
