@@ -200,9 +200,14 @@ onAuthStateChanged(auth, async u => {
 
 async function entrarPainel() {
   try {
-    const d = await getDoc(doc(db, "instrutores", user.uid));
+    const ref = doc(db, "instrutores", user.uid);
+    let d = await getDoc(ref);
+    if (!d.exists()) {   // primeiro acesso: cadastra o instrutor automaticamente, sem código de convite
+      await setDoc(ref, { nome: user.displayName || "", email: user.email || "", criadoEm: serverTimestamp() });
+      d = await getDoc(ref);
+    }
     ehAdmin = d.exists() && d.data().admin === true;
-    if (d.exists()) telaClasses(); else telaConvite();
+    telaClasses();
   } catch (e) { console.error(e); main.innerHTML = '<div class="card">Não foi possível carregar.<div class="mut">Detalhe técnico: ' + esc(e.code || e.message) + '</div></div>'; }
 }
 
