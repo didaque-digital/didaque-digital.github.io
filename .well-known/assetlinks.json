@@ -1,8 +1,11 @@
 [{
-      "relation": ["delegate_permission/common.handle_all_urls"],
-      "target": {
-        "namespace": "android_app",
-        "package_name": "com.didaquedigital.app",
-        "sha256_cert_fingerprints": ["F7:B6:C2:B0:18:93:87:5E:1E:10:14:63:7B:E1:90:CF:71:4F:2F:55:5F:EB:23:64:50:A0:4B:02:ED:8A:10:E0"]
-      }
-    }]
+  "relation": ["delegate_permission/common.handle_all_urls"],
+  "target": {
+    "namespace": "android_app",
+    "package_name": "com.didaquedigital.app",
+    "sha256_cert_fingerprints": [
+      "F7:B6:C2:B0:18:93:87:5E:1E:10:14:63:7B:E1:90:CF:71:4F:2F:55:5F:EB:23:64:50:A0:4B:02:ED:8A:10:E0",
+      "6B:0E:64:71:C5:2D:1F:60:5F:D8:22:4F:00:DE:15:1C:A1:45:A2:74:01:07:A6:D7:B4:CF:3E:31:DA:7A:0A:DF"
+    ]
+  }
+}]
