@@ -140,8 +140,9 @@ function guiaHtml(Q, n) {
   if (m.intro) h += '<div class="card"><div class="tag">Introdução do estudo (leia para o aluno)</div><p style="margin:6px 0 0">' + esc(m.intro) + '</p></div>';
   h += Q.map((q, k) => {
     let c = '<div class="card gq"><div class="gqq">' + (q.recap ? esc(q.q) : (k + 1) + ". " + esc(q.q)) + '</div>';
-    if (q.r) c += '<div class="mut">📖 ' + esc(q.r) + '</div>' + textoBiblico(q, m);
-    if (q.p) c += '<p class="gs">' + q.p.map(x => typeof x === "string" ? esc(x) : '<span class="fill">' + esc(x[0]) + '</span>').join("") + '</p>';
+    const ref = q.r || (q.v ? q.v.map(x => x[0]).join("; ") : "");
+    if (ref) c += '<div class="mut">📖 ' + esc(ref) + '</div>' + textoBiblico(q, m);
+    if (q.p) c += '<p class="gs">' + q.p.map(x => typeof x === "string" ? esc(x.replace(/<br\s*\/?>/g, " ").replace(/<[^>]*>/g, "")) : '<span class="fill">' + esc(x[0]) + '</span>').join("") + '</p>';
     if (q.i) c += (q.s ? '<p class="mut" style="margin:6px 0 2px">' + esc(q.s) + '</p>' : '') + q.i.map(x => '<div class="vfr"><span>' + esc(x[0]) + '</span><span class="vfa">' + (x[1] ? "V" : "F") + '</span></div>').join("");
     if (q.o) c += q.o.map((x, j) => '<div class="opc' + (j === q.c ? ' right' : '') + '">' + (j === q.c ? '✔ ' : '') + esc(x) + '</div>').join("");
     if (q.h) c += '<div class="mut" style="margin-top:6px">💡 Dica: ' + esc(q.h) + '</div>';
