@@ -76,7 +76,7 @@ const esc = s => String(s == null ? "" : s).replace(/[&<>"]/g, c => ({"&":"&amp;
 const TITULOS = ["A Bíblia","Criação e origem do mal","O plano da salvação","A volta de Jesus","A morte e a Nova Terra","Santuário e juízo","A lei de Deus e o sábado","Princípios de saúde","O dom de profecia","Dízimo e ofertas","A igreja remanescente","Vida cristã e o Espírito Santo","Batismo e missão"];
 // Número do administrador para o botão de WhatsApp (só dígitos, com 55 + DDD). Deixe "" para esconder o botão.
 const ADMIN_WHATSAPP = "";
-let user = null, unsubClasses = null, unsubAlunos = null, unsubSol = null, ehAdmin = false, aberto = {}, alunos = [], classeAtual = null;
+let user = null, unsubClasses = null, unsubAlunos = null, unsubSol = null, ehAdmin = false, aberto = {}, escolhido = {}, alunos = [], classeAtual = null;
 
 /* ===== Dados dos estudos (lidos direto da página de cada estudo) ===== */
 const cache = {};
@@ -296,7 +296,7 @@ async function criarClasse() {
 
 /* ===== Uma classe: acompanhamento ao vivo ===== */
 function telaClasse(cod, nome) {
-  pararTudo(); classeAtual = cod; aberto = {}; alunos = [];
+  pararTudo(); classeAtual = cod; aberto = {}; escolhido = {}; alunos = [];
   main.innerHTML = '<p><a class="link" id="voltar">← Minhas classes</a></p>' +
     '<div class="card"><div class="mut">' + esc(nome) + '</div><div class="code">' + esc(cod) + '</div>' +
     '<p class="mut" style="margin:6px 0 10px">Passe este código aos alunos. Eles entram em <b>Sou aluno</b>.</p><button class="btn sec sm" id="cp">Copiar código</button></div>' +
@@ -318,7 +318,9 @@ async function desenhar() {
   const html = [];
   const sel = $("#sel"); if (sel && !sel.dataset.m && alunos[0] && alunos[0].estudo && sel.value != alunos[0].estudo) { sel.value = alunos[0].estudo; mostrarCodigos(); }
   for (const d of alunos) {
-    const n = d.estudo, st = n ? d["e" + n] : null;
+    const n = escolhido[d._id] || d.estudo, st = n ? d["e" + n] : null;
+    const feitos = Object.keys(d).filter(k => /^e\d+$/.test(k)).map(k => +k.slice(1)).sort((a, b) => a - b);
+    const seletor = feitos.length > 1 ? '<div class="mut" style="margin-top:4px">Ver estudo: <select data-s="' + esc(d._id) + '">' + feitos.map(k => '<option value="' + k + '"' + (k === +n ? ' selected' : '') + '>Estudo ' + k + '</option>').join("") + '</select></div>' : '';
     let Q = null; if (n) { try { Q = await carregarEstudo(n); } catch (e) {} }
     const NQ = Q ? Q.length : null;
     const i = st ? st.i : -1;
@@ -335,12 +337,13 @@ async function desenhar() {
     const rein = n && d.reinicios ? (d.reinicios["e" + n] || 0) : 0;
     html.push('<div class="card alu' + (chamou ? ' call' : '') + '"><div class="row" style="justify-content:space-between"><span class="nm">' + esc(d.nome) + '</span><span class="tag">' + quando(d.atualizadoEm) + '</span></div>' +
       (chamou ? '<div style="margin:6px 0"><span class="badge red">🔔 Chamou o instrutor · pergunta ' + ((d.chamou.pergunta != null ? d.chamou.pergunta + 1 : "?")) + '</span> <button class="btn sm" data-at="' + esc(d._id) + '">Atendido</button></div>' : '') +
-      '<div>' + esc(status) + '</div><div class="bar"><i style="width:' + pct + '%"></i></div>' +
+      '<div>' + esc(status) + '</div>' + seletor + '<div class="bar"><i style="width:' + pct + '%"></i></div>' +
       '<div><span class="badge">Erros: ' + erros + '</span>' + (rein ? '<span class="badge">↻ recomeçou ' + rein + 'x</span>' : '') + (concl ? '<span class="badge ok">Concluídos: ' + esc(concl) + '</span>' : '') + ' <button class="link a" data-t="' + esc(d._id) + '">' + (aberto[d._id] ? "Ocultar detalhes" : "Ver detalhes e respostas") + '</button></div>' +
       (aberto[d._id] ? detalhe(d, Q, n, i) : '') + '</div>');
   }
   box.innerHTML = html.join("");
   box.querySelectorAll("button[data-t]").forEach(b => b.onclick = () => { aberto[b.dataset.t] = !aberto[b.dataset.t]; desenhar(); });
+  box.querySelectorAll("select[data-s]").forEach(s => s.onchange = () => { escolhido[s.dataset.s] = +s.value; desenhar(); });
   box.querySelectorAll("button[data-at]").forEach(b => b.onclick = async () => {
     try { await updateDoc(doc(db, "classes", classeAtual, "alunos", b.dataset.at), { "chamou.atendido": true }); } catch (e) { console.error(e); }
   });
@@ -354,7 +357,7 @@ function detalhe(d, Q, n, i) {
     const q = Q[k], cur = (k === i), er = (d.erros || {})["e" + n + "_q" + k] || 0;
     const resp = respAluno(q, a[k]);
     let ult = "";
-    if (cur && d.ult && d.ult.estudo === n && d.ult.pergunta === k) {
+    if (cur && d.ult && d.ult.estudo === +n && d.ult.pergunta === k) {
       const u = d.ult, p = [];
       if (u.f && u.f.some(x => x)) p.push(u.f.join(" · "));
       if (u.o) p.push(u.o);
