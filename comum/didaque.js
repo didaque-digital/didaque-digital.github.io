@@ -1,13 +1,71 @@
-// Envia o progresso do aluno ao Firebase e recupera quando o aparelho está vazio.
-// Cada estudo só precisa carregar este arquivo. Sem classe, não faz nada.
+// Envia o progresso do aluno ao Firebase, recupera quando o aparelho está vazio
+// e TRAVA cada estudo até o anterior ser concluído e liberado com o código.
+// Cada estudo só precisa carregar este arquivo (no fim do <body>):
+//   <script type="module" src="../comum/didaque.js"></script>
 import { auth, db } from "./fb.js";
 import { signInAnonymously } from "https://www.gstatic.com/firebasejs/12.13.0/firebase-auth.js";
 import { doc, getDoc, updateDoc, setDoc, increment, serverTimestamp } from "https://www.gstatic.com/firebasejs/12.13.0/firebase-firestore.js";
 
 const m = location.pathname.match(/estudo-(\d+)/);
+const N = m ? +m[1] : 0;
 let A = null; try { A = JSON.parse(localStorage.getItem("didaque_aluno")); } catch (e) {}
-if (m && A && A.classe) iniciar(+m[1], A);
 
+if (N) {
+  guardarLiberacao(N);          // lembra, neste aparelho, que o estudo seguinte foi liberado
+  if (N > 1) trava(N, A);       // estudo 2 em diante: só abre se o anterior foi liberado
+}
+if (N && A && A.classe) iniciar(N, A);
+
+/* ===== TRAVA ===== */
+// Guarda uma marca permanente quando o aluno digita o código de liberação deste estudo.
+// Assim, tocar em "Recomeçar" não tranca de novo o estudo seguinte.
+function guardarLiberacao(n) {
+  const KEY = "didaque_e" + n + "_v1";
+  const orig = Storage.prototype.setItem;
+  const marcar = v => {
+    try { const s = JSON.parse(v); if (s && s.u) orig.call(localStorage, "didaque_liberou_" + n, "1"); } catch (e) {}
+  };
+  try { marcar(localStorage.getItem(KEY)); } catch (e) {}   // quem já tinha liberado antes
+  Storage.prototype.setItem = function (k, v) { orig.apply(this, arguments); if (k === KEY) marcar(v); };
+}
+
+function liberadoLocal(p) {
+  try {
+    if (localStorage.getItem("didaque_liberou_" + p) === "1") return true;
+    const s = JSON.parse(localStorage.getItem("didaque_e" + p + "_v1"));
+    return !!(s && s.u);
+  } catch (e) { return false; }
+}
+
+async function trava(n, A) {
+  const p = n - 1;
+  if (liberadoLocal(p)) return;
+  const wrap = document.querySelector(".wrap");
+  if (wrap) wrap.style.display = "none";
+  const tela = document.createElement("div");
+  tela.style.cssText = "max-width:640px;margin:0 auto;padding:40px 22px;font:17px/1.55 Calibri,'Segoe UI',system-ui,sans-serif;color:var(--tx,#222)";
+  tela.innerHTML =
+    '<div style="font-size:44px">🔒</div>' +
+    '<h1 style="font:700 26px/1.2 Georgia,serif;margin:8px 0">Estudo ' + n + ' bloqueado</h1>' +
+    '<p>Conclua o Estudo ' + p + ' e digite o código de liberação que o seu instrutor fornece no final dele. Depois disso este estudo será aberto.</p>' +
+    '<p><a href="../estudo-' + p + '/" style="display:inline-block;background:#E07B39;color:#fff;text-decoration:none;font-weight:700;border-radius:12px;padding:13px 22px">Ir para o Estudo ' + p + '</a></p>' +
+    '<p><a href="../estudos/" style="color:var(--teal,#2A7F8E)">Ver a lista de estudos</a></p>';
+  document.body.appendChild(tela);
+
+  // Aparelho novo ou dados limpos: confere no Firebase se o aluno já liberou o estudo anterior
+  if (A && A.classe) {
+    try {
+      await auth.authStateReady();
+      if (!auth.currentUser) await signInAnonymously(auth);
+      const id = A.id || auth.currentUser.uid;
+      const s = await getDoc(doc(db, "classes", A.classe, "alunos", id));
+      const r = s.exists() ? s.data()["e" + p] : null;
+      if (r && r.u) { tela.remove(); if (wrap) wrap.style.display = ""; }
+    } catch (e) { console.warn("Didaquê: não foi possível conferir a liberação", e); }
+  }
+}
+
+/* ===== PROGRESSO ===== */
 async function iniciar(n, A) {
   try {
     await auth.authStateReady();
@@ -60,13 +118,15 @@ async function iniciar(n, A) {
     remoto = remoto || {}; remoto["e" + n] = novo;
     gravar(dados);
   }
-  Storage.prototype.setItem = function (k, v) { orig.apply(this, arguments); if (k === KEY) agendar(); };
+  const antesDoGancho = Storage.prototype.setItem;
+  Storage.prototype.setItem = function (k, v) { antesDoGancho.apply(this, arguments); if (k === KEY) agendar(); };
   agendar();
 
   // 2) Erros: conta cada "Ainda não..." e guarda o que o aluno digitou
+  //    (só a mensagem direta de #fb: código errado do instrutor não conta como erro)
   let ultimo = null;
   new MutationObserver(function () {
-    const el = document.querySelector("#fb .msg.no");
+    const el = document.querySelector("#fb > .msg.no");
     if (el && el !== ultimo) { ultimo = el; registrarErro(); } else if (!el) { ultimo = null; }
   }).observe(document.body, { childList: true, subtree: true });
 
