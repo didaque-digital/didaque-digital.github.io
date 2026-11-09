@@ -125,7 +125,7 @@ var Q = [
  {q:"Está alguém autorizado a alterar a Bíblia?", r:"Malaquias 3:6; Apocalipse 22:18, 19", v:[["Malaquias 3:6","malachi 3:6"],["Apocalipse 22:18-19","revelation 22:18-19"]], t:"choice",
   o:["Sim, se achar necessário","Não: nada se deve acrescentar nem tirar"], c:1, h:"Leia Apocalipse 22:18 e 19."},
  {q:"Como são chamados os praticantes dos ensinos bíblicos?", r:"João 13:17; Tiago 1:22", v:[["João 13:17","john 13:17"],["Tiago 1:22","james 1:22"]], t:"fill",
-  p:["Bem ",["aventurados","aventurado","feliz"]," se praticardes os ",["ensinos","ensin","mandamento"]," da Bíblia."], h:"João 13:17: “bem-...” se o praticardes."},
+  p:["Vocês serão ",["bem-aventurados","aventurado","feliz"]," se praticarem os ",["ensinos","ensin","mandamento"]," da Bíblia."], h:"Em João 13:17, quem pratica o que sabe é chamado de “bem-...”."},
  {q:"Recapitulação", recap:1, t:"fill",
   p:["Para Jesus, a Palavra de Deus é a fonte da ",["verdade"],". Muitos estudam a ",["Bíblia","biblia"]," e não ",["entendem","entend"],". A forma correta de estudar é um ",["pouco"]," aqui e um pouco ",["ali"],", sobre o mesmo ",["assunto"],". Toda a Bíblia é inspirada por ",["Deus","deus"],". Não podemos ",["tirar","tira","retir","diminuir", "diminu"]," nem ",["acrescentar","acrescent"]," nada às Escrituras."], h:"Use as respostas que você já deu nas perguntas."}
 ];
@@ -147,29 +147,21 @@ var bibOpen=false, bibList=[], bibFocus=null;
 // ATENÇÃO: cada versículo deve ficar em UMA linha só, entre aspas. Quebra de linha dentro do texto quebra o estudo e o painel.
 // Formato: "chave": [ [número do versículo, "texto"], ... ]
 var BIB = {
- "john 17:17":[[17,"Santifica-os na verdade, a tua palavra é a verdade."]],
- "act 8:26-31":[
-  [26,"Um anjo do Senhor disse a Filipe: — Levante-se e vá para o Sul, no caminho que desce de Jerusalém a Gaza; este se acha deserto."],
-  [27,"Filipe se levantou e foi. Havia um etíope, eunuco, alto oficial de Candace, rainha dos etíopes, o qual era superintendente de todo o seu tesouro. Ele tinha vindo adorar em Jerusalém"],
-  [28,"e estava regressando ao seu país. E, assentado na sua carruagem, vinha lendo o profeta Isaías."],
-  [29,"Então o Espírito disse a Filipe: — Aproxime-se dessa carruagem e acompanhe-a."],
-  [30,"Correndo para lá, Filipe ouviu que o homem estava lendo o profeta Isaías. Então perguntou: — O senhor entende o que está lendo?"],
-  [31,"Ele respondeu: — Como poderei entender, se ninguém me explicar? E convidou Filipe a subir e sentar-se ao seu lado."]],
- "isaiah 28:10":[[10,"Porque nos fala como a crianças, repetindo palavras e frases. Uma palavra, depois mais outra, um pouco aqui, um pouco ali."]],
- "john 5:39":[[39,"Vocês examinam as Escrituras, porque julgam ter nelas a vida eterna, e são elas mesmas que testificam de mim."]],
- "john 16:13":[[13,"Quando vier, porém, aquele, o Espírito da verdade, ele vos guiará a toda a verdade; porque não falará por si mesmo, mas dirá o que tiver ouvido, e vos anunciará as coisas vindouras."]],
- "john 8:32":[[32,"conhecerão a verdade, e a verdade os libertará."]],
- "2 peter 1:21":[[21,"porque nunca jamais qualquer profecia foi dada por vontade humana; entretanto, homens falaram da parte de Deus, movidos pelo Espírito Santo."]],
- "2 timothy 3:16":[[16,"Toda Escritura é divinamente inspirada e proveitosa para ensinar, para repreender, para corrigir, para instruir em justiça;"]],
- "exodus 31:18":[[18,"E deu a Moisés, quando acabou de falar com ele no monte Sinai, as duas tábuas do testemunho, tábuas de pedra, escritas pelo dedo de Deus."]],
- "malachi 3:6":[[6,"— Porque eu, o Senhor, não mudo; por isso, vocês, filhos de Jacó, não foram destruídos."]],
- "revelation 22:18-19":[
-  [18,"Eu, a todo aquele que ouve as palavras da profecia deste livro, testifico: Se alguém lhes fizer qualquer acréscimo, Deus lhe acrescentará os flagelos escritos neste livro"],
-  [19,"E, se alguém tirar qualquer coisa das palavras do livro desta profecia, Deus tirará a sua parte da árvore da vida, da cidade santa e das coisas que estão escritas neste livro."]],
- "john 13:17":[[17,"Se vocês sabem estas coisas, bem-aventurados serão se as praticarem."]],
- "james 1:22":[[22,"Sejam praticantes da palavra e não somente ouvintes, enganando a vocês mesmos."]]
+ "john 17:17": [[17, "Santifica-os na verdade; a tua palavra é a verdade."]],
+ "act 8:26-31": [[26, "Um anjo do Senhor falou a Filipe: Levanta-te e vai para o sul, pelo caminho que desce de Jerusalém a Gaza, o qual é deserto."],[27, "Ele se levantou e foi. E eis que um etíope, eunuco, ministro de Candace, rainha dos etíopes, e superintendente de todos os seus tesouros, tinha ido a Jerusalém para adorar,"],[28, "e voltava para casa. Sentado no seu carro, lia o profeta Isaías."],[29, "Então o Espírito disse a Filipe: Aproxima-te e acompanha esse carro."],[30, "Filipe correu, ouviu que ele lia o profeta Isaías e perguntou: Entendes o que lês?"],[31, "Ele respondeu: Como poderei entender, se alguém não me explicar? E pediu a Filipe que subisse e se sentasse com ele."]],
+ "isaiah 28:10": [[10, "Porque é preceito sobre preceito, preceito sobre preceito; regra sobre regra, regra sobre regra; um pouco aqui, um pouco ali."]],
+ "john 5:39": [[39, "Vocês examinam as Escrituras, porque pensam ter nelas a vida eterna; e são elas que dão testemunho de mim."]],
+ "john 16:13": [[13, "Quando vier, porém, o Espírito da verdade, ele guiará vocês a toda a verdade; pois não falará de si mesmo, mas dirá o que tiver ouvido e anunciará a vocês as coisas que virão."]],
+ "john 8:32": [[32, "Vocês conhecerão a verdade, e a verdade os libertará."]],
+ "2 peter 1:21": [[21, "Porque a profecia nunca foi produzida por vontade de homem algum, mas os homens santos de Deus falaram inspirados pelo Espírito Santo."]],
+ "2 timothy 3:16": [[16, "Toda a Escritura divinamente inspirada é proveitosa para ensinar, para repreender, para corrigir, para instruir em justiça;"]],
+ "exodus 31:18": [[18, "E deu a Moisés, quando acabou de falar com ele no monte Sinai, as duas tábuas do testemunho, tábuas de pedra, escritas pelo dedo de Deus."]],
+ "malachi 3:6": [[6, "Pois eu, o Senhor, não mudo; por isso vocês, filhos de Jacó, não foram consumidos."]],
+ "revelation 22:18-19": [[18, "Eu, a todo aquele que ouve as palavras da profecia deste livro, testifico: Se alguém lhes acrescentar alguma coisa, Deus lhe acrescentará as pragas escritas neste livro;"],[19, "e, se alguém tirar qualquer coisa das palavras do livro desta profecia, Deus tirará a sua parte do livro da vida, da cidade santa e das coisas que estão escritas neste livro."]],
+ "john 13:17": [[17, "Se vocês sabem estas coisas, bem-aventurados serão se as praticarem."]],
+ "james 1:22": [[22, "Sejam cumpridores da palavra, e não somente ouvintes, enganando a si mesmos."]]
 };
-var BIBNAME = "João Ferreira de Almeida (domínio público)";
+var BIBNAME = "Almeida (domínio público), adaptado ao português atual · confira na sua Bíblia em caso de dúvida";
 
 function openBible(list,opener){
   bibList=list; bibFocus=opener||document.activeElement;
