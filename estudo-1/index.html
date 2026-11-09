@@ -144,28 +144,18 @@ var BAD=[[190,.18,"square"],[150,.3,"square"]], GOOD=[[660,.12],[880,.22]];
 /* ===== Pop-up bíblico ===== */
 var bibOpen=false, bibList=[], bibFocus=null;
 // ====== TEXTOS BÍBLICOS (ficam dentro do aplicativo, funcionam sem internet) ======
-// Tradução atual: João Ferreira de Almeida (domínio público).
-// Para trocar por outra tradução, basta substituir o texto de cada versículo abaixo.
+// ATENÇÃO: cada versículo deve ficar em UMA linha só, entre aspas. Quebra de linha dentro do texto quebra o estudo e o painel.
 // Formato: "chave": [ [número do versículo, "texto"], ... ]
 var BIB = {
  "john 17:17":[[17,"Santifica-os na verdade, a tua palavra é a verdade."]],
  "act 8:26-31":[
-  [26,"Um anjo do Senhor disse a Filipe:
-— Levante-se e vá para o Sul, no caminho que desce de Jerusalém a Gaza; este se acha deserto."],
-  [27,"Filipe se levantou e foi.
-Havia um etíope, eunuco, alto oficial de Candace, rainha dos etíopes, o qual era superintendente de todo o seu tesouro. Ele tinha vindo adorar em Jerusalém"],
+  [26,"Um anjo do Senhor disse a Filipe: — Levante-se e vá para o Sul, no caminho que desce de Jerusalém a Gaza; este se acha deserto."],
+  [27,"Filipe se levantou e foi. Havia um etíope, eunuco, alto oficial de Candace, rainha dos etíopes, o qual era superintendente de todo o seu tesouro. Ele tinha vindo adorar em Jerusalém"],
   [28,"e estava regressando ao seu país. E, assentado na sua carruagem, vinha lendo o profeta Isaías."],
-  [29,"Então o Espírito disse a Filipe:
-— Aproxime-se dessa carruagem e acompanhe-a."],
-  [30,"Correndo para lá, Filipe ouviu que o homem estava lendo o profeta Isaías. Então perguntou:
-— O senhor entende o que está lendo?"],
-  [31,"Ele respondeu:
-— Como poderei entender, se ninguém me explicar?
-E convidou Filipe a subir e sentar-se ao seu lado."]],
- "isaiah 28:10":[[10,"Porque nos fala como a crianças,
-repetindo palavras e frases.
-Uma palavra, depois mais outra,
-um pouco aqui, um pouco ali."]],
+  [29,"Então o Espírito disse a Filipe: — Aproxime-se dessa carruagem e acompanhe-a."],
+  [30,"Correndo para lá, Filipe ouviu que o homem estava lendo o profeta Isaías. Então perguntou: — O senhor entende o que está lendo?"],
+  [31,"Ele respondeu: — Como poderei entender, se ninguém me explicar? E convidou Filipe a subir e sentar-se ao seu lado."]],
+ "isaiah 28:10":[[10,"Porque nos fala como a crianças, repetindo palavras e frases. Uma palavra, depois mais outra, um pouco aqui, um pouco ali."]],
  "john 5:39":[[39,"Vocês examinam as Escrituras, porque julgam ter nelas a vida eterna, e são elas mesmas que testificam de mim."]],
  "john 16:13":[[13,"Quando vier, porém, aquele, o Espírito da verdade, ele vos guiará a toda a verdade; porque não falará por si mesmo, mas dirá o que tiver ouvido, e vos anunciará as coisas vindouras."]],
  "john 8:32":[[32,"conhecerão a verdade, e a verdade os libertará."]],
@@ -294,5 +284,6 @@ $("#mute").onclick=function(){muted=!muted;this.textContent=muted?"🔇 Som desl
 $("#reset").onclick=function(){ st={i:-1,u:0}; save(); render(); };
 render();
 </script>
+<script type="module" src="../comum/didaque.js"></script>
 </body>
 </html>
