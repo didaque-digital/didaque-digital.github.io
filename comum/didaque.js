@@ -47,10 +47,34 @@ async function trava(n, A) {
   tela.innerHTML =
     '<div style="font-size:44px">🔒</div>' +
     '<h1 style="font:700 26px/1.2 Georgia,serif;margin:8px 0">Estudo ' + n + ' bloqueado</h1>' +
-    '<p>Conclua o Estudo ' + p + ' e digite o código de liberação que o seu instrutor fornece no final dele. Depois disso este estudo será aberto.</p>' +
-    '<p><a href="../estudo-' + p + '/" style="display:inline-block;background:#E07B39;color:#fff;text-decoration:none;font-weight:700;border-radius:12px;padding:13px 22px">Ir para o Estudo ' + p + '</a></p>' +
+    '<p>Digite abaixo o código que o seu instrutor passou para abrir este estudo.</p>' +
+    '<div style="display:flex;gap:8px;margin-top:8px"><input id="trv-cod" placeholder="Código de liberação" autocomplete="off" autocapitalize="characters" style="flex:1;min-width:0;font:inherit;padding:10px;border-radius:10px;border:2px solid var(--line,#E6D9B8);background:var(--inp,#FDF1D8);color:var(--tx,#222)">' +
+    '<button id="trv-ok" style="background:#E07B39;color:#fff;border:0;border-radius:12px;padding:10px 20px;font:700 17px inherit;cursor:pointer">Abrir</button></div>' +
+    '<div id="trv-msg" style="margin-top:10px;font-weight:700;color:var(--bad,#C62828)"></div>' +
+    '<p style="margin-top:26px">Ainda não terminou o estudo anterior?</p>' +
+    '<p><a href="../estudo-' + p + '/" style="display:inline-block;color:var(--teal,#2A7F8E);font-weight:700;border:2px solid var(--teal,#2A7F8E);text-decoration:none;border-radius:12px;padding:9px 16px">Ir para o Estudo ' + p + '</a></p>' +
     '<p><a href="../estudos/" style="color:var(--teal,#2A7F8E)">Ver a lista de estudos</a></p>';
   document.body.appendChild(tela);
+
+  function abrir() {
+    try { localStorage.setItem("didaque_liberou_" + p, "1"); } catch (e) {}
+    tela.remove(); if (wrap) wrap.style.display = "";
+  }
+  async function conferir() {
+    const msg = tela.querySelector("#trv-msg"), digitado = tela.querySelector("#trv-cod").value.trim().toUpperCase();
+    msg.textContent = "";
+    if (!digitado) return;
+    try {
+      // o código de liberação está na página do estudo anterior (variável NEXT_CODE)
+      const r = await fetch("../estudo-" + p + "/", { cache: "no-store" });
+      if (!r.ok) throw new Error("estudo anterior indisponível");
+      const t = await r.text(), m = t.match(/var NEXT_CODE\s*=\s*"([^"]*)"/);
+      if (m && digitado === m[1].toUpperCase()) return abrir();
+      msg.textContent = "Código incorreto. Peça ao seu instrutor.";
+    } catch (e) { msg.textContent = "Não foi possível conferir agora. Verifique a internet e tente de novo."; }
+  }
+  tela.querySelector("#trv-ok").onclick = conferir;
+  tela.querySelector("#trv-cod").addEventListener("keydown", function (e) { if (e.key === "Enter") conferir(); });
 
   // Aparelho novo ou dados limpos: confere no Firebase se o aluno já liberou o estudo anterior
   if (A && A.classe) {
@@ -60,7 +84,7 @@ async function trava(n, A) {
       const id = A.id || auth.currentUser.uid;
       const s = await getDoc(doc(db, "classes", A.classe, "alunos", id));
       const r = s.exists() ? s.data()["e" + p] : null;
-      if (r && r.u) { tela.remove(); if (wrap) wrap.style.display = ""; }
+      if (r && r.u) abrir();
     } catch (e) { console.warn("Didaquê: não foi possível conferir a liberação", e); }
   }
 }
