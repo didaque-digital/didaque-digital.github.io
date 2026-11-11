@@ -1,0 +1,321 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="robots" content="noindex">
+<title>Estudo 12 · Vida Cristã e o Espírito Santo</title>
+<style>
+:root{--bg:#FFF8E7;--card:#fff;--tx:#222;--mut:#666;--navy:#1F3A5F;--qc:#1F3A5F;--or:#E07B39;--teal:#2A7F8E;--ok:#2E7D32;--bad:#C62828;--line:#E6D9B8;--inp:#FDF1D8;--gold:#F4B43C;box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}
+@media (prefers-color-scheme:dark){:root:not([data-theme="light"]){--bg:#0F1B2D;--card:#172A45;--tx:#EDEFF2;--mut:#A9B4C4;--navy:#14263F;--qc:#C9DAF5;--or:#F0914F;--teal:#6CC6D3;--ok:#66BB6A;--bad:#EF5350;--line:#2B4466;--inp:#1E3556}}
+:root[data-theme="dark"]{--bg:#0F1B2D;--card:#172A45;--tx:#EDEFF2;--mut:#A9B4C4;--navy:#14263F;--qc:#C9DAF5;--or:#F0914F;--teal:#6CC6D3;--ok:#66BB6A;--bad:#EF5350;--line:#2B4466;--inp:#1E3556}
+html{scroll-padding-top:env(safe-area-inset-top,0px)}
+body{margin:0;background:var(--bg);color:var(--tx);font:17px/1.55 Calibri,"Segoe UI",system-ui,sans-serif}
+body.lock{overflow:hidden}
+.wrap{max-width:640px;margin:0 auto;padding:0 14px 40px}
+.hero{background:radial-gradient(circle at 88% 20%,#f4b43c55,transparent 45%),linear-gradient(135deg,var(--navy),#2c527f);color:#fff;margin:0 -14px 14px;padding:22px 22px 20px;border-radius:0 0 24px 24px}
+.hero small{color:var(--gold);letter-spacing:.3em;font-weight:700;font-size:13px}
+.hero .n{font:700 56px/1 Georgia,serif;color:#F0914F;margin-top:2px}
+.hero h1{font:700 30px/1.15 Georgia,serif;margin:4px 0 0}
+.bar{height:8px;background:var(--line);border-radius:6px;overflow:hidden;margin:6px 0 4px}
+.bar i{display:block;height:100%;width:0;background:var(--or);transition:width .4s}
+.cnt{font-size:14px;color:var(--mut);margin-bottom:10px}
+.card{background:var(--card);border-radius:14px;padding:18px;border:1px solid var(--line);border-left:6px solid var(--or)}
+.q{font:700 19px/1.35 Georgia,serif;color:var(--qc)}
+.ref{margin:8px 0 14px}
+.refbtn{font:inherit;font-weight:700;color:var(--teal);background:transparent;border:0;border-bottom:2px dotted var(--teal);padding:2px 0;margin:0 2px;cursor:pointer;text-align:left}
+.s{line-height:2.3;margin:0 0 6px}
+.s+.row,.sub+.row{border-top:1px solid var(--line)}
+.sub{margin:12px 0 2px;color:var(--mut);font-size:15px}
+.intro{margin:0 0 10px}
+.mut{color:var(--mut);font-size:15px}
+a.btn{display:inline-block;text-decoration:none}
+input.b{font:inherit;border:2px solid var(--line);background:var(--inp);color:var(--tx);border-radius:8px;padding:1px 8px;width:9em;max-width:100%}
+input.ok,.opt.ok{border-color:var(--ok)!important;background:color-mix(in srgb,var(--ok) 15%,transparent)!important}
+input.no,.opt.no{border-color:var(--bad)!important}
+.opt{display:block;width:100%;text-align:left;font:inherit;color:var(--tx);background:var(--card);padding:11px 12px;border:2px solid var(--line);border-radius:10px;margin:8px 0;cursor:pointer}
+.opt.sel{border-color:var(--or)}
+.row{display:flex;justify-content:space-between;gap:10px;align-items:center;padding:8px 0;border-bottom:1px solid var(--line)}
+.vf{display:flex;gap:6px;flex:none}
+.vf button{width:44px;height:44px;border-radius:50%;border:2px solid var(--line);background:var(--card);color:var(--tx);font:700 16px inherit;cursor:pointer}
+.vf button.sel{background:var(--or);border-color:var(--or);color:#fff}
+.vf.ok button.sel{background:var(--ok);border-color:var(--ok)}
+.vf.no button.sel{background:var(--bad);border-color:var(--bad)}
+.btn{background:var(--or);color:#fff;border:0;border-radius:12px;padding:13px 22px;font:700 17px inherit;cursor:pointer;margin-top:16px}
+a.btn{display:inline-block;text-decoration:none}
+.btn.sec{background:transparent;color:var(--teal);border:2px solid var(--teal);padding:9px 16px;font-size:15px;margin-top:10px}
+.btn:focus-visible,.opt:focus-visible,.vf button:focus-visible,input:focus-visible,a:focus-visible,.refbtn:focus-visible,.xbtn:focus-visible,.tab:focus-visible{outline:3px solid var(--teal);outline-offset:2px}
+.msg{margin-top:12px;font-weight:700}.msg.ok{color:var(--ok)}.msg.no{color:var(--bad)}
+.hint,.note{margin-top:10px;padding:10px 12px;border-radius:10px;background:var(--inp);font-size:15px}
+.note{border-left:4px solid var(--teal)}
+.shake{animation:sh .35s}
+@keyframes sh{20%,60%{transform:translateX(-7px)}40%,80%{transform:translateX(7px)}}
+.foot{display:flex;justify-content:space-between;margin-top:18px;font-size:14px;color:var(--mut)}
+.foot a.home{color:var(--mut);text-decoration:underline;padding:6px}
+.foot button{background:none;border:0;color:var(--mut);font:inherit;text-decoration:underline;cursor:pointer;padding:6px}
+.tc{display:flex;gap:8px;margin-top:8px}.tc input{flex:1;min-width:0;font:inherit;padding:8px;border-radius:8px;border:2px solid var(--line);background:var(--inp);color:var(--tx)}
+.chk{display:flex;gap:10px;align-items:flex-start;padding:8px 0}.chk input{width:22px;height:22px;margin-top:3px;accent-color:var(--or)}
+/* ===== Pop-up do texto bíblico ===== */
+.ov{position:fixed;inset:0;z-index:100;display:none;align-items:flex-end;justify-content:center;background:rgba(10,20,40,.6);-webkit-backdrop-filter:blur(3px);backdrop-filter:blur(3px)}
+.ov.on{display:flex;animation:fd .2s}
+.md{background:var(--card);color:var(--tx);width:100%;max-width:640px;max-height:84vh;max-height:84dvh;display:flex;flex-direction:column;overflow:hidden;border-radius:24px 24px 0 0;border-top:6px solid var(--or);box-shadow:0 -10px 40px rgba(0,0,0,.35);animation:up .28s ease-out}
+.mh{display:flex;align-items:center;justify-content:space-between;gap:10px;padding:14px 12px 8px 20px}
+.mh b{font:700 13px/1 Calibri,system-ui,sans-serif;letter-spacing:.2em;color:var(--or);text-transform:uppercase}
+.xbtn{flex:none;width:44px;height:44px;border-radius:50%;border:0;background:var(--inp);color:var(--tx);font:400 26px/1 system-ui,sans-serif;cursor:pointer;display:flex;align-items:center;justify-content:center}
+.tabs{display:flex;gap:8px;padding:0 20px 8px;overflow-x:auto}
+.tab{flex:none;font:inherit;font-weight:700;font-size:15px;color:var(--teal);background:transparent;border:2px solid var(--teal);border-radius:999px;padding:6px 14px;cursor:pointer}
+.tab.sel{background:var(--teal);color:#fff}
+.mb{padding:6px 20px 12px;overflow-y:auto;-webkit-overflow-scrolling:touch;min-height:120px}
+.mb h2{font:700 24px/1.2 Georgia,serif;color:var(--qc);margin:4px 0 12px}
+.vs{font:20px/1.75 Georgia,serif;margin:0 0 10px}
+.vs sup{font:700 12px Calibri,system-ui,sans-serif;color:var(--or);margin-right:3px}
+.ver{font-size:13px;color:var(--mut);margin-top:12px}
+.ld{color:var(--mut);padding:24px 0;text-align:center}
+.mf{padding:6px 20px calc(16px + env(safe-area-inset-bottom,0px))}
+.mf .btn{width:100%;margin-top:6px}
+@keyframes up{from{transform:translateY(40px);opacity:0}to{transform:none;opacity:1}}
+@keyframes fd{from{opacity:0}to{opacity:1}}
+@media (min-width:700px){.ov{align-items:center}.md{border-radius:24px;max-height:80vh}.mf{padding-bottom:18px}}
+@media (prefers-reduced-motion:reduce){.shake,.md,.ov.on{animation:none}.bar i{transition:none}}
+</style>
+</head>
+<body>
+<div class="wrap">
+  <div class="hero"><small>ESTUDO</small><div class="n">12</div><h1>Vida Cristã e o Espírito Santo</h1></div>
+  <div class="bar"><i id="pb"></i></div>
+  <div class="cnt" id="cnt"></div>
+  <main id="app"></main>
+  <div class="foot"><button id="mute">🔊 Som ligado</button><a class="home" href="../estudos/">Estudos</a><button id="back" aria-label="Voltar à pergunta anterior">← Voltar</button><button id="reset">Recomeçar</button></div>
+</div>
+
+<!-- Pop-up do texto bíblico -->
+<div class="ov" id="ov" aria-hidden="true">
+  <div class="md" role="dialog" aria-modal="true" aria-labelledby="mt">
+    <div class="mh"><b id="mt">📖 Texto bíblico</b><button class="xbtn" id="mx" aria-label="Fechar">×</button></div>
+    <div class="tabs" id="mtabs"></div>
+    <div class="mb" id="mbody"></div>
+    <div class="mf"><button class="btn" id="mclose">Fechar e voltar à pergunta</button></div>
+  </div>
+</div>
+
+<script>
+// ====== CONFIGURAÇÃO (edite aqui) ======
+var TEACHER_CODE = "M7K2";    // código do instrutor (mostra a resposta)
+var NEXT_CODE = "DZ13";    // código que libera o próximo estudo
+var NEXT_URL = "../estudo-13/"; // endereço da página do próximo estudo
+var KEY = "didaque_e12_v1";
+
+// Cada resposta: [texto exibido, trechos aceitos...]  (sem acento, minúsculas; "=" no início = palavra exata)
+var Q = [
+ {q:"Que práticas ajudam a fortalecer a fé e o crescimento espiritual?",
+  v:[["João 5:39","jhn 5:39"],["Colossenses 4:2","col 4:2"],["Hebreus 10:25","heb 10:25"],["Marcos 5:18-20","mar 5:18-20"]],
+  p:["Estudar a ",["Bíblia","biblia","escrituras"],", ",["orar","oracao","ora"],", frequentar a ",["igreja","igreja"]," e ",["testemunhar","testemunh"]," de Jesus."],
+  h:"João 5:39 fala de examinar as Escrituras; Colossenses 4:2, de perseverar na oração; Hebreus 10:25, de não deixar de nos reunir; Marcos 5:20, de anunciar o que Jesus fez.",
+  n:"São quatro hábitos simples: ler a Bíblia, orar, estar com a igreja e contar aos outros o que Jesus fez."},
+ {q:"Como devemos viver as horas do sábado?",
+  v:[["Isaías 58:13, 14","isa 58:13-14"],["Lucas 4:16, 31","luk 4:16-31"]],
+  p:["O sábado não é um dia de não fazer nada, mas de ",["adoração","adora"],", comunhão e ",["serviço","servico","servir"]," ao próximo."],
+  h:"Jesus tinha o costume de ir à sinagoga no sábado e ali ensinava (Lucas 4:16, 31).",
+  n:"Os limites do sábado vão do pôr do sol de sexta-feira ao pôr do sol de sábado (Neemias 13:19; Lucas 23:50-56)."},
+ {q:"Que princípios a Bíblia apresenta para o vestuário feminino?",
+  v:[["1 Pedro 3:3, 4","1pe 3:3-4"],["1 Timóteo 2:9","1ti 2:9"]],
+  p:["As mulheres devem se vestir com ",["modéstia","modesti"]," e bom ",["senso","=senso","juizo","sensatez"],"."],
+  h:"Leia 1 Timóteo 2:9: as mulheres se vestem de modo decente, com ... e bom ...",
+  n:"A beleza que mais vale está no interior: um espírito manso e tranquilo (1 Pedro 3:4)."},
+ {q:"O que a Bíblia diz sobre os costumes e as diversões do mundo?",
+  v:[["1 João 2:15-17","1jo 2:15-17"],["Tiago 4:4","tia 4:4"]],
+  p:["Ser amigo do ",["mundo","mundo"]," é ser inimigo de ",["Deus","=deus"],"."],
+  h:"Tiago 4:4: a amizade com o mundo é inimizade contra quem?",
+  n:"O ponto não é se isolar, mas não deixar que o mundo ocupe o lugar de Deus no coração."},
+ {q:"Que princípios a Bíblia estabelece para o comportamento sexual?",
+  v:[["Êxodo 20:14","exo 20:14"],["1 Coríntios 6:18","1co 6:18"]],
+  p:["Deus ordena: não cometa ",["adultério","adulterio","adulter"],". E pede que fujamos da ",["imoralidade","imoral","fornic","prostitu"]," sexual."],
+  h:"Êxodo 20:14 é o sétimo mandamento; 1 Coríntios 6:18 começa com: Fujam da ... sexual."},
+ {q:"Que cerimônias Jesus instituiu para os cristãos, e o que elas significam?",
+  v:[["João 13:4, 5, 15","jhn 13:4-15"],["1 Coríntios 11:23-28","1co 11:23-28"]],
+  p:["Na Santa Ceia, lembramos a ",["morte","mort"]," de Jesus. O lava-pés é a cerimônia da ",["humildade","humild"],"."],
+  h:"1 Coríntios 11:26 diz que, ao comer o pão e beber o cálice, anunciamos a ... do Senhor. Em João 13, Jesus lava os pés dos discípulos e dá o exemplo.",
+  n:"O pão representa o corpo de Jesus, entregue por nós. O suco de uva representa o seu sangue, derramado pelos nossos pecados."},
+ {q:"Que promessa Jesus fez aos discípulos, e quando ela se cumpriu?",
+  v:[["João 14:16","jhn 14:16"],["Lucas 24:49","luk 24:49"],["Atos 2:1-4","act 2:1-4"]],
+  p:["Jesus prometeu que o Pai enviaria outro ",["Consolador","consolad","ajudador","auxiliador","defensor"],". A promessa se cumpriu no dia de ",["Pentecostes","pentecost"],"."],
+  h:"João 14:16 fala de outro Consolador; Atos 2:1 diz que o Espírito veio quando chegou o dia de ...",
+  n:"Antes disso, os discípulos oraram e esperaram, reunidos no mesmo lugar (Atos 1:12-14)."},
+ {q:"Quem é o Espírito Santo e o que Ele faz?",
+  v:[["Atos 5:3, 4","act 5:3-4"],["Mateus 28:19","mat 28:19"],["João 14:26","jhn 14:26"],["João 16:8-13","jhn 16:8-13"],["1 Samuel 10:6","1sa 10:6"]],
+  s:"Marque V ou F em cada frase:",
+  i:[["O Espírito Santo é um ser divino, e não uma força impessoal.",1],["Ele ensina só algumas coisas.",0],["Ele guia em toda a verdade.",1],["Ele convence do pecado, da justiça e do juízo.",1],["Ele pode mudar a natureza humana.",1]],
+  h:"Em Atos 5:3-4, mentir ao Espírito Santo é mentir a Deus. Em João 14:26, Ele ensina todas as coisas.",
+  n:"A Bíblia associa o batismo do Espírito Santo ao batismo nas águas, mas essa deve ser uma experiência renovada a cada dia."},
+ {q:"Como saber se alguém tem o Espírito Santo, e o que podemos pedir a Deus?",
+  v:[["João 14:15","jhn 14:15"],["Atos 5:32","act 5:32"],["Gálatas 5:22, 23","gal 5:22-23"],["Lucas 11:13","luk 11:13"]],
+  s:"Marque V ou F em cada frase:",
+  i:[["Ama a Deus e obedece aos Seus mandamentos.",1],["Sua vida mostra o fruto do Espírito: amor, alegria, paz...",1],["Fala em línguas estranhas.",0],["O Pai dá o Espírito Santo a quem O pede.",1]],
+  h:"Gálatas 5:22-23 lista o fruto do Espírito; Atos 5:32 fala dos que obedecem a Deus; Lucas 11:13 diz que o Pai dá o Espírito Santo aos que pedem.",
+  n:"Essa experiência diária está ligada a três hábitos: estudar a Bíblia com vontade de obedecer, orar e testemunhar aos que ainda não conhecem Jesus."},
+ {q:"Recapitulação", recap:1,
+  p:["O cristão fortalece a fé com o estudo da ",["Bíblia","biblia"]," e a ",["oração","oracao","orar"],". Na Santa Ceia, lembramos a ",["morte","mort"]," de Jesus. Ele prometeu outro ",["Consolador","consolad","ajudador","auxiliador"],". O Espírito Santo nos convence do pecado, da ",["justiça","justica"]," e do ",["juízo","juizo"],". Quem O tem ",["obedece","obedec"]," a Deus e mostra o ",["fruto","fruto"]," do Espírito, e todos nós podemos pedir esse dom a Deus a cada dia."],
+  h:"Use as respostas que você já deu nas perguntas."}
+];
+var NQ = Q.length, TOTAL = NQ + 2;
+var $ = function(s){return document.querySelector(s)}, app = $("#app");
+var st = {i:-1,u:0}; try{var sv=JSON.parse(localStorage.getItem(KEY)); if(sv) st=sv;}catch(e){}
+function save(){try{localStorage.setItem(KEY,JSON.stringify(st))}catch(e){}}
+var muted=false, tries=0, sel={}, ac;
+
+function norm(s){return String(s).toLowerCase().normalize("NFD").replace(/[\u0300-\u036f]/g,"").replace(/[^a-z0-9 ]/g," ").replace(/\s+/g," ").trim()}
+function match(v,a){ if(a.charAt(0)==="=") return (" "+v+" ").indexOf(" "+norm(a.slice(1))+" ")>-1; return v.indexOf(norm(a))>-1; }
+function accepted(x){ return x.length>1 ? x.slice(1) : x; }
+function esc(s){return String(s).replace(/[&<>"]/g,function(c){return {"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;"}[c]})}
+function tone(seq){ if(muted) return; try{ ac=ac||new (window.AudioContext||window.webkitAudioContext)(); var t=ac.currentTime;
+  seq.forEach(function(n){var o=ac.createOscillator(),g=ac.createGain();o.type=n[2]||"sine";o.frequency.value=n[0];g.gain.setValueAtTime(.16,t);g.gain.exponentialRampToValueAtTime(.001,t+n[1]);o.connect(g);g.connect(ac.destination);o.start(t);o.stop(t+n[1]);t+=n[1]+.06}); }catch(e){} }
+var BAD=[[190,.18,"square"],[150,.3,"square"]], GOOD=[[660,.12],[880,.22]];
+
+/* ===== Pop-up bíblico ===== */
+var bibOpen=false, bibList=[], bibFocus=null;
+// ====== TEXTOS BÍBLICOS (ficam dentro do aplicativo, funcionam sem internet) ======
+var BIB = {
+ "jhn 5:39": [[39, "Vocês examinam as Escrituras, porque pensam ter nelas a vida eterna; e são elas mesmas que testemunham a meu respeito."]],
+ "col 4:2": [[2, "Perseverem na oração, vigiando nela com ação de graças."]],
+ "heb 10:25": [[25, "Não deixemos de nos reunir, como alguns costumam fazer, mas procuremos encorajar-nos uns aos outros, ainda mais ao ver que se aproxima o Dia."]],
+ "mar 5:18-20": [[18, "Quando Jesus entrava no barco, o homem que tinha estado endemoninhado pediu para ir com ele."],[19, "Jesus não permitiu, mas disse: Vá para casa, para os seus, e anuncie a eles tudo o que o Senhor fez por você e como teve misericórdia de você."],[20, "Ele foi e começou a anunciar em Decápolis tudo o que Jesus tinha feito por ele; e todos ficavam admirados."]],
+ "isa 58:13-14": [[13, "Se você deixar de pisotear o sábado e de fazer o que quer no meu santo dia, se chamar o sábado de deleite e o santo dia do Senhor de digno de honra, e se o honrar, sem seguir os seus caminhos, sem procurar o seu próprio prazer e sem falar palavras vãs,"],[14, "então você terá prazer no Senhor, e eu o farei cavalgar sobre os altos da terra e o sustentarei com a herança de Jacó, seu pai. A boca do Senhor o disse."]],
+ "luk 4:16-31": [[16, "Foi a Nazaré, onde tinha sido criado e, como era seu costume, entrou na sinagoga no dia de sábado e levantou-se para ler."],[31, "Desceu a Cafarnaum, cidade da Galileia, e ali ensinava no sábado."]],
+ "1pe 3:3-4": [[3, "Que a beleza de vocês não esteja nos enfeites exteriores, como tranças no cabelo, joias de ouro e roupas caras;"],[4, "mas esteja no íntimo do coração, na beleza incorruptível de um espírito manso e tranquilo, que é de grande valor diante de Deus."]],
+ "1ti 2:9": [[9, "Da mesma forma, que as mulheres se vistam de modo decente, com modéstia e bom senso, e não com tranças, ouro, pérolas ou roupas caras,"]],
+ "1jo 2:15-17": [[15, "Não amem o mundo nem as coisas que há no mundo. Se alguém amar o mundo, o amor do Pai não está nele;"],[16, "pois tudo o que há no mundo, a cobiça da carne, a cobiça dos olhos e a ostentação dos bens, não vem do Pai, mas do mundo."],[17, "O mundo passa, e a sua cobiça também; mas quem faz a vontade de Deus permanece para sempre."]],
+ "tia 4:4": [[4, "Gente infiel, vocês não sabem que ser amigo do mundo é ser inimigo de Deus? Quem quiser ser amigo do mundo torna-se inimigo de Deus."]],
+ "exo 20:14": [[14, "Não cometa adultério."]],
+ "1co 6:18": [[18, "Fujam da imoralidade sexual. Todo pecado que alguém comete é fora do corpo; mas quem pratica a imoralidade sexual peca contra o seu próprio corpo."]],
+ "jhn 13:4-15": [[4, "levantou-se da ceia, tirou o manto e, tomando uma toalha, amarrou-a na cintura."],[5, "Depois colocou água numa bacia e começou a lavar os pés dos discípulos e a enxugá-los com a toalha que estava na cintura."],[15, "Eu lhes dei o exemplo, para que vocês façam como eu fiz."]],
+ "1co 11:23-28": [[23, "Pois eu recebi do Senhor o que também lhes transmiti: que o Senhor Jesus, na noite em que foi traído, tomou o pão"],[24, "e, tendo dado graças, o partiu e disse: Isto é o meu corpo, que é dado por vocês; façam isto em memória de mim."],[25, "Do mesmo modo, depois da ceia, tomou o cálice, dizendo: Este cálice é a nova aliança no meu sangue; façam isto, todas as vezes que o beberem, em memória de mim."],[26, "Porque, todas as vezes que comerem este pão e beberem este cálice, anunciam a morte do Senhor, até que ele venha."],[27, "Por isso, quem comer o pão ou beber o cálice do Senhor indignamente será culpado do corpo e do sangue do Senhor."],[28, "Examine-se cada um a si mesmo, e assim coma do pão e beba do cálice."]],
+ "jhn 14:16": [[16, "Eu pedirei ao Pai, e ele dará a vocês outro Consolador, para que esteja com vocês para sempre."]],
+ "luk 24:49": [[49, "Eis que envio sobre vocês a promessa de meu Pai; permaneçam na cidade, até serem revestidos de poder do alto."]],
+ "act 2:1-4": [[1, "Quando chegou o dia de Pentecostes, estavam todos reunidos no mesmo lugar."],[2, "De repente veio do céu um som, como de um vento muito forte, e encheu toda a casa onde estavam sentados."],[3, "Apareceram-lhes línguas como de fogo, que se repartiram e pousaram sobre cada um deles."],[4, "Todos ficaram cheios do Espírito Santo e começaram a falar em outras línguas, conforme o Espírito lhes concedia que falassem."]],
+ "act 5:3-4": [[3, "Disse Pedro: Ananias, por que Satanás encheu o seu coração, para que você mentisse ao Espírito Santo e retivesse parte do preço do terreno?"],[4, "Enquanto o terreno não era vendido, não era seu? E, depois de vendido, não estava em seu poder? Por que você pensou em fazer isso? Você não mentiu aos homens, mas a Deus."]],
+ "mat 28:19": [[19, "Portanto, vão e façam discípulos de todas as nações, batizando-os em nome do Pai e do Filho e do Espírito Santo,"]],
+ "jhn 14:26": [[26, "Mas o Consolador, o Espírito Santo, que o Pai enviará em meu nome, ele lhes ensinará todas as coisas e lhes fará lembrar tudo o que eu lhes disse."]],
+ "jhn 16:8-13": [[8, "Quando ele vier, convencerá o mundo do pecado, da justiça e do juízo:"],[9, "do pecado, porque não creem em mim;"],[10, "da justiça, porque vou para o Pai, e vocês não me verão mais;"],[11, "do juízo, porque o príncipe deste mundo já está julgado."],[12, "Ainda tenho muito que lhes dizer, mas vocês não podem suportar agora."],[13, "Quando vier o Espírito da verdade, ele os guiará a toda a verdade; pois não falará por si mesmo, mas dirá tudo o que ouvir e lhes anunciará as coisas futuras."]],
+ "1sa 10:6": [[6, "O Espírito do Senhor virá sobre você com poder, e você profetizará com eles e será transformado em outro homem."]],
+ "jhn 14:15": [[15, "Se vocês me amam, guardarão os meus mandamentos."]],
+ "act 5:32": [[32, "Nós somos testemunhas destas coisas, e também o Espírito Santo, que Deus concedeu aos que lhe obedecem."]],
+ "gal 5:22-23": [[22, "Mas o fruto do Espírito é amor, alegria, paz, paciência, amabilidade, bondade, fidelidade,"],[23, "mansidão e domínio próprio. Contra essas coisas não há lei."]],
+ "luk 11:13": [[13, "Se vocês, que são maus, sabem dar boas coisas aos seus filhos, quanto mais o Pai celestial dará o Espírito Santo àqueles que o pedirem!"]]
+};
+var BIBNAME = "Almeida (domínio público), adaptada para o português atual · confira na sua Bíblia em caso de dúvida";
+
+function openBible(list,opener,start){
+  bibList=list; bibFocus=opener||document.activeElement;
+  var tabs=$("#mtabs");
+  tabs.innerHTML = list.length>1 ? list.map(function(x,k){return '<button class="tab" data-k="'+k+'">'+esc(x[0])+'</button>'}).join("") : "";
+  tabs.style.display = list.length>1 ? "flex" : "none";
+  tabs.querySelectorAll(".tab").forEach(function(b){b.onclick=function(){showRef(+b.dataset.k)}});
+  $("#ov").classList.add("on"); $("#ov").setAttribute("aria-hidden","false");
+  document.body.classList.add("lock"); bibOpen=true;
+  try{history.pushState({bib:1},"")}catch(e){}   // o botão "voltar" do celular fecha o pop-up
+  showRef(start||0); $("#mx").focus();
+}
+function closeBible(fromPop){
+  if(!bibOpen) return;
+  bibOpen=false;
+  $("#ov").classList.remove("on"); $("#ov").setAttribute("aria-hidden","true");
+  document.body.classList.remove("lock");
+  if(!fromPop){ try{ if(history.state&&history.state.bib) history.back(); }catch(e){} }
+  try{ bibFocus&&bibFocus.focus&&bibFocus.focus(); }catch(e){}
+}
+function showRef(k){
+  var item=bibList[k], body=$("#mbody");
+  document.querySelectorAll("#mtabs .tab").forEach(function(b,j){b.classList.toggle("sel",j===k)});
+  body.scrollTop=0;
+  var sb=document.querySelector("#mtabs .tab.sel"); if(sb&&sb.scrollIntoView){ try{sb.scrollIntoView({inline:"center",block:"nearest"})}catch(e){} }
+  var vs=BIB[item[1]];
+  if(vs) draw(item,vs); else body.innerHTML='<h2>'+esc(item[0])+'</h2><div class="ld">Texto não encontrado.</div>';
+}
+function draw(item,vs){
+  var multi=vs.length>1;
+  $("#mbody").innerHTML='<h2>'+esc(item[0])+'</h2>'+vs.map(function(v){return '<p class="vs">'+(multi?'<sup>'+v[0]+'</sup>':'')+esc(v[1])+'</p>'}).join("")+'<div class="ver">Tradução: '+esc(BIBNAME)+'</div>';
+}
+$("#mx").onclick=function(){closeBible()};
+$("#mclose").onclick=function(){closeBible()};
+$("#ov").addEventListener("click",function(e){ if(e.target===this) closeBible(); });
+document.addEventListener("keydown",function(e){ if(e.key==="Escape"&&bibOpen) closeBible(); });
+window.addEventListener("popstate",function(){ if(bibOpen) closeBible(true); });
+
+function render(){
+  var i=st.i; tries=0; sel={};
+  $("#back").style.visibility = i>0 ? "visible" : "hidden";
+  $("#pb").style.width=(Math.max(i,0)/TOTAL*100)+"%";
+  $("#cnt").textContent = i<0 ? "" : i<NQ ? (Q[i].recap?"Recapitulação":"Pergunta "+(i+1)+" de "+(NQ-1)) : i===NQ ? "Compromisso de fé" : "Estudo concluído";
+  if(i<0){ app.innerHTML='<div class="card"><p class="q">Vamos começar</p><p class="intro">Um celular novo sai da loja com a bateria cheia, e ninguém acha estranho carregá-lo todos os dias. Algo parecido acontece com quem decide seguir Jesus: a decisão é o começo, mas a energia para viver essa decisão vem de uma fonte que precisa ser buscada diariamente. Este estudo mostra como é o dia a dia de quem vive assim e quem é essa fonte.</p><p class="mut">Tente responder cada pergunta. Se errar, é só tentar de novo: você só avança quando acertar. Se ficar difícil, leia o texto bíblico indicado ou peça ajuda ao seu instrutor.</p><button class="btn" id="go">Começar</button></div>'; $("#go").onclick=function(){st.i=0;save();render()}; return; }
+  if(i<NQ) return question(Q[i],i);
+  if(i===NQ){ app.innerHTML='<div class="card"><p class="q">Compromisso de fé</p><p>Se quiser, marque o que você deseja assumir:</p><label class="chk"><input type="checkbox"><span>Desejo dedicar tempo, todos os dias, ao estudo da Bíblia e à oração.</span></label><label class="chk"><input type="checkbox"><span>Quero pedir a Deus, todos os dias, o Espírito Santo.</span></label><label class="chk"><input type="checkbox"><span>Desejo testemunhar da minha fé àqueles que me cercam.</span></label><button class="btn" id="nx">Concluir o estudo</button></div>'; $("#nx").onclick=function(){st.i=NQ+1;save();render()}; return; }
+  if(!st.d){st.d=1;save();}
+  app.innerHTML='<div class="card"><p class="q">Parabéns! Você concluiu o Estudo 12.</p><p>Agora você conhece princípios práticos da vida cristã e o papel do Espírito Santo nela. O próximo estudo será liberado pelo seu instrutor.</p>'+(st.u?'<p class="msg ok">Estudo 13 liberado!</p><a class="btn" href="'+NEXT_URL+'">Ir para o Estudo 13</a>':'<div class="tc"><input id="uc" placeholder="Código de liberação" autocapitalize="characters"><button class="btn sec" id="ub" style="margin:0">Liberar</button></div><div id="um" class="msg"></div>')+'</div>';
+  if(!st.u) $("#ub").onclick=function(){ if($("#uc").value.trim().toUpperCase()===NEXT_CODE){st.u=1;save();render()} else {$("#um").className="msg no";$("#um").textContent="Código incorreto. Peça ao seu instrutor.";tone(BAD)} };
+}
+
+function question(q,i){
+  var h='<div class="card" id="c"><div class="q">'+(q.recap?q.q:(i+1)+". "+q.q)+'</div>';
+  if(q.v) h+='<div class="ref">📖 '+q.v.map(function(x,k){return '<button class="refbtn" data-k="'+k+'">'+esc(x[0])+'</button>'}).join(" · ")+' <span class="mut">· toque para ler</span></div>'; else h+='<div class="ref"></div>';
+  var parts={
+    p:function(){ var k=0; return '<p class="s">'+q.p.map(function(x){return typeof x==="string"?x:'<input class="b" data-k="'+(k++)+'" autocomplete="off" autocapitalize="off" spellcheck="false" aria-label="Resposta '+k+'">'}).join("")+'</p>'; },
+    i:function(){ return (q.s?'<p class="sub">'+q.s+'</p>':'')+q.i.map(function(x,k){return '<div class="row"><span>'+x[0]+'</span><span class="vf" data-k="'+k+'"><button data-v="1" aria-label="Verdadeiro">V</button><button data-v="0" aria-label="Falso">F</button></span></div>'}).join(""); },
+    o:function(){ return q.o.map(function(x,k){return '<button class="opt" data-k="'+k+'">'+x+'</button>'}).join(""); }
+  };
+  (q.ord||"poi").split("").forEach(function(c){ if(q[c]) h+=parts[c](); });
+  h+='<div id="fb"></div><button class="btn" id="ck">Verificar</button></div>';
+  app.innerHTML=h;
+  document.querySelectorAll(".refbtn").forEach(function(b){b.onclick=function(){openBible(q.v,b,+b.dataset.k)}});
+  document.querySelectorAll(".vf button").forEach(function(b){b.onclick=function(){var p=b.parentNode;p.querySelectorAll("button").forEach(function(x){x.classList.remove("sel")});b.classList.add("sel");sel[p.dataset.k]=+b.dataset.v}});
+  document.querySelectorAll(".opt").forEach(function(b){b.onclick=function(){document.querySelectorAll(".opt").forEach(function(x){x.classList.remove("sel")});b.classList.add("sel");sel.c=+b.dataset.k}});
+  $("#ck").onclick=function(){check(q,i)};
+  document.querySelectorAll("input.b").forEach(function(f){f.addEventListener("keydown",function(e){if(e.key==="Enter")check(q,i)})});
+  var sa=st.a&&st.a[i]; if(sa){ putAns(q,sa); check(q,i,true); }
+}
+
+function canonAns(q){ var a={}; if(q.p) a.f=q.p.filter(function(x){return typeof x!=="string"}).map(function(x){return x[0]}); if(q.i){ a.v={}; q.i.forEach(function(x,k){ a.v[k]=x[1]; }); } if(q.o) a.c=q.c; return a; }
+function readAns(q){ var a={}; if(q.p) a.f=[].map.call(document.querySelectorAll("input.b"),function(x){return x.value}); if(q.i){ a.v={}; q.i.forEach(function(x,k){ if(sel[k]!==undefined) a.v[k]=sel[k]; }); } if(q.o&&sel.c!==undefined) a.c=sel.c; return a; }
+function putAns(q,a){
+  if(a.f) [].forEach.call(document.querySelectorAll("input.b"),function(x,k){ x.value=a.f[k]||""; });
+  if(a.v) Object.keys(a.v).forEach(function(k){ sel[k]=a.v[k]; var g=document.querySelector('.vf[data-k="'+k+'"]'); if(g) g.querySelectorAll("button").forEach(function(b){ b.classList.toggle("sel",+b.dataset.v===a.v[k]); }); });
+  if(a.c!==undefined){ sel.c=a.c; document.querySelectorAll(".opt").forEach(function(b){ b.classList.toggle("sel",+b.dataset.k===a.c); }); }
+}
+function answerText(q){
+  var a=[];
+  if(q.p) a.push(q.p.filter(function(x){return typeof x!=="string"}).map(function(x){return x[0]}).join(" · "));
+  if(q.i) a.push(q.i.map(function(x){return (x[1]?"V":"F")}).join(" · "));
+  if(q.o) a.push(q.o[q.c]);
+  return a.join(" | ");
+}
+function check(q,i,silent){
+  var ok=true, fb=$("#fb"), card=$("#c");
+  if(q.p){ var k=0; q.p.forEach(function(x){ if(typeof x==="string")return; var inp=document.querySelector('input[data-k="'+(k++)+'"]'); var v=norm(inp.value); var good=!!v&&accepted(x).some(function(a){return match(v,a)}); inp.classList.toggle("ok",good); inp.classList.toggle("no",!good); if(!good) ok=false; }); }
+  if(q.i){ q.i.forEach(function(x,k){ var g=document.querySelector('.vf[data-k="'+k+'"]'); var good=sel[k]===x[1]; g.classList.toggle("ok",good); g.classList.toggle("no",!good); if(!good) ok=false; }); }
+  if(q.o){ document.querySelectorAll(".opt").forEach(function(b){b.classList.remove("ok","no")}); var b=document.querySelector('.opt[data-k="'+sel.c+'"]'); if(sel.c===undefined) ok=false; else { b.classList.add(sel.c===q.c?"ok":"no"); if(sel.c!==q.c) ok=false; } }
+  if(ok) return acerto(q,i,silent);
+  if(silent) return;
+  tries++; tone(BAD); try{navigator.vibrate&&navigator.vibrate([80,60,80])}catch(e){}
+  card.classList.remove("shake"); void card.offsetWidth; card.classList.add("shake");
+  var m='<div class="msg no">Ainda não. Releia o texto e tente de novo.</div>';
+  if(tries>=2) m+='<div class="hint">💡 Dica: '+q.h+'</div>';
+  if(tries>=3) m+='<button class="btn sec" id="ti">Chamar o instrutor</button><div id="tb"></div>';
+  fb.innerHTML=m;
+  if(tries>=3) $("#ti").onclick=function(){ $("#tb").innerHTML='<div class="tc"><input id="tcd" type="password" placeholder="Código do instrutor"><button class="btn sec" id="tok" style="margin:0">OK</button></div><div id="tr"></div>'; $("#tok").onclick=function(){ if($("#tcd").value===TEACHER_CODE){ $("#tr").innerHTML='<div class="note">Resposta: '+answerText(q)+'</div><button class="btn" id="sk">Seguir adiante</button>'; $("#sk").onclick=function(){ st.a=st.a||{}; st.a[i]=canonAns(q); avancar(); }; } else {$("#tr").innerHTML='<div class="msg no">Código incorreto.</div>';tone(BAD)} } };
+}
+function acerto(q,i,silent){
+  if(!silent){ st.a=st.a||{}; st.a[i]=readAns(q); save(); tone(GOOD); }
+  document.querySelectorAll("input.b,.opt,.vf button").forEach(function(x){x.disabled=true});
+  var h='<div class="msg ok">Muito bem! ✔</div>'+(q.n?'<div class="note">'+q.n+'</div>':'')+'<button class="btn" id="nx">'+(i===NQ-1?"Continuar":"Próxima pergunta")+'</button>';
+  $("#fb").innerHTML=h; $("#ck").style.display="none"; $("#nx").onclick=avancar; if(!silent) $("#nx").focus();
+}
+function avancar(){ st.i++; save(); render(); window.scrollTo({top:0,behavior:"smooth"}); }
+
+function voltar(){ if(st.i<=0) return; closeBible(); st.i--; save(); render(); window.scrollTo({top:0,behavior:"smooth"}); }
+$("#back").onclick=voltar;
+$("#mute").onclick=function(){muted=!muted;this.textContent=muted?"🔇 Som desligado":"🔊 Som ligado"};
+$("#reset").onclick=function(){ st={i:-1,u:0}; save(); render(); };
+render();
+</script>
+<script type="module" src="../comum/didaque.js"></script>
+</body>
+</html>
