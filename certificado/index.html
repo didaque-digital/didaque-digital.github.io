@@ -1,0 +1,144 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="robots" content="noindex">
+<title>Certificado · Didaquê Digital</title>
+<style>
+:root{--bg:#FFF8E7;--card:#fff;--tx:#222;--mut:#666;--navy:#1F3A5F;--or:#E07B39;--teal:#2A7F8E;--ok:#2E7D32;--bad:#C62828;--line:#E6D9B8;--inp:#FDF1D8;--gold:#F4B43C;box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}
+@media (prefers-color-scheme:dark){:root:not([data-theme="light"]){--bg:#0F1B2D;--card:#172A45;--tx:#EDEFF2;--mut:#A9B4C4;--navy:#14263F;--or:#F0914F;--teal:#6CC6D3;--ok:#66BB6A;--bad:#EF5350;--line:#2B4466;--inp:#1E3556}}
+:root[data-theme="dark"]{--bg:#0F1B2D;--card:#172A45;--tx:#EDEFF2;--mut:#A9B4C4;--navy:#14263F;--or:#F0914F;--teal:#6CC6D3;--ok:#66BB6A;--bad:#EF5350;--line:#2B4466;--inp:#1E3556}
+html{scroll-padding-top:env(safe-area-inset-top,0px)}
+body{margin:0;background:var(--bg);color:var(--tx);font:17px/1.55 Calibri,"Segoe UI",system-ui,sans-serif}
+.wrap{max-width:760px;margin:0 auto;padding:0 14px 40px}
+.hero{background:radial-gradient(circle at 88% 20%,#f4b43c55,transparent 45%),linear-gradient(135deg,var(--navy),#2c527f);color:#fff;margin:0 -14px 14px;padding:22px 22px 20px;border-radius:0 0 24px 24px}
+.hero small{color:var(--gold);letter-spacing:.3em;font-weight:700;font-size:13px}
+.hero h1{font:700 30px/1.15 Georgia,serif;margin:4px 0 0}
+.card{background:var(--card);border-radius:14px;padding:18px;border:1px solid var(--line);border-left:6px solid var(--or)}
+.q{font:700 19px/1.35 Georgia,serif;color:var(--navy);margin:0 0 8px}
+@media (prefers-color-scheme:dark){.q{color:#C9DAF5}}
+label{display:block;font-weight:700;margin:14px 0 4px}
+input{font:inherit;width:100%;box-sizing:border-box;padding:10px 12px;border-radius:10px;border:2px solid var(--line);background:var(--inp);color:var(--tx)}
+input:focus-visible,.btn:focus-visible,a:focus-visible{outline:3px solid var(--teal);outline-offset:2px}
+.btn{display:inline-block;background:var(--or);color:#fff;border:0;border-radius:12px;padding:13px 22px;font:700 17px inherit;cursor:pointer;margin:16px 8px 0 0;text-decoration:none}
+.btn.sec{background:transparent;color:var(--teal);border:2px solid var(--teal);padding:10px 18px;font-size:16px}
+.msg{margin-top:12px;font-weight:700;color:var(--bad)}
+.mut{color:var(--mut);font-size:15px}
+#cv{width:100%;height:auto;border-radius:8px;border:1px solid var(--line);display:block;margin-top:12px}
+.hid{display:none}
+@media print{
+  body{background:#fff}
+  .wrap>*:not(#res),#res>*:not(canvas){display:none!important}
+  .wrap{max-width:none;padding:0}
+  #cv{border:0;margin:0;border-radius:0}
+  @page{size:A4 landscape;margin:0}
+}
+</style>
+</head>
+<body>
+<div class="wrap">
+  <div class="hero"><small>DIDAQUÊ DIGITAL</small><h1>Seu certificado</h1></div>
+
+  <div class="card hid" id="gate">
+    <p class="q">Certificado ainda não liberado</p>
+    <p>O certificado fica disponível depois que você terminar o Estudo 13 neste aparelho. Se você concluiu os estudos em outro celular ou computador, abra o Estudo 13 aqui e chegue até a tela final.</p>
+    <a class="btn" href="../estudos/">Ir para os estudos</a>
+  </div>
+
+  <div class="card hid" id="form">
+    <p class="q">Parabéns por concluir os estudos!</p>
+    <p class="mut">Para gerar o seu certificado, digite o código de conclusão que o seu instrutor entregou e o seu nome completo. O nome não é enviado para lugar nenhum: tudo acontece no seu aparelho.</p>
+    <label for="cod" id="lcod">Código de conclusão</label>
+    <input id="cod" autocapitalize="characters" autocomplete="off" spellcheck="false" placeholder="Código do instrutor">
+    <label for="nome">Nome completo</label>
+    <input id="nome" autocomplete="name" maxlength="60" placeholder="Como deve aparecer no certificado">
+    <div class="msg" id="err" role="alert"></div>
+    <button class="btn" id="gen">Gerar certificado</button>
+  </div>
+
+  <div id="res" class="hid">
+    <canvas id="cv" width="1754" height="1240" aria-label="Certificado de conclusão"></canvas>
+    <button class="btn" id="dl">Baixar imagem</button>
+    <button class="btn sec" id="pr">Imprimir ou salvar em PDF</button>
+    <button class="btn sec" id="ch">Mudar o nome</button>
+    <p class="mut">Para salvar em PDF, escolha “Imprimir” e depois “Salvar como PDF” como impressora.</p>
+  </div>
+  <p class="mut" style="text-align:center;margin-top:22px"><a href="../estudos/" style="color:inherit">← Voltar aos estudos</a></p>
+</div>
+
+<script>
+// ====== CONFIGURAÇÃO (edite aqui) ======
+var COMPLETION_CODE = "CERT13";           // código de conclusão que o instrutor entrega
+var INSTRUCTOR_NAME = "Gilberto B. Silva"; // nome que aparece na assinatura
+var INSTRUCTOR_ROLE = "Instrutor bíblico";
+var SERIES = "Didaquê Digital";
+var TOTAL_STUDIES = 13;
+var DONE_KEY = "didaque_e13_v1";          // progresso do último estudo
+var CODE_OK_KEY = "didaque_cert_ok";
+
+var $ = function(s){return document.querySelector(s)};
+function show(id,on){ $(id).classList.toggle("hid",!on); }
+function norm(s){return String(s).toLowerCase().normalize("NFD").replace(/[\u0300-\u036f]/g,"").replace(/[^a-z0-9]/g,"")}
+function finished(){ try{ var st=JSON.parse(localStorage.getItem(DONE_KEY)); return !!(st&&st.d); }catch(e){ return false; } }
+function codeSaved(){ try{ return localStorage.getItem(CODE_OK_KEY)==="1"; }catch(e){ return false; } }
+function saveCode(){ try{ localStorage.setItem(CODE_OK_KEY,"1"); }catch(e){} }
+var SMALL={"da":1,"das":1,"de":1,"do":1,"dos":1,"e":1};
+function titleCase(n){ return n.trim().replace(/\s+/g," ").toLowerCase().split(" ").map(function(w,i){ return (i>0&&SMALL[w])?w:w.charAt(0).toUpperCase()+w.slice(1); }).join(" "); }
+
+function start(){
+  if(!finished()){ show("#gate",true); show("#form",false); return; }
+  show("#gate",false); show("#form",true);
+  if(codeSaved()){ $("#cod").classList.add("hid"); $("#lcod").classList.add("hid"); }
+}
+
+function draw(name){
+  var c=$("#cv"), x=c.getContext("2d"), W=c.width, H=c.height, cx=W/2;
+  function sp(v){ try{ x.letterSpacing=v; }catch(e){} }
+  var g=x.createLinearGradient(0,0,W,H); g.addColorStop(0,"#FFF8E7"); g.addColorStop(1,"#FBEBC6");
+  x.fillStyle=g; x.fillRect(0,0,W,H);
+  x.strokeStyle="#1F3A5F"; x.lineWidth=14; x.strokeRect(40,40,W-80,H-80);
+  x.strokeStyle="#F4B43C"; x.lineWidth=3; x.strokeRect(66,66,W-132,H-132);
+  x.fillStyle="#F4B43C";
+  [[66,66],[W-66,66],[66,H-66],[W-66,H-66]].forEach(function(p){ x.beginPath(); x.arc(p[0],p[1],14,0,6.2832); x.fill(); });
+  x.textAlign="center"; x.textBaseline="alphabetic";
+  x.fillStyle="#E07B39"; x.font="700 30px Calibri,'Segoe UI',sans-serif"; sp("10px"); x.fillText("DIDAQUÊ DIGITAL",cx,170); sp("0px");
+  x.fillStyle="#1F3A5F"; x.font="700 92px Georgia,serif"; x.fillText("Certificado de Conclusão",cx,290);
+  x.strokeStyle="#E07B39"; x.lineWidth=4; x.beginPath(); x.moveTo(cx-160,328); x.lineTo(cx+160,328); x.stroke();
+  x.fillStyle="#444"; x.font="italic 38px Georgia,serif"; x.fillText("Certificamos que",cx,430);
+  var fs=104; x.font="italic 700 "+fs+"px Georgia,serif";
+  while(x.measureText(name).width>1360&&fs>40){ fs-=4; x.font="italic 700 "+fs+"px Georgia,serif"; }
+  x.fillStyle="#1F3A5F"; x.fillText(name,cx,560);
+  x.strokeStyle="#C9B98A"; x.lineWidth=2; x.beginPath(); x.moveTo(cx-640,592); x.lineTo(cx+640,592); x.stroke();
+  x.fillStyle="#333"; x.font="36px Georgia,serif";
+  x.fillText("concluiu os "+TOTAL_STUDIES+" estudos bíblicos da série "+SERIES+",",cx,690);
+  x.fillText("dedicando-se a conhecer a Palavra de Deus.",cx,746);
+  var d=new Date().toLocaleDateString("pt-BR",{day:"numeric",month:"long",year:"numeric"});
+  x.fillStyle="#666"; x.font="italic 30px Georgia,serif"; x.fillText(d,cx,830);
+  x.fillStyle="#1F3A5F"; x.font="italic 64px 'Segoe Script','Brush Script MT','Apple Chancery','Lucida Handwriting',cursive"; x.fillText(INSTRUCTOR_NAME,cx,985);
+  x.strokeStyle="#1F3A5F"; x.lineWidth=2; x.beginPath(); x.moveTo(cx-300,1004); x.lineTo(cx+300,1004); x.stroke();
+  x.fillStyle="#333"; x.font="700 30px Calibri,'Segoe UI',sans-serif"; x.fillText(INSTRUCTOR_NAME,cx,1046);
+  x.fillStyle="#666"; x.font="26px Calibri,'Segoe UI',sans-serif"; x.fillText(INSTRUCTOR_ROLE,cx,1082);
+  x.fillStyle="#2A7F8E"; x.font="italic 26px Georgia,serif"; x.fillText("“A tua palavra é lâmpada para os meus pés e luz para o meu caminho.” Salmo 119:105",cx,1150);
+}
+
+$("#gen").onclick=function(){
+  var err=$("#err"); err.textContent="";
+  if(!codeSaved()){
+    if(norm($("#cod").value)!==norm(COMPLETION_CODE)){ err.textContent="Código incorreto. Peça o código de conclusão ao seu instrutor."; return; }
+    saveCode();
+  }
+  var nome=$("#nome").value.trim().replace(/\s+/g," ");
+  if(nome.split(" ").length<2){ err.textContent="Digite o nome completo, com nome e sobrenome."; return; }
+  draw(titleCase(nome));
+  show("#form",false); show("#res",true); window.scrollTo({top:0});
+};
+$("#ch").onclick=function(){ show("#res",false); show("#form",true); };
+$("#pr").onclick=function(){ window.print(); };
+$("#dl").onclick=function(){
+  $("#cv").toBlob(function(b){ var a=document.createElement("a"); a.href=URL.createObjectURL(b); a.download="certificado-didaque-digital.png"; document.body.appendChild(a); a.click(); a.remove(); setTimeout(function(){URL.revokeObjectURL(a.href)},2000); },"image/png");
+};
+start();
+</script>
+</body>
+</html>
