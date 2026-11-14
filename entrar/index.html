@@ -39,12 +39,14 @@ import { doc, getDoc, setDoc, serverTimestamp } from "https://www.gstatic.com/fi
 const $ = s => document.querySelector(s), box = $("#box");
 const esc = s => String(s).replace(/[&<>"]/g, c => ({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;"}[c]));
 const atual = () => { try { return JSON.parse(localStorage.getItem("didaque_aluno")); } catch (e) { return null; } };
+// série da classe: "d" = Profecias de Daniel; qualquer outra coisa = Ouvindo a Voz de Deus
+const destino = serie => serie === "d" ? "../daniel/estudos/" : "../estudos/";
 
 function tela() {
   const a = atual();
   if (a && a.classe) {
     box.innerHTML = '<p>Você está na classe <b>' + esc(a.classe) + '</b> como <b>' + esc(a.nome) + '</b>.</p>' +
-      '<a class="btn" href="../estudos/">Continuar os estudos</a>' +
+      '<a class="btn" href="' + destino(a.serie) + '">Continuar os estudos</a>' +
       '<button class="btn sec" id="trocar">Entrar em outra classe</button>';
     $("#trocar").onclick = () => { localStorage.removeItem("didaque_aluno"); tela(); };
     return;
@@ -70,6 +72,7 @@ async function entrar(confirmado) {
     const u = auth.currentUser || (await signInAnonymously(auth)).user;
     const c = await getDoc(doc(db, "classes", cod));
     if (!c.exists()) { m.textContent = "Código não encontrado. Confira com o seu instrutor."; ok.disabled = false; return; }
+    const serie = c.data().serie === "d" ? "d" : c.data().serie === "o" ? "o" : "";
     const id = slug(nome), ref = doc(db, "classes", cod, "alunos", id);
     const ex = await getDoc(ref);
     if (ex.exists() && confirmado !== true) {
@@ -83,8 +86,8 @@ async function entrar(confirmado) {
     const dados = { nome: nome, uid: u.uid, atualizadoEm: serverTimestamp() };
     if (!ex.exists()) dados.entrouEm = serverTimestamp();
     await setDoc(ref, dados, { merge: true });
-    localStorage.setItem("didaque_aluno", JSON.stringify({ classe: cod, nome: nome, id: id }));
-    location.href = "../estudos/";
+    localStorage.setItem("didaque_aluno", JSON.stringify({ classe: cod, nome: nome, id: id, serie: serie }));
+    location.href = destino(serie);
   } catch (e) {
     console.error(e);
     m.textContent = "Não foi possível entrar. Verifique a internet e tente de novo. (" + (e.code || e.message) + ")";
