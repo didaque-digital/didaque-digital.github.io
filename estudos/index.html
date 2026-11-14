@@ -4,17 +4,20 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
 <meta name="robots" content="noindex">
-<title>Didaquê Digital</title>
+<title>Didaquê Digital · Profecias de Daniel</title>
 <style>
 :root{--bg:#FFF8E7;--card:#fff;--tx:#222;--mut:#666;--navy:#1F3A5F;--or:#E07B39;--ok:#2E7D32;--line:#E6D9B8;--gold:#F4B43C}
 @media (prefers-color-scheme:dark){:root{--bg:#0F1B2D;--card:#172A45;--tx:#EDEFF2;--mut:#A9B4C4;--navy:#14263F;--or:#F0914F;--ok:#66BB6A;--line:#2B4466}}
 *{box-sizing:border-box}
 body{margin:0;background:var(--bg);color:var(--tx);font:17px/1.5 Calibri,"Segoe UI",system-ui,sans-serif;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}
 .wrap{max-width:640px;margin:0 auto;padding:0 14px 40px}
-.hero{background:radial-gradient(circle at 88% 20%,#f4b43c55,transparent 45%),linear-gradient(135deg,var(--navy),#2c527f);color:#fff;margin:0 -14px 16px;padding:26px 22px 22px;border-radius:0 0 24px 24px}
+.hero{background:radial-gradient(circle at 88% 20%,#f4b43c55,transparent 45%),linear-gradient(135deg,var(--navy),#B85E1E);color:#fff;margin:0 -14px 16px;padding:26px 22px 22px;border-radius:0 0 24px 24px}
 .hero h1{font:700 34px/1.1 Georgia,serif;margin:0}
 .hero h1 span{color:#F0914F}
 .hero p{margin:8px 0 0;opacity:.92}
+.ser{display:flex;gap:8px;margin:0 0 14px}
+.ser a{flex:1;text-align:center;padding:11px 8px;border-radius:12px;border:2px solid var(--line);background:var(--card);color:var(--tx);text-decoration:none;font:700 15px/1.2 Calibri,"Segoe UI",system-ui,sans-serif}
+.ser a.on{background:var(--or);border-color:var(--or);color:#fff}
 .list{display:flex;flex-direction:column;gap:10px}
 a.it,div.it{display:flex;align-items:center;gap:14px;background:var(--card);border:1px solid var(--line);border-left:6px solid var(--or);border-radius:14px;padding:14px 16px;text-decoration:none;color:var(--tx)}
 .num{font:700 30px/1 Georgia,serif;color:var(--or);min-width:34px;text-align:center}
@@ -24,24 +27,27 @@ a.it,div.it{display:flex;align-items:center;gap:14px;background:var(--card);bord
 div.it{opacity:.55;border-left-color:var(--line)}
 div.it .num{color:var(--mut)}
 .foot{margin-top:22px;font-size:14px;color:var(--mut);text-align:center}
+:root{--or:#C2641F;--navy:#5E2E10;--bg:#FFF4E8}
+@media (prefers-color-scheme:dark){:root{--navy:#3A1C09;--bg:#1C1410;--card:#2A1E17;--line:#4A3425;--or:#F0914F}}
 </style>
 </head>
 <body>
 <div class="wrap">
-  <div class="hero"><h1>Didaquê <span>Digital</span></h1><p>Escolha o estudo para continuar.</p></div>
+  <div class="hero"><h1>Didaquê <span>Digital</span></h1><p>Profecias de Daniel · escolha o estudo.</p></div>
+  <nav class="ser" aria-label="Séries"><a href="../../estudos/">Ouvindo a Voz de Deus</a><a class="on" href="./">Profecias de Daniel</a></nav>
   <div id="quem" style="margin:0 0 12px;font-size:15px;color:var(--mut)"></div>
   <div class="list" id="list"></div>
-  <div class="foot">Os estudos novos serão publicados aos poucos.<br><a href="../" style="color:inherit">← Voltar à página de boas-vindas</a></div>
+  <div class="foot">Os estudos novos serão publicados aos poucos.<br><a href="../../" style="color:inherit">← Voltar à página de boas-vindas</a></div>
 </div>
 <script>
-var E = [{"n": 1, "t": "A Bíblia", "ok": true}, {"n": 2, "t": "Criação e origem do mal", "ok": true}, {"n": 3, "t": "O plano da salvação", "ok": true}, {"n": 4, "t": "A volta de Jesus", "ok": true}, {"n": 5, "t": "A morte e a Nova Terra", "ok": false}, {"n": 6, "t": "Santuário e juízo", "ok": false}, {"n": 7, "t": "A lei de Deus e o sábado", "ok": false}, {"n": 8, "t": "Princípios de saúde", "ok": false}, {"n": 9, "t": "O dom de profecia", "ok": false}, {"n": 10, "t": "Dízimo e ofertas", "ok": false}, {"n": 11, "t": "A igreja remanescente", "ok": false}, {"n": 12, "t": "Vida cristã e o Espírito Santo", "ok": false}, {"n": 13, "t": "Batismo e missão", "ok": false}];
+var E = [{"n": 1, "t": "Daniel, um livro para os dias de hoje", "ok": true}, {"n": 2, "t": "Dois poderes em conflito", "ok": false}, {"n": 3, "t": "Uma estátua assustadora", "ok": false}, {"n": 4, "t": "Prova de fogo", "ok": false}, {"n": 5, "t": "Do palácio ao pasto", "ok": false}, {"n": 6, "t": "A queda de Babilônia", "ok": false}, {"n": 7, "t": "Na cova dos leões", "ok": false}, {"n": 8, "t": "Quatro animais estranhos", "ok": false}, {"n": 9, "t": "O chifre pequeno e o ataque à lei de Deus", "ok": false}, {"n": 10, "t": "Um carneiro e um bode", "ok": false}, {"n": 11, "t": "2.300 tardes e manhãs (parte 1)", "ok": false}, {"n": 12, "t": "2.300 tardes e manhãs (parte 2)", "ok": false}, {"n": 13, "t": "Daniel no rio Tigre", "ok": false}, {"n": 14, "t": "Reis em guerra", "ok": false}, {"n": 15, "t": "Um tempo de angústia sem precedentes", "ok": false}, {"n": 16, "t": "O estabelecimento do eterno reino de Cristo", "ok": false}];
 var L = document.getElementById("list");
 (function(){ var q = document.getElementById("quem"), a = null; try{ a = JSON.parse(localStorage.getItem("didaque_aluno")); }catch(x){}
-  q.innerHTML = a && a.classe ? "👤 " + a.nome + " · classe " + a.classe + ' · <a href="../entrar/" style="color:inherit">trocar</a>' : '<a href="../entrar/" style="color:inherit">Entrar numa classe</a> para o instrutor acompanhar o seu estudo.'; })();
+  q.innerHTML = a && a.classe ? "👤 " + a.nome + " · classe " + a.classe + ' · <a href="../../entrar/" style="color:inherit">trocar</a>' : '<a href="../../entrar/" style="color:inherit">Entrar numa classe</a> para o instrutor acompanhar o seu estudo.'; })();
 function draw(){
   L.innerHTML = "";
   E.forEach(function(e){
-    var st = null; try{ st = JSON.parse(localStorage.getItem("didaque_e"+e.n+"_v1")); }catch(x){}
+    var st = null; try{ st = JSON.parse(localStorage.getItem("didaque_e"+(100+e.n)+"_v1")); }catch(x){}
     var done = st && st.d;
     var tag = !e.ok ? "Em breve" : done ? "✔ Concluído" : (st && st.i >= 0 ? "Em andamento" : "Começar");
     var el = document.createElement(e.ok ? "a" : "div");
