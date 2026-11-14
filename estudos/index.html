@@ -27,6 +27,8 @@ a.it,div.it{display:flex;align-items:center;gap:14px;background:var(--card);bord
 div.it{opacity:.55;border-left-color:var(--line)}
 div.it .num{color:var(--mut)}
 .foot{margin-top:22px;font-size:14px;color:var(--mut);text-align:center}
+.ser .lk{flex:1;text-align:center;padding:11px 8px;border-radius:12px;border:2px dashed var(--line);color:var(--mut);font:700 15px/1.2 Calibri,"Segoe UI",system-ui,sans-serif}
+.lkn{margin:-6px 0 12px;font-size:14px;color:var(--mut)}
 </style>
 </head>
 <body>
@@ -40,9 +42,11 @@ div.it .num{color:var(--mut)}
 <script>
 var E = [{"n": 1, "t": "A Bíblia", "ok": true}, {"n": 2, "t": "Criação e origem do mal", "ok": true}, {"n": 3, "t": "O plano da salvação", "ok": true}, {"n": 4, "t": "A volta de Jesus", "ok": true}, {"n": 5, "t": "A morte e a Nova Terra", "ok": false}, {"n": 6, "t": "Santuário e juízo", "ok": false}, {"n": 7, "t": "A lei de Deus e o sábado", "ok": false}, {"n": 8, "t": "Princípios de saúde", "ok": false}, {"n": 9, "t": "O dom de profecia", "ok": false}, {"n": 10, "t": "Dízimo e ofertas", "ok": false}, {"n": 11, "t": "A igreja remanescente", "ok": false}, {"n": 12, "t": "Vida cristã e o Espírito Santo", "ok": false}, {"n": 13, "t": "Batismo e missão", "ok": false}];
 var L = document.getElementById("list");
+function trava(x){ if(!x) return; var s=document.createElement("span"); s.className="lk"; s.setAttribute("aria-disabled","true"); s.textContent="🔒 "+x.textContent; x.parentNode.replaceChild(s,x);
+  var n=document.querySelector(".ser"), p=document.createElement("p"); p.className="lkn"; p.textContent="A outra série fica disponível quando o seu instrutor liberar."; n.parentNode.insertBefore(p,n.nextSibling); }
 (function(){var a=null;try{a=JSON.parse(localStorage.getItem("didaque_aluno"))}catch(x){}
   if(a&&a.serie==="d"){location.replace("../daniel/estudos/");return;}
-  if(a&&a.serie==="o"){var n=document.querySelector(".ser");if(n)n.style.display="none";}})();
+  if(a&&a.serie==="o") trava(document.querySelector(".ser a:nth-child(2)"));})();
 (function(){ var q = document.getElementById("quem"), a = null; try{ a = JSON.parse(localStorage.getItem("didaque_aluno")); }catch(x){}
   q.innerHTML = a && a.classe ? "👤 " + a.nome + " · classe " + a.classe + ' · <a href="../entrar/" style="color:inherit">trocar</a>' : '<a href="../entrar/" style="color:inherit">Entrar numa classe</a> para o instrutor acompanhar o seu estudo.'; })();
 function draw(){
