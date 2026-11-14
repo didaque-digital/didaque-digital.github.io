@@ -29,6 +29,8 @@ div.it .num{color:var(--mut)}
 .foot{margin-top:22px;font-size:14px;color:var(--mut);text-align:center}
 :root{--or:#C2641F;--navy:#5E2E10;--bg:#FFF4E8}
 @media (prefers-color-scheme:dark){:root{--navy:#3A1C09;--bg:#1C1410;--card:#2A1E17;--line:#4A3425;--or:#F0914F}}
+.ser .lk{flex:1;text-align:center;padding:11px 8px;border-radius:12px;border:2px dashed var(--line);color:var(--mut);font:700 15px/1.2 Calibri,"Segoe UI",system-ui,sans-serif}
+.lkn{margin:-6px 0 12px;font-size:14px;color:var(--mut)}
 </style>
 </head>
 <body>
@@ -42,9 +44,11 @@ div.it .num{color:var(--mut)}
 <script>
 var E = [{"n": 1, "t": "Daniel, um livro para os dias de hoje", "ok": true}, {"n": 2, "t": "Dois poderes em conflito", "ok": false}, {"n": 3, "t": "Uma estátua assustadora", "ok": false}, {"n": 4, "t": "Prova de fogo", "ok": false}, {"n": 5, "t": "Do palácio ao pasto", "ok": false}, {"n": 6, "t": "A queda de Babilônia", "ok": false}, {"n": 7, "t": "Na cova dos leões", "ok": false}, {"n": 8, "t": "Quatro animais estranhos", "ok": false}, {"n": 9, "t": "O chifre pequeno e o ataque à lei de Deus", "ok": false}, {"n": 10, "t": "Um carneiro e um bode", "ok": false}, {"n": 11, "t": "2.300 tardes e manhãs (parte 1)", "ok": false}, {"n": 12, "t": "2.300 tardes e manhãs (parte 2)", "ok": false}, {"n": 13, "t": "Daniel no rio Tigre", "ok": false}, {"n": 14, "t": "Reis em guerra", "ok": false}, {"n": 15, "t": "Um tempo de angústia sem precedentes", "ok": false}, {"n": 16, "t": "O estabelecimento do eterno reino de Cristo", "ok": false}];
 var L = document.getElementById("list");
+function trava(x){ if(!x) return; var s=document.createElement("span"); s.className="lk"; s.setAttribute("aria-disabled","true"); s.textContent="🔒 "+x.textContent; x.parentNode.replaceChild(s,x);
+  var n=document.querySelector(".ser"), p=document.createElement("p"); p.className="lkn"; p.textContent="A outra série fica disponível quando o seu instrutor liberar."; n.parentNode.insertBefore(p,n.nextSibling); }
 (function(){var a=null;try{a=JSON.parse(localStorage.getItem("didaque_aluno"))}catch(x){}
   if(a&&a.serie==="o"){location.replace("../../estudos/");return;}
-  if(a&&a.serie==="d"){var n=document.querySelector(".ser");if(n)n.style.display="none";}})();
+  if(a&&a.serie==="d") trava(document.querySelector(".ser a:nth-child(1)"));})();
 (function(){ var q = document.getElementById("quem"), a = null; try{ a = JSON.parse(localStorage.getItem("didaque_aluno")); }catch(x){}
   q.innerHTML = a && a.classe ? "👤 " + a.nome + " · classe " + a.classe + ' · <a href="../../entrar/" style="color:inherit">trocar</a>' : '<a href="../../entrar/" style="color:inherit">Entrar numa classe</a> para o instrutor acompanhar o seu estudo.'; })();
 function draw(){
