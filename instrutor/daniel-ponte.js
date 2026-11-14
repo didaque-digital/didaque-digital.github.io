@@ -22,22 +22,29 @@
   // 2) Guia com os 16 estudos de Daniel e rótulos "Daniel N" no lugar de "Estudo 10N"
   function ajustar() {
     var s = document.getElementById("sel");
-    if (s && !s.querySelector('optgroup[label="Ouvindo a Voz de Deus"]') && s.querySelector(":scope > option")) {
-      var og = document.createElement("optgroup"), sv = s.value;
-      og.label = "Ouvindo a Voz de Deus";
-      Array.prototype.slice.call(s.querySelectorAll(":scope > option")).forEach(function (x) { og.appendChild(x); });
-      s.insertBefore(og, s.firstChild); s.value = sv;
-    }
-    if (s && !s.querySelector('option[value="101"]')) {
-      var g = document.createElement("optgroup");
-      g.label = "Profecias de Daniel";
-      T.forEach(function (t, k) {
-        var p = document.createElement("option");
-        p.value = 101 + k;
-        p.textContent = "Daniel " + (k + 1) + " · " + t;
-        g.appendChild(p);
+    if (s && !document.getElementById("serie")) {
+      // Escolha da série: o menu de estudos mostra só os da série escolhida
+      var base = Array.prototype.slice.call(s.options).map(function (o) { return [o.value, o.textContent]; });
+      var sr = document.createElement("select");
+      sr.id = "serie";
+      sr.style.flex = "1 1 100%";
+      sr.innerHTML = '<option value="o">Ouvindo a Voz de Deus</option><option value="d">Profecias de Daniel</option>';
+      var fill = function (ser) {
+        var L = ser === "d" ? T.map(function (t, k) { return [101 + k, "Daniel " + (k + 1) + " · " + t]; }) : base;
+        s.innerHTML = L.map(function (x) { return '<option value="' + x[0] + '">' + x[1] + "</option>"; }).join("");
+      };
+      var dv = Object.getOwnPropertyDescriptor(HTMLSelectElement.prototype, "value");
+      Object.defineProperty(s, "value", {
+        configurable: true,
+        get: function () { return dv.get.call(s); },
+        set: function (v) {
+          var ser = +v > 100 ? "d" : "o";
+          if (sr.value !== ser) { sr.value = ser; fill(ser); }
+          dv.set.call(s, v);
+        }
       });
-      s.appendChild(g);
+      sr.onchange = function () { fill(sr.value); s.dataset.m = 1; s.dispatchEvent(new Event("change")); };
+      s.parentNode.insertBefore(sr, s);
     }
     var w = document.createTreeWalker(document.getElementById("main") || document.body, NodeFilter.SHOW_TEXT), n, L = [];
     while ((n = w.nextNode())) L.push(n);
