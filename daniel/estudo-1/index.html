@@ -86,7 +86,7 @@ details.det p{margin:8px 0 2px}
   <div class="bar"><i id="pb"></i></div>
   <div class="cnt" id="cnt"></div>
   <main id="app"></main>
-  <div class="foot"><button id="mute">🔊 Som ligado</button><a class="home" href="../../">Início</a><button id="back" aria-label="Voltar à pergunta anterior">← Voltar</button><button id="reset">Recomeçar</button></div>
+  <div class="foot"><button id="mute">🔊 Som ligado</button><a class="home" href="../estudos/">Estudos</a><button id="back" aria-label="Voltar à pergunta anterior">← Voltar</button><button id="reset">Recomeçar</button></div>
 </div>
 
 <div class="ov" id="ov" aria-hidden="true">
@@ -230,7 +230,7 @@ function render(){
   if(i<NQ) return question(Q[i],i);
   if(i===NQ){ app.innerHTML='<div class="card"><p class="q">Minha decisão</p><p>Se quiser, marque o que você deseja assumir:</p><label class="chk"><input type="checkbox"><span>Vou fazer uma oração de gratidão a Deus pela oportunidade de conhecer mais da Sua Palavra.</span></label><label class="chk"><input type="checkbox"><span>Vou dedicar tempo todos os dias à leitura da Bíblia.</span></label><label class="chk"><input type="checkbox"><span>Vou buscar a ajuda de Deus para praticar o que aprender.</span></label><button class="btn" id="nx">Concluir o estudo</button></div>'; $("#nx").onclick=function(){st.i=NQ+1;save();render()}; return; }
   if(!st.d){st.d=1;save();}
-  app.innerHTML='<div class="card"><p class="q">Parabéns! Você concluiu o Estudo 1.</p><p>Próximo estudo: <b>Dois poderes em conflito</b>. Quando o seu instrutor passar o código na aula, digite aqui para liberar.</p><div class="tc"><input id="nc" placeholder="Código do próximo estudo" autocomplete="off" autocapitalize="characters"><button class="btn sec" id="nok" style="margin:0">Liberar</button></div><div id="nm"></div><a class="btn sec" href="../../">Voltar ao início</a></div>';
+  app.innerHTML='<div class="card"><p class="q">Parabéns! Você concluiu o Estudo 1.</p><p>Próximo estudo: <b>Dois poderes em conflito</b>. Quando o seu instrutor passar o código na aula, digite aqui para liberar.</p><div class="tc"><input id="nc" placeholder="Código do próximo estudo" autocomplete="off" autocapitalize="characters"><button class="btn sec" id="nok" style="margin:0">Liberar</button></div><div id="nm"></div><a class="btn sec" href="../estudos/">Voltar à lista de estudos</a></div>';
   function lib(){ var d=$("#nc").value.trim().toUpperCase(); if(!d) return; if(d===NEXT_CODE){ st.u=1; save(); tone(GOOD); $("#nm").innerHTML='<div class="msg ok">Estudo 2 liberado!</div><a class="btn" href="../estudo-2/">Ir para o Estudo 2</a>'; } else { tone(BAD); $("#nm").innerHTML='<div class="msg no">Código incorreto. Peça ao seu instrutor.</div>'; } }
   $("#nok").onclick=lib; $("#nc").addEventListener("keydown",function(e){if(e.key==="Enter")lib()});
   if(st.u) $("#nm").innerHTML='<div class="msg ok">Estudo 2 liberado!</div><a class="btn" href="../estudo-2/">Ir para o Estudo 2</a>';
