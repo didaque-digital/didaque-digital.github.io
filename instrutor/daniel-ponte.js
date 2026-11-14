@@ -22,6 +22,12 @@
   // 2) Guia com os 16 estudos de Daniel e rótulos "Daniel N" no lugar de "Estudo 10N"
   function ajustar() {
     var s = document.getElementById("sel");
+    if (s && !s.querySelector('optgroup[label="Ouvindo a Voz de Deus"]') && s.querySelector(":scope > option")) {
+      var og = document.createElement("optgroup"), sv = s.value;
+      og.label = "Ouvindo a Voz de Deus";
+      Array.prototype.slice.call(s.querySelectorAll(":scope > option")).forEach(function (x) { og.appendChild(x); });
+      s.insertBefore(og, s.firstChild); s.value = sv;
+    }
     if (s && !s.querySelector('option[value="101"]')) {
       var g = document.createElement("optgroup");
       g.label = "Profecias de Daniel";
