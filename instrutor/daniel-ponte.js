@@ -19,8 +19,59 @@
     });
   };
 
+  // 3) Série da classe: campo na criação e rótulo na lista (usa os mesmos módulos Firebase do painel)
+  var SER = { o: "Ouvindo a Voz de Deus", d: "Profecias de Daniel" };
+  var fb = null;
+  function lib() {
+    if (!fb) fb = Promise.all([import("../comum/fb.js"), import("https://www.gstatic.com/firebasejs/12.13.0/firebase-firestore.js")]).then(function (r) { return { db: r[0].db, auth: r[0].auth, f: r[1] }; });
+    return fb;
+  }
+  function minhas() {
+    return lib().then(function (x) {
+      var f = x.f;
+      return f.getDocs(f.query(f.collection(x.db, "classes"), f.where("instrutorUid", "==", x.auth.currentUser.uid))).then(function (sn) { return { x: x, sn: sn }; });
+    });
+  }
+  function gravarSerie(nome, serie, t) {
+    setTimeout(function () {
+      minhas().then(function (r) {
+        var alvo = null;
+        r.sn.forEach(function (d) {
+          var v = d.data();
+          if (v.nome === nome && !v.serie && (!alvo || (v.criadoEm && v.criadoEm.seconds > (alvo.data().criadoEm || {}).seconds))) alvo = d;
+        });
+        if (alvo) return r.x.f.updateDoc(alvo.ref, { serie: serie });
+        if (t < 6) gravarSerie(nome, serie, t + 1);
+      }).catch(function (e) { console.error(e); alert("Não foi possível guardar a série da classe. (" + (e.code || e.message) + ")"); });
+    }, 900);
+  }
+  function campoSerie() {
+    var nc = document.getElementById("nc"), b = document.getElementById("criar");
+    if (!nc || !b || document.getElementById("serieNova")) return;
+    var s = document.createElement("select");
+    s.id = "serieNova"; s.setAttribute("aria-label", "Série da classe");
+    s.innerHTML = '<option value="o">Série: Ouvindo a Voz de Deus</option><option value="d">Série: Profecias de Daniel</option>';
+    nc.parentNode.insertBefore(s, b);
+    b.addEventListener("click", function () { var nome = nc.value.trim(); if (nome) gravarSerie(nome, s.value, 0); }, true);
+  }
+  function rotular() {
+    var L = document.getElementById("lista");
+    if (!L) return;
+    var cards = Array.prototype.filter.call(L.querySelectorAll("button[data-c]"), function (b) { return !b.closest(".card").dataset.ser; }).map(function (b) { return b.closest(".card"); });
+    if (!cards.length) return;
+    cards.forEach(function (c) { c.dataset.ser = "1"; });
+    minhas().then(function (r) {
+      var m = {}; r.sn.forEach(function (d) { m[d.id] = d.data().serie; });
+      cards.forEach(function (c) {
+        var cod = c.querySelector("button[data-c]").dataset.c, t = c.querySelector(".mut");
+        if (t) t.insertAdjacentHTML("beforeend", " · Série: <b>" + (SER[m[cod]] || "livre (o aluno escolhe)") + "</b>");
+      });
+    }).catch(function (e) { console.error(e); });
+  }
+
   // 2) Guia com os 16 estudos de Daniel e rótulos "Daniel N" no lugar de "Estudo 10N"
   function ajustar() {
+    campoSerie(); rotular();
     var s = document.getElementById("sel");
     if (s && !document.getElementById("serie")) {
       // Escolha da série: o menu de estudos mostra só os da série escolhida
