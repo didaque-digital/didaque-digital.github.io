@@ -1,0 +1,312 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="robots" content="noindex">
+<title>Daniel · Estudo 10 · Um carneiro e um bode</title>
+<style>
+:root{--bg:#FFF3E6;--card:#fff;--tx:#222;--mut:#666;--hd1:#6B3004;--hd2:#E67E22;--qc:#6B3004;--or:#B85A0A;--teal:#2A6F8E;--ok:#2E7D32;--bad:#C62828;--line:#F0D5B8;--inp:#FBE6CF;--gold:#F4B43C;box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}
+@media (prefers-color-scheme:dark){:root:not([data-theme="light"]){--bg:#1F150C;--card:#2D2014;--tx:#F7EBDD;--mut:#C4B29B;--hd1:#3D1B03;--hd2:#A5530F;--qc:#F7D9B5;--or:#C9701F;--teal:#6CB6D3;--ok:#66BB6A;--bad:#EF5350;--line:#51391F;--inp:#3E2B19}}
+:root[data-theme="dark"]{--bg:#1F150C;--card:#2D2014;--tx:#F7EBDD;--mut:#C4B29B;--hd1:#3D1B03;--hd2:#A5530F;--qc:#F7D9B5;--or:#C9701F;--teal:#6CB6D3;--ok:#66BB6A;--bad:#EF5350;--line:#51391F;--inp:#3E2B19}
+html{scroll-padding-top:env(safe-area-inset-top,0px)}
+body{margin:0;background:var(--bg);color:var(--tx);font:17px/1.55 Calibri,"Segoe UI",system-ui,sans-serif}
+body.lock{overflow:hidden}
+.wrap{max-width:640px;margin:0 auto;padding:0 14px 40px}
+.hero{background:radial-gradient(circle at 88% 20%,#f4b43c55,transparent 45%),linear-gradient(135deg,var(--hd1),var(--hd2));color:#fff;margin:0 -14px 14px;padding:22px 22px 20px;border-radius:0 0 24px 24px}
+.hero small{color:var(--gold);letter-spacing:.2em;font-weight:700;font-size:13px}
+.hero .n{font:700 56px/1 Georgia,serif;color:#FFD9B3;margin-top:2px}
+.hero h1{font:700 28px/1.15 Georgia,serif;margin:4px 0 0}
+.bar{height:8px;background:var(--line);border-radius:6px;overflow:hidden;margin:6px 0 4px}
+.bar i{display:block;height:100%;width:0;background:var(--or);transition:width .4s}
+.cnt{font-size:14px;color:var(--mut);margin-bottom:10px}
+.card{background:var(--card);border-radius:14px;padding:18px;border:1px solid var(--line);border-left:6px solid var(--or)}
+.q{font:700 19px/1.35 Georgia,serif;color:var(--qc)}
+.ref{margin:8px 0 14px}
+.refbtn{font:inherit;font-weight:700;color:var(--teal);background:transparent;border:0;border-bottom:2px dotted var(--teal);padding:2px 0;margin:0 2px;cursor:pointer;text-align:left}
+.s{line-height:2.3;margin:0 0 6px}
+.sub{margin:12px 0 2px;color:var(--mut);font-size:15px}
+.intro{margin:0 0 10px}
+.mut{color:var(--mut);font-size:15px}
+input.b,.wt{font:inherit;border:2px solid var(--line);background:var(--inp);color:var(--tx);border-radius:8px;padding:1px 8px}
+input.b{width:9em;max-width:100%}
+.wt{width:100%;box-sizing:border-box;padding:10px;resize:vertical}
+input.ok,.opt.ok,.wt.ok{border-color:var(--ok)!important;background:color-mix(in srgb,var(--ok) 15%,transparent)!important}
+input.no,.opt.no,.wt.no{border-color:var(--bad)!important}
+.opt{display:block;width:100%;text-align:left;font:inherit;color:var(--tx);background:var(--card);padding:11px 12px;border:2px solid var(--line);border-radius:10px;margin:8px 0;cursor:pointer}
+.opt.sel{border-color:var(--or)}
+.row{display:flex;justify-content:space-between;gap:10px;align-items:center;padding:8px 0;border-bottom:1px solid var(--line)}
+.vf{display:flex;gap:6px;flex:none}
+.vf button{width:44px;height:44px;border-radius:50%;border:2px solid var(--line);background:var(--card);color:var(--tx);font:700 16px inherit;cursor:pointer}
+.vf button.sel{background:var(--or);border-color:var(--or);color:#fff}
+.vf.ok button.sel{background:var(--ok);border-color:var(--ok)}
+.vf.no button.sel{background:var(--bad);border-color:var(--bad)}
+.btn{background:var(--or);color:#fff;border:0;border-radius:12px;padding:13px 22px;font:700 17px inherit;cursor:pointer;margin-top:16px}
+a.btn{display:inline-block;text-decoration:none}
+.btn.sec{background:transparent;color:var(--teal);border:2px solid var(--teal);padding:9px 16px;font-size:15px;margin-top:10px}
+.btn:focus-visible,.opt:focus-visible,.vf button:focus-visible,input:focus-visible,textarea:focus-visible,a:focus-visible,.refbtn:focus-visible,.xbtn:focus-visible,.tab:focus-visible,summary:focus-visible{outline:3px solid var(--teal);outline-offset:2px}
+.msg{margin-top:12px;font-weight:700}.msg.ok{color:var(--ok)}.msg.no{color:var(--bad)}
+.hint,.note{margin-top:10px;padding:10px 12px;border-radius:10px;background:var(--inp);font-size:15px}
+.note{border-left:4px solid var(--teal)}
+details.det{margin-top:10px;border:2px solid var(--line);border-radius:10px;padding:8px 12px;font-size:15px}
+details.det summary{cursor:pointer;font-weight:700;color:var(--teal)}
+details.det p{margin:8px 0 2px}
+.shake{animation:sh .35s}
+@keyframes sh{20%,60%{transform:translateX(-7px)}40%,80%{transform:translateX(7px)}}
+.foot{display:flex;justify-content:space-between;margin-top:18px;font-size:14px;color:var(--mut)}
+.foot a.home{color:var(--mut);text-decoration:underline;padding:6px}
+.foot button{background:none;border:0;color:var(--mut);font:inherit;text-decoration:underline;cursor:pointer;padding:6px}
+.tc{display:flex;gap:8px;margin-top:8px}.tc input{flex:1;min-width:0;font:inherit;padding:8px;border-radius:8px;border:2px solid var(--line);background:var(--inp);color:var(--tx)}
+.chk{display:flex;gap:10px;align-items:flex-start;padding:8px 0}.chk input{width:22px;height:22px;margin-top:3px;accent-color:var(--or)}
+.ov{position:fixed;inset:0;z-index:100;display:none;align-items:flex-end;justify-content:center;background:rgba(20,10,5,.6);-webkit-backdrop-filter:blur(3px);backdrop-filter:blur(3px)}
+.ov.on{display:flex;animation:fd .2s}
+.md{background:var(--card);color:var(--tx);width:100%;max-width:640px;max-height:84vh;max-height:84dvh;display:flex;flex-direction:column;overflow:hidden;border-radius:24px 24px 0 0;border-top:6px solid var(--or);box-shadow:0 -10px 40px rgba(0,0,0,.35);animation:up .28s ease-out}
+.mh{display:flex;align-items:center;justify-content:space-between;gap:10px;padding:14px 12px 8px 20px}
+.mh b{font:700 13px/1 Calibri,system-ui,sans-serif;letter-spacing:.15em;color:var(--or)}
+.xbtn{flex:none;width:44px;height:44px;border-radius:50%;border:0;background:var(--inp);color:var(--tx);font:400 26px/1 system-ui,sans-serif;cursor:pointer;display:flex;align-items:center;justify-content:center}
+.tabs{display:flex;gap:8px;padding:0 20px 8px;overflow-x:auto}
+.tab{flex:none;font:inherit;font-weight:700;font-size:15px;color:var(--teal);background:transparent;border:2px solid var(--teal);border-radius:999px;padding:6px 14px;cursor:pointer}
+.tab.sel{background:var(--teal);color:#fff}
+.mb{padding:6px 20px 12px;overflow-y:auto;-webkit-overflow-scrolling:touch;min-height:120px}
+.mb h2{font:700 24px/1.2 Georgia,serif;color:var(--qc);margin:4px 0 12px}
+.vs{font:20px/1.75 Georgia,serif;margin:0 0 10px}
+.vs sup{font:700 12px Calibri,system-ui,sans-serif;color:var(--or);margin-right:3px}
+.ver{font-size:13px;color:var(--mut);margin-top:12px}
+.mf{padding:6px 20px calc(16px + env(safe-area-inset-bottom,0px))}
+.mf .btn{width:100%;margin-top:6px}
+@keyframes up{from{transform:translateY(40px);opacity:0}to{transform:none;opacity:1}}
+@keyframes fd{from{opacity:0}to{opacity:1}}
+@media (min-width:700px){.ov{align-items:center}.md{border-radius:24px;max-height:80vh}.mf{padding-bottom:18px}}
+@media (prefers-reduced-motion:reduce){.shake,.md,.ov.on{animation:none}.bar i{transition:none}}
+</style>
+</head>
+<body>
+<div class="wrap">
+  <div class="hero"><small>PROFECIAS DE DANIEL · ESTUDO</small><div class="n">10</div><h1>Um carneiro e um bode</h1></div>
+  <div class="bar"><i id="pb"></i></div>
+  <div class="cnt" id="cnt"></div>
+  <main id="app"></main>
+  <div class="foot"><button id="mute">🔊 Som ligado</button><a class="home" href="../estudos/">Estudos</a><button id="back" aria-label="Voltar à pergunta anterior">← Voltar</button><button id="reset">Recomeçar</button></div>
+</div>
+
+<div class="ov" id="ov" aria-hidden="true">
+  <div class="md" role="dialog" aria-modal="true" aria-labelledby="mt">
+    <div class="mh"><b id="mt">📖 Texto bíblico</b><button class="xbtn" id="mx" aria-label="Fechar">×</button></div>
+    <div class="tabs" id="mtabs"></div>
+    <div class="mb" id="mbody"></div>
+    <div class="mf"><button class="btn" id="mclose">Fechar e voltar à pergunta</button></div>
+  </div>
+</div>
+
+<script>
+// ====== CONFIGURAÇÃO ======
+var TEACHER_CODE = "K4P8";    // código do instrutor (mostra a resposta)
+var NEXT_CODE = "TMPS11";     // libera o Estudo 11 (2.300 tardes e manhãs e a purificação do santuário). Troque aqui se preferir outro código
+var KEY = "didaque_e1010_v1"; // progresso deste estudo
+
+// Tipos: p = completar | i = V/F | o = múltipla escolha | w = escrever uma frase
+// n = resumo | t = texto completo da revista (abre e fecha) | r = resposta de referência (tipo w)
+var Q = [
+ {q:"Qual foi o primeiro animal visto por Daniel na nova visão?",
+  v:[["Daniel 8:3, 4","dan 8:3-4"]],
+  p:["Um ",["carneiro","carneiro"]," com dois chifres, em pé diante do rio."],
+  h:"Daniel 8:3: ele viu um animal com dois chifres, um mais alto que o outro, que subiu por último.",
+  n:"Passados cerca de dois anos da visão do capítulo 7, Daniel recebe outra visão, em que animais de novo representam nações. O chifre mais alto que “subiu por último” corresponde aos persas, que assumem o poder depois dos medos. O anjo Gabriel explica: o carneiro representa os reis da Média e da Pérsia (Daniel 8:20).",
+  t:"<p>O verso 3 informa que o “chifre mais alto subiu por último”. Como a profecia é uma verdade que se amplia, vale destacar o paralelo entre os capítulos 7 e 8.</p><p>O capítulo 7 apresenta um animal semelhante ao urso que “se levantou sobre um de seus lados” (Daniel 7:5), assim como este chifre do carneiro. No capítulo 7 o urso representa os medos e os persas, e os persas assumem o poder por último, com Ciro. O mesmo acontece aqui com o carneiro. O anjo Gabriel deu essa interpretação a Daniel: “Aquele carneiro com dois chifres, que viste, são os reis da Média e da Pérsia” (Daniel 8:20).</p>"},
+ {q:"Qual foi o segundo animal visto por Daniel?",
+  v:[["Daniel 8:5","dan 8:5"]],
+  p:["Um ",["bode","bode"]," que vinha do ocidente, com um chifre ",["notável","notavel"]," entre os olhos."],
+  h:"Daniel 8:5: veio do ocidente, sem tocar o chão, com um chifre notável entre os olhos.",
+  n:"O bode representa o reino da Grécia. O fato de ele não tocar o chão é paralelo às quatro asas do leopardo (Daniel 7:6) e indica a velocidade com que os gregos dominariam o mundo. O chifre notável é Alexandre, o Grande, como confirma Gabriel: “o bode peludo é o rei da Grécia; o chifre grande entre os olhos é o primeiro rei” (Daniel 8:21).",
+  t:"<p>Continuando o paralelo com o capítulo 7, é lógico supor que o bode representa o reino da Grécia, que venceu a Medo-Pérsia. O fato de o bode não tocar o chão está em paralelo com as quatro asas do leopardo (Daniel 7:6), significando a velocidade com que os gregos dominariam o mundo.</p><p>Quanto ao “chifre notável entre os olhos”, só pode ser uma referência ao líder dos gregos, Alexandre, o Grande, e às suas notáveis conquistas. O anjo Gabriel mais uma vez confirma essa interpretação ao declarar que “o bode peludo é o rei da Grécia; o chifre grande entre os olhos é o primeiro rei” (Daniel 8:21).</p>"},
+ {q:"O que aconteceu em seguida com os dois animais?",
+  v:[["Daniel 8:6, 7","dan 8:6-7"]],
+  s:"Marque V ou F em cada frase:",
+  i:[["O bode correu contra o carneiro com grande fúria.",1],["O carneiro resistiu e venceu o bode.",0],["O bode derrubou o carneiro e o pisou.",1]],
+  h:"Daniel 8:7: o bode feriu o carneiro, quebrou os seus dois chifres, lançou-o por terra e o pisou.",
+  n:"A Medo-Pérsia (o carneiro) foi vencida pela Grécia de Alexandre (o bode). Alexandre travou três batalhas até vencer Dario III: Granico (334 a.C.), Issos (333 a.C.) e Arbela, ou Gaugamela (331 a.C.). O ano 331 a.C. marca o fim do Império Medo-Persa e o início do domínio de Alexandre.",
+  t:"<p>Neste ponto do estudo é bom entender que o tema tratado tem como pano de fundo o santuário terrestre, construído por Moisés quando o povo de Israel foi tirado do Egito. Uma vez ao ano, no Dia da Expiação, dois animais participavam do ritual de perdão e purificação do povo de Deus (veja Levítico 16:5).</p>"},
+ {q:"Depois de sair vitorioso, o que aconteceu com o grande chifre do bode?",
+  v:[["Daniel 8:8","dan 8:8"],["Daniel 8:22","dan 8:22"]],
+  o:["Continuou forte e dominou para sempre","Foi quebrado, e quatro chifres notáveis surgiram no lugar dele","Dividiu-se em dez chifres"], c:1,
+  h:"Daniel 8:8: estando forte, o grande chifre foi quebrado, e em seu lugar saíram quatro chifres notáveis.",
+  n:"O grande chifre é Alexandre, o Grande. Depois da sua morte (“quebrou-se-lhe o grande chifre”), o reino foi repartido entre quatro generais (“quatro chifres notáveis”): Ptolomeu, Lisímaco, Seleuco e Cassandro."},
+ {q:"Que novo elemento surge na visão, e o que ele faria?",
+  v:[["Daniel 8:9-12","dan 8:9-12"],["Daniel 8:23-25","dan 8:23-25"]],
+  p:["Dos quatro ventos do céu sai um chifre ",["pequeno","pequeno"],", que cresce para o sul, o oriente e a terra ",["gloriosa","glorios"],"."],
+  h:"Daniel 8:9: de um deles saiu um chifre pequeno, que cresceu muito para o sul, para o oriente e para a terra gloriosa.",
+  n:"A mesma expressão de Daniel 7:8 aparece aqui. Roma tem duas fases: pagã (Roma Imperial) e religiosa (Roma Papal), que atuaria contra Deus e o seu povo. A Roma Papal é a continuidade da Roma Imperial, como mostra o título pontifex maximus, assumido pelo bispo de Roma. O chifre pequeno é também o “rei de feroz catadura” de Daniel 8:23.",
+  t:"<p>Na estátua de Daniel 2, cada império foi representado por um metal, com exceção do quarto: as pernas eram de ferro (Roma Imperial) e os pés, de ferro e barro (Roma Papal). No capítulo 7 aparecem quatro animais, um para cada império, mas novamente surgem dez chifres e um chifre pequeno. Assim, temos Roma em duas fases, pagã (Roma Imperial) e religiosa (Roma Papal), que atuaria contra Deus e o seu povo.</p><p>De fato, a Roma Papal é a continuidade da Roma Imperial, o que se vê no fato de o bispo de Roma se assentar na cadeira do imperador e assumir o seu título (<i>pontifex maximus</i>), na conservação dos deuses romanos, que se tornam “santos” com nomes cristianizados, na manutenção da língua latina como versão oficial das Escrituras (<i>Vulgata Latina</i>) e nas celebrações das missas.</p><p>Alguns questionam de qual parte do domínio grego, dividido pelos quatro generais, teria vindo o chifre pequeno. A expressão “de um dos chifres” (Daniel 8:9) não está bem traduzida em algumas versões. No hebraico original está escrito “de um deles”, sem a palavra “chifre”. Isso quer dizer que o chifre pequeno se origina de um dos “quatro ventos do céu” (Daniel 8:8), e não de um dos chifres (veja Zacarias 6:5, 6).</p><p>O texto bíblico informa cinco atividades do chifre pequeno, que se distinguem em duas direções: <b>crescimento horizontal</b> (conquistas políticas, Roma Imperial) e <b>crescimento vertical</b> (conquistas religiosas, Roma Papal).</p><p><b>a) Tornou-se forte para o sul, o oriente e a terra gloriosa.</b> Roma, uma pequena república fundada em 753 a.C., começou sua expansão em 334 a.C. Conquistou a Península Itálica e as ilhas do Mediterrâneo. Em 202 a.C. conquistou Cartago, na África, ao sul. Em 168 a.C. conquistou a Grécia, a Macedônia, a Ásia Menor e a Síria, em direção ao oriente. Faltava o crescimento ao norte, a “terra gloriosa” (Daniel 8:9), o que se cumpriu quando Roma conquistou a Gália e a Bretanha.</p><p><b>b) Cresceu até atingir o “exército dos céus” e lançou algumas “estrelas” por terra.</b> Segundo o anjo, o exército e as estrelas representam “os poderosos e o povo santo” (Daniel 8:24), o povo de Deus a quem o poder papal perseguiria (veja Daniel 12:1, 3). De acordo com o Apocalipse, foi o dragão, Satanás, que enganou a terça parte das estrelas do céu (Apocalipse 12:3, 4), e o chifre pequeno é o seu representante terrestre, o mesmo poder de Apocalipse 13:1-10, que recebe do dragão o seu poder, o trono e grande autoridade (Apocalipse 13:2). Essa guerra entre o bem e o mal começou no céu e se estendeu à Terra: é o “Conflito Cósmico”.</p>"},
+ {q:"O chifre pequeno se engrandeceu até o “Príncipe do exército”. Quem é esse Príncipe?",
+  v:[["Daniel 8:11","dan 8:9-12"],["Daniel 8:25","dan 8:23-25"]],
+  o:["O anjo Gabriel","Jesus Cristo","O rei Dario"], c:1,
+  h:"Daniel 8:25 o chama de “Príncipe dos príncipes”. Ele aceitou adoração, o que um anjo nunca faria (Apocalipse 19:9, 10).",
+  n:"O “Príncipe do exército” ou “Príncipe dos príncipes” (Daniel 8:25) é uma referência ao próprio Jesus Cristo. O chifre pequeno tira dele o “sacrifício diário” e o lugar do seu santuário é lançado por terra. Em 2 Tessalonicenses 2:4, Paulo descreve esse poder que se levanta contra tudo o que se chama Deus e se assenta no santuário de Deus.",
+  t:"<p>Essa mesma expressão, “Príncipe do exército”, aparece em Josué 5:13-15, na conquista de Canaã. O texto deixa claro que Josué adorou esse Príncipe e ele não o repreendeu. Logo, não pode ser apenas um anjo, pois os anjos de Deus não aceitam adoração (veja Apocalipse 19:9, 10; 22:8, 9; Mateus 4:10). Outro detalhe: o Príncipe disse “Descalça as sandálias dos pés, porque o lugar em que estás é santo”, expressão que só aparece mais uma vez na Bíblia, quando Deus chamou Moisés para libertar o seu povo (Êxodo 3:5).</p><p>O chifre pequeno tira do Príncipe o “sacrifício diário”, que poderia ser melhor traduzido como “contínuo”. A expressão hebraica é <i>tamid</i>, termo cultual usado para todas as cerimônias realizadas no pátio e no lugar santo do santuário durante o ano (veja Êxodo 30:8; Levítico 24:4, 8; Números 28:3). Todas elas tratavam de perdão dos pecados e salvação do povo.</p><p>Como o sistema papal ataca essas práticas? A Igreja Romana pretende ser o templo do novo pacto, negando a realidade de um santuário celestial, do qual o terrestre era um tipo (Êxodo 25:8, 40). Seus líderes espirituais são chamados de sacerdotes, que escutam confissões e realizam o sacrifício da missa, diminuindo o sacrifício único e perfeito de Cristo. Ensina que Cristo não é o único Mediador ou Sumo Sacerdote entre Deus e os homens, mas também a virgem Maria e os santos. Significa substituir a obra de Cristo no Santuário Celestial em favor do pecador por uma obra de salvação de feitura humana (Hebreus 4:16; 8:1; 9:11, 12; 12:2, 3).</p><p>Daniel afirma ainda que o papado se levantaria contra o “Príncipe dos príncipes” (Daniel 8:25). Esse “levantar” indica que ele tentaria ocupar o lugar de Cristo, como Paulo também advertiu: “O qual se opõe e se levanta contra tudo que se chama Deus ou é objeto de culto, a ponto de assentar-se no santuário de Deus, ostentando-se como se fosse o próprio Deus” (2 Tessalonicenses 2:4). As doutrinas da infalibilidade papal e da confissão auricular demonstram bem o cumprimento dessa profecia.</p><p><b>d) Deitou a verdade por terra e o que fez prosperou.</b> Na lição anterior vimos três alterações nos Dez Mandamentos: a exclusão do segundo, a divisão do décimo e a mudança do sábado para o domingo. Além delas, vários outros ensinos baseados apenas na tradição da Igreja suplantaram a verdade da Palavra de Deus, como a oração pelos mortos, as penitências, as indulgências, o batismo infantil e a doutrina da transubstanciação.</p>"},
+ {q:"Até quando durariam os ataques do chifre pequeno ao povo de Deus e à sua lei?",
+  v:[["Daniel 8:13, 14","dan 8:13-14"]],
+  p:["Até ",["2.300","2 300","2300"]," tardes e manhãs; então o santuário seria ",["purificado","purific"],"."],
+  h:"Daniel 8:14: até duas mil e trezentas tardes e manhãs; então o santuário será purificado.",
+  n:"Depois de passadas as 2.300 tardes e manhãs, o santuário seria purificado. Assim como a purificação do santuário terrestre representava um juízo de vindicação do povo de Deus, o mesmo ocorrerá ao término desse período, e o chifre pequeno será destruído sem esforço de mãos humanas (Daniel 8:25)."},
+ {q:"Quando Daniel quis saber o significado da visão, qual foi a resposta do anjo Gabriel?",
+  v:[["Daniel 8:16-19","dan 8:16-19"]],
+  o:["A visão se refere ao tempo do fim","A visão já tinha se cumprido no passado","A visão não tinha aplicação prática"], c:0,
+  h:"Daniel 8:17 e 19: a visão se refere ao tempo do fim, ao tempo determinado do fim.",
+  n:"As expressões “tempo do fim” e “tempo determinado do fim” mostram que certas profecias do livro de Daniel se aplicam exclusivamente aos nossos dias. Por isso é importante estudar e compreender cada profecia de Daniel: elas se referem aos nossos dias."},
+ {q:"O anjo explicou a identidade dos animais, mas qual parte da visão Daniel não entendeu?",
+  v:[["Daniel 8:26, 27","dan 8:26-27"]],
+  p:["Daniel não entendeu a visão das ",["tardes","tarde"]," e das ",["manhãs","manha"],"."],
+  h:"Daniel 8:26, 27: a visão das tardes e manhãs é verdadeira, mas Daniel ficou espantado e ninguém a entendia.",
+  n:"A visão das “tardes e manhãs” é a profecia das 2.300 tardes e manhãs de Daniel 8:14. Quando esse período terminasse, o santuário seria purificado e a ação do chifre pequeno seria freada. Por isso o interesse de Daniel em compreender o assunto. No próximo estudo veremos essa profecia em detalhes, e descobriremos que, no fim, o povo de Deus sairá vitorioso."},
+ {q:"Para resumir: o que o chifre pequeno representa e o que ele fez? Responda com poucas palavras.",
+  v:[["Daniel 8:23-25","dan 8:23-25"]], w:1,
+  rf:"Ele representa a Roma Papal, continuação da Roma Imperial, que perseguiu o povo de Deus, atacou a obra de Cristo no santuário e lançou a verdade por terra.",
+  h:"Lembre: surgiu da Roma Imperial, perseguiu o povo de Deus, tirou o “contínuo” do Príncipe e lançou a verdade por terra.",
+  n:"O chifre pequeno de Daniel 8 é a mesma Roma Papal já identificada em Daniel 7, agora vista também pelo seu ataque ao ministério de Cristo no santuário."}
+];
+var NQ = Q.length, TOTAL = NQ + 2;
+var $ = function(s){return document.querySelector(s)}, app = $("#app");
+var st = {i:-1,u:0}; try{var sv=JSON.parse(localStorage.getItem(KEY)); if(sv) st=sv;}catch(e){}
+function save(){try{localStorage.setItem(KEY,JSON.stringify(st))}catch(e){}}
+var muted=false, tries=0, sel={}, ac;
+
+function norm(s){return String(s).toLowerCase().normalize("NFD").replace(/[\u0300-\u036f]/g,"").replace(/[^a-z0-9 ]/g," ").replace(/\s+/g," ").trim()}
+function match(v,a){ if(a.charAt(0)==="=") return (" "+v+" ").indexOf(" "+norm(a.slice(1))+" ")>-1; return v.indexOf(norm(a))>-1; }
+function accepted(x){ return x.length>1 ? x.slice(1) : x; }
+function esc(s){return String(s).replace(/[&<>"]/g,function(c){return {"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;"}[c]})}
+function tone(seq){ if(muted) return; try{ ac=ac||new (window.AudioContext||window.webkitAudioContext)(); var t=ac.currentTime;
+  seq.forEach(function(n){var o=ac.createOscillator(),g=ac.createGain();o.type=n[2]||"sine";o.frequency.value=n[0];g.gain.setValueAtTime(.16,t);g.gain.exponentialRampToValueAtTime(.001,t+n[1]);o.connect(g);g.connect(ac.destination);o.start(t);o.stop(t+n[1]);t+=n[1]+.06}); }catch(e){} }
+var BAD=[[190,.18,"square"],[150,.3,"square"]], GOOD=[[660,.12],[880,.22]];
+
+/* ===== Pop-up bíblico ===== */
+var bibOpen=false, bibList=[], bibFocus=null;
+// Textos adaptados do Almeida (domínio público) para o português atual
+var BIB = {
+ "dan 8:3-4": [[3,"Então levantei os olhos e vi, e eis que diante do rio estava um carneiro que tinha dois chifres; os dois chifres eram altos, mas um era mais alto que o outro, e o mais alto subiu por último."],[4,"Vi que o carneiro dava marradas para o ocidente, para o norte e para o sul; nenhum animal lhe podia resistir, nem havia quem o livrasse do seu poder; ele fazia o que queria e se engrandecia."]],
+ "dan 8:5": [[5,"Enquanto eu considerava, eis que um bode vinha do ocidente, sobre toda a face da terra, sem tocar o chão; e o bode tinha um chifre notável entre os olhos."]],
+ "dan 8:6-7": [[6,"Dirigiu-se ao carneiro de dois chifres, que eu tinha visto em pé diante do rio, e correu contra ele no ímpeto da sua força."],[7,"Vi-o chegar perto do carneiro, enfurecido contra ele; feriu o carneiro e lhe quebrou os dois chifres, e o carneiro não teve força para resistir-lhe; o bode o lançou por terra e o pisou, e não houve quem livrasse o carneiro do seu poder."]],
+ "dan 8:8": [[8,"O bode se engrandeceu sobremaneira; e, estando já forte, aquele grande chifre foi quebrado, e em seu lugar saíram quatro chifres notáveis, para os quatro ventos do céu."]],
+ "dan 8:22": [[22,"Quanto ao chifre quebrado, em cujo lugar se levantaram quatro, significa que quatro reinos se levantarão da mesma nação, mas não com a força dele."]],
+ "dan 8:9-12": [[9,"De um deles saiu um chifre pequeno, que cresceu muito para o sul, para o oriente e para a terra gloriosa."],[10,"Cresceu até atingir o exército dos céus; a alguns do exército e das estrelas lançou por terra e os pisou."],[11,"Engrandeceu-se até ao Príncipe do exército; dele tirou o sacrifício diário, e o lugar do seu santuário foi lançado por terra."],[12,"O exército lhe foi entregue, junto com o sacrifício diário, por causa da transgressão; e lançou a verdade por terra; o que fez prosperou."]],
+ "dan 8:23-25": [[23,"No fim do reinado deles, quando os transgressores acabarem, levantar-se-á um rei de feroz catadura e que entende enigmas."],[24,"Será forte o seu poder, mas não pela sua própria força; destruirá maravilhosamente, prosperará e fará o que quiser; destruirá os poderosos e o povo santo."],[25,"Por sua astúcia fará prosperar o engano na sua mão; no seu coração se engrandecerá e, sem aviso, destruirá a muitos; levantar-se-á contra o Príncipe dos príncipes, mas será quebrado sem esforço de mãos humanas."]],
+ "dan 8:13-14": [[13,"Então ouvi um santo que falava; e outro santo disse àquele que falava: Até quando durará a visão do sacrifício diário e da transgressão assoladora, entregando o santuário e o exército a ser pisados?"],[14,"Ele me disse: Até duas mil e trezentas tardes e manhãs; então o santuário será purificado."]],
+ "dan 8:16-19": [[16,"Ouvi a voz de um homem, entre as margens do Ulai, que gritou: Gabriel, faça este homem compreender a visão."],[17,"Ele veio perto de onde eu estava; ao chegar, fiquei assombrado e me prostrei com o rosto em terra. Mas ele me disse: Entenda, filho do homem, que a visão se refere ao tempo do fim."],[19,"E disse: Eu lhe farei saber o que há de acontecer no último tempo da ira, porque a visão se refere ao tempo determinado do fim."]],
+ "dan 8:26-27": [[26,"A visão das tardes e das manhãs, que foi dita, é verdadeira; mas você, guarde a visão, porque se refere a dias ainda muito distantes."],[27,"Eu, Daniel, fiquei sem forças e doente por alguns dias; depois me levantei e cuidei dos negócios do rei. Fiquei espantado com a visão, e não havia quem a entendesse."]]
+};
+var BIBNAME = "Almeida (domínio público), adaptada para o português atual · confira na sua Bíblia em caso de dúvida";
+
+function openBible(list,opener,start){
+  bibList=list; bibFocus=opener||document.activeElement;
+  var tabs=$("#mtabs");
+  tabs.innerHTML = list.length>1 ? list.map(function(x,k){return '<button class="tab" data-k="'+k+'">'+esc(x[0])+'</button>'}).join("") : "";
+  tabs.style.display = list.length>1 ? "flex" : "none";
+  tabs.querySelectorAll(".tab").forEach(function(b){b.onclick=function(){showRef(+b.dataset.k)}});
+  $("#ov").classList.add("on"); $("#ov").setAttribute("aria-hidden","false");
+  document.body.classList.add("lock"); bibOpen=true;
+  try{history.pushState({bib:1},"")}catch(e){}
+  showRef(start||0); $("#mx").focus();
+}
+function closeBible(fromPop){
+  if(!bibOpen) return;
+  bibOpen=false;
+  $("#ov").classList.remove("on"); $("#ov").setAttribute("aria-hidden","true");
+  document.body.classList.remove("lock");
+  if(!fromPop){ try{ if(history.state&&history.state.bib) history.back(); }catch(e){} }
+  try{ bibFocus&&bibFocus.focus&&bibFocus.focus(); }catch(e){}
+}
+function showRef(k){
+  var item=bibList[k], body=$("#mbody");
+  document.querySelectorAll("#mtabs .tab").forEach(function(b,j){b.classList.toggle("sel",j===k)});
+  body.scrollTop=0;
+  var vs=BIB[item[1]], multi=vs&&vs.length>1;
+  body.innerHTML = vs ? '<h2>'+esc(item[0])+'</h2>'+vs.map(function(v){return '<p class="vs">'+(multi?'<sup>'+v[0]+'</sup>':'')+esc(v[1])+'</p>'}).join("")+'<div class="ver">Tradução: '+esc(BIBNAME)+'</div>' : '<h2>'+esc(item[0])+'</h2><p>Texto não encontrado.</p>';
+}
+$("#mx").onclick=function(){closeBible()};
+$("#mclose").onclick=function(){closeBible()};
+$("#ov").addEventListener("click",function(e){ if(e.target===this) closeBible(); });
+document.addEventListener("keydown",function(e){ if(e.key==="Escape"&&bibOpen) closeBible(); });
+window.addEventListener("popstate",function(){ if(bibOpen) closeBible(true); });
+
+function render(){
+  var i=st.i; tries=0; sel={};
+  $("#back").style.visibility = i>0 ? "visible" : "hidden";
+  $("#pb").style.width=(Math.max(i,0)/TOTAL*100)+"%";
+  $("#cnt").textContent = i<0 ? "" : i<NQ ? "Pergunta "+(i+1)+" de "+NQ : i===NQ ? "Minha decisão" : "Estudo concluído";
+  if(i<0){ app.innerHTML='<div class="card"><p class="q">Vamos começar</p><p class="intro">Cerca de dois anos depois da visão do capítulo 7, Daniel recebeu outra visão, registrada no capítulo 8. De novo, animais surgem na cena profética e representam nações que lutavam pelo poder. Daniel declara: “Pareceu-me estar eu na cidadela de Susã, que é província de Elão, e vi que estava junto ao rio Ulai” (Daniel 8:2). Pegue a sua Bíblia, faça uma oração e vamos estudar o significado desta visão para os nossos dias, a fim de compreender a vontade de Deus para a nossa vida.</p><p class="mut">Tente responder cada pergunta. Se errar, é só tentar de novo: você só avança quando acertar. Se ficar difícil, leia o texto bíblico indicado ou peça ajuda ao seu instrutor.</p><button class="btn" id="go">Começar</button></div>'; $("#go").onclick=function(){st.i=0;save();render()}; return; }
+  if(i<NQ) return question(Q[i],i);
+  if(i===NQ){ app.innerHTML='<div class="card"><p class="q">Minha decisão</p><p>Depois de compreender os simbolismos de Daniel 8 e as ações do papado contra Deus, o seu povo e a sua verdade, se quiser, marque o que você deseja assumir:</p><label class="chk"><input type="checkbox"><span>Adorarei apenas a Deus e confiarei somente em Cristo como meu intercessor junto ao Pai.</span></label><label class="chk"><input type="checkbox"><span>Praticarei, por amor a Cristo e pelo poder dele, todas as verdades que aprendi, principalmente os eternos princípios da Lei de Deus.</span></label><label class="chk"><input type="checkbox"><span>Buscarei, de todo o coração, alertar os sinceros filhos de Deus que ainda não compreenderam as verdades bíblicas e confiam em obras humanas para a sua salvação.</span></label><button class="btn" id="nx">Concluir o estudo</button></div>'; $("#nx").onclick=function(){st.i=NQ+1;save();render()}; return; }
+  if(!st.d){st.d=1;save();}
+  app.innerHTML='<div class="card"><p class="q">Parabéns! Você concluiu o Estudo 10.</p><p>Próximo estudo: <b>2.300 tardes e manhãs e a purificação do santuário (Parte 1)</b>. Quando o seu instrutor passar o código na aula, digite aqui para liberar.</p><div class="tc"><input id="nc" placeholder="Código do próximo estudo" autocomplete="off" autocapitalize="characters"><button class="btn sec" id="nok" style="margin:0">Liberar</button></div><div id="nm"></div><a class="btn sec" href="../estudos/">Voltar à lista de estudos</a></div>';
+  function lib(){ var d=$("#nc").value.trim().toUpperCase(); if(!d) return; if(d===NEXT_CODE){ st.u=1; save(); tone(GOOD); $("#nm").innerHTML='<div class="msg ok">Estudo 11 liberado!</div><a class="btn" href="../estudo-11/">Ir para o Estudo 11</a>'; } else { tone(BAD); $("#nm").innerHTML='<div class="msg no">Código incorreto. Peça ao seu instrutor.</div>'; } }
+  $("#nok").onclick=lib; $("#nc").addEventListener("keydown",function(e){if(e.key==="Enter")lib()});
+  if(st.u) $("#nm").innerHTML='<div class="msg ok">Estudo 11 liberado!</div><a class="btn" href="../estudo-11/">Ir para o Estudo 11</a>';
+}
+
+function question(q,i){
+  var h='<div class="card" id="c"><div class="q">'+(i+1)+". "+q.q+'</div>';
+  if(q.v) h+='<div class="ref">📖 '+q.v.map(function(x,k){return '<button class="refbtn" data-k="'+k+'">'+esc(x[0])+'</button>'}).join(" · ")+' <span class="mut">· toque para ler</span></div>'; else h+='<div class="ref"></div>';
+  var parts={
+    p:function(){ var k=0; return '<p class="s">'+q.p.map(function(x){return typeof x==="string"?x:'<input class="b" data-k="'+(k++)+'" autocomplete="off" autocapitalize="off" spellcheck="false" aria-label="Resposta '+k+'">'}).join("")+'</p>'; },
+    i:function(){ return (q.s?'<p class="sub">'+q.s+'</p>':'')+q.i.map(function(x,k){return '<div class="row"><span>'+x[0]+'</span><span class="vf" data-k="'+k+'"><button data-v="1" aria-label="Verdadeiro">V</button><button data-v="0" aria-label="Falso">F</button></span></div>'}).join(""); },
+    o:function(){ return q.o.map(function(x,k){return '<button class="opt" data-k="'+k+'">'+x+'</button>'}).join(""); },
+    w:function(){ return '<textarea class="wt" id="wt" rows="3" maxlength="300" placeholder="Escreva aqui, com suas palavras"></textarea>'; }
+  };
+  "poiw".split("").forEach(function(c){ if(q[c]) h+=parts[c](); });
+  h+='<div id="fb"></div><button class="btn" id="ck">Verificar</button></div>';
+  app.innerHTML=h;
+  document.querySelectorAll(".refbtn").forEach(function(b){b.onclick=function(){openBible(q.v,b,+b.dataset.k)}});
+  document.querySelectorAll(".vf button").forEach(function(b){b.onclick=function(){var p=b.parentNode;p.querySelectorAll("button").forEach(function(x){x.classList.remove("sel")});b.classList.add("sel");sel[p.dataset.k]=+b.dataset.v}});
+  document.querySelectorAll(".opt").forEach(function(b){b.onclick=function(){document.querySelectorAll(".opt").forEach(function(x){x.classList.remove("sel")});b.classList.add("sel");sel.c=+b.dataset.k}});
+  $("#ck").onclick=function(){check(q,i)};
+  document.querySelectorAll("input.b").forEach(function(f){f.addEventListener("keydown",function(e){if(e.key==="Enter")check(q,i)})});
+  var sa=st.a&&st.a[i]; if(sa){ putAns(q,sa); check(q,i,true); }
+}
+
+function canonAns(q){ var a={}; if(q.p) a.f=q.p.filter(function(x){return typeof x!=="string"}).map(function(x){return x[0]}); if(q.i){ a.v={}; q.i.forEach(function(x,k){ a.v[k]=x[1]; }); } if(q.o) a.c=q.c; if(q.w) a.f=[q.rf]; return a; }
+function readAns(q){ var a={}; if(q.p) a.f=[].map.call(document.querySelectorAll("input.b"),function(x){return x.value}); if(q.i){ a.v={}; q.i.forEach(function(x,k){ if(sel[k]!==undefined) a.v[k]=sel[k]; }); } if(q.o&&sel.c!==undefined) a.c=sel.c; if(q.w) a.f=[$("#wt").value.trim()]; return a; }
+function putAns(q,a){
+  if(a.f) [].forEach.call(document.querySelectorAll("input.b"),function(x,k){ x.value=a.f[k]||""; });
+  if(a.v) Object.keys(a.v).forEach(function(k){ sel[k]=a.v[k]; var g=document.querySelector('.vf[data-k="'+k+'"]'); if(g) g.querySelectorAll("button").forEach(function(b){ b.classList.toggle("sel",+b.dataset.v===a.v[k]); }); });
+  if(a.c!==undefined){ sel.c=a.c; document.querySelectorAll(".opt").forEach(function(b){ b.classList.toggle("sel",+b.dataset.k===a.c); }); }
+  if(q.w&&a.f&&$("#wt")) $("#wt").value=a.f[0]||"";
+}
+function answerText(q){
+  var a=[];
+  if(q.p) a.push(q.p.filter(function(x){return typeof x!=="string"}).map(function(x){return x[0]}).join(" · "));
+  if(q.i) a.push(q.i.map(function(x){return (x[1]?"V":"F")}).join(" · "));
+  if(q.o) a.push(q.o[q.c]);
+  if(q.w) a.push(q.rf);
+  return a.join(" | ");
+}
+function check(q,i,silent){
+  var ok=true, fb=$("#fb"), card=$("#c");
+  if(q.p){ var k=0; q.p.forEach(function(x){ if(typeof x==="string")return; var inp=document.querySelector('input[data-k="'+(k++)+'"]'); var v=norm(inp.value); var good=!!v&&accepted(x).some(function(a){return match(v,a)}); inp.classList.toggle("ok",good); inp.classList.toggle("no",!good); if(!good) ok=false; }); }
+  if(q.i){ q.i.forEach(function(x,k){ var g=document.querySelector('.vf[data-k="'+k+'"]'); var good=sel[k]===x[1]; g.classList.toggle("ok",good); g.classList.toggle("no",!good); if(!good) ok=false; }); }
+  if(q.o){ document.querySelectorAll(".opt").forEach(function(b){b.classList.remove("ok","no")}); var b=document.querySelector('.opt[data-k="'+sel.c+'"]'); if(sel.c===undefined) ok=false; else { b.classList.add(sel.c===q.c?"ok":"no"); if(sel.c!==q.c) ok=false; } }
+  if(q.w){ var wt=$("#wt"), good=wt.value.trim().length>=8; wt.classList.toggle("ok",good); wt.classList.toggle("no",!good); if(!good) ok=false; }
+  if(ok) return acerto(q,i,silent);
+  if(silent) return;
+  tries++; tone(BAD); try{navigator.vibrate&&navigator.vibrate([80,60,80])}catch(e){}
+  card.classList.remove("shake"); void card.offsetWidth; card.classList.add("shake");
+  var m='<div class="msg no">'+(q.w?'Escreva ao menos uma frase curta, com suas palavras.':'Ainda não. Releia o texto e tente de novo.')+'</div>';
+  if(tries>=2) m+='<div class="hint">💡 Dica: '+q.h+'</div>';
+  if(tries>=3) m+='<button class="btn sec" id="ti">Chamar o instrutor</button><div id="tb"></div>';
+  fb.innerHTML=m;
+  if(tries>=3) $("#ti").onclick=function(){ $("#tb").innerHTML='<div class="tc"><input id="tcd" type="password" placeholder="Código do instrutor"><button class="btn sec" id="tok" style="margin:0">OK</button></div><div id="tr"></div>'; $("#tok").onclick=function(){ if($("#tcd").value===TEACHER_CODE){ $("#tr").innerHTML='<div class="note">Resposta: '+answerText(q)+'</div><button class="btn" id="sk">Seguir adiante</button>'; $("#sk").onclick=function(){ st.a=st.a||{}; st.a[i]=canonAns(q); avancar(); }; } else {$("#tr").innerHTML='<div class="msg no">Código incorreto.</div>';tone(BAD)} } };
+}
+function acerto(q,i,silent){
+  if(!silent){ st.a=st.a||{}; st.a[i]=readAns(q); save(); tone(GOOD); }
+  document.querySelectorAll("input.b,.opt,.vf button,.wt").forEach(function(x){x.disabled=true});
+  var h='<div class="msg ok">Muito bem! ✔</div>'+(q.rf?'<div class="note"><b>Resposta de referência:</b> '+q.rf+'</div>':'')+(q.n?'<div class="note">'+q.n+'</div>':'')+(q.t?'<details class="det"><summary>Ler o texto completo</summary>'+q.t+'</details>':'')+'<button class="btn" id="nx">'+(i===NQ-1?"Continuar":"Próxima pergunta")+'</button>';
+  $("#fb").innerHTML=h; $("#ck").style.display="none"; $("#nx").onclick=avancar; if(!silent) $("#nx").focus();
+}
+function avancar(){ st.i++; save(); render(); window.scrollTo({top:0,behavior:"smooth"}); }
+function voltar(){ if(st.i<=0) return; closeBible(); st.i--; save(); render(); window.scrollTo({top:0,behavior:"smooth"}); }
+$("#back").onclick=voltar;
+$("#mute").onclick=function(){muted=!muted;this.textContent=muted?"🔇 Som desligado":"🔊 Som ligado"};
+$("#reset").onclick=function(){ st={i:-1,u:0}; save(); render(); };
+render();
+</script>
+<script type="module" src="../../comum/didaque.js"></script>
+</body>
+</html>
