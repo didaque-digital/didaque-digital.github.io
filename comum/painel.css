@@ -1,0 +1,43 @@
+/* Didaquê Digital · visual de aplicativo para o painel do instrutor.
+   Carregado DEPOIS do estilo da página, então só sobrescreve; nada da lógica muda. */
+@import url("https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,600;9..144,700&family=Nunito+Sans:wght@400;600;700&display=swap");
+:root{--bg:#FBF1DC;--card:#fff;--tx:#12243F;--mut:#5B6577;--line:#E7D9B5;--navy:#0A1830;--navy2:#12305A;--or:#F2B63D;--teal:#1B4F9C;--ok:#1F8A3E;--bad:#C62828;--inp:#FFF8E6;--gold:#F2B63D;
+ --serif:"Fraunces",Georgia,"Times New Roman",serif;--sans:"Nunito Sans","Segoe UI",system-ui,-apple-system,sans-serif}
+html{background:var(--bg)}
+body{background:var(--bg);color:var(--tx);font-family:var(--sans);-webkit-tap-highlight-color:transparent;overscroll-behavior:none}
+button,a{-webkit-touch-callout:none}
+.w{max-width:760px;padding-bottom:calc(104px + env(safe-area-inset-bottom,0px))}
+.top{position:sticky;top:0;z-index:4;background:var(--navy);border-bottom:3px solid var(--gold);border-radius:0 0 18px 18px;margin:0 -14px 14px;box-shadow:0 8px 18px -12px rgba(0,0,0,.6)}
+.top h1{font-family:var(--serif)}
+#sair{display:none!important}
+h2{display:flex;align-items:center;gap:10px;font-family:var(--serif);font-size:22px}
+h2::before{content:"";width:4px;height:24px;border-radius:2px;background:var(--gold)}
+.card{background:var(--card);border-color:var(--line);border-left-color:var(--gold);border-radius:16px;box-shadow:0 6px 16px -12px rgba(18,36,63,.6)}
+.card.alu{border-left-color:var(--teal)}
+.card.cods{border-left-color:var(--gold)}
+.btn{background:var(--gold);color:#1B1203;border-radius:14px;font-family:var(--sans);box-shadow:0 8px 16px -10px rgba(232,154,43,.9)}
+.btn:active{transform:translateY(1px)}
+.btn.sec{background:transparent;color:var(--navy);border:2px solid var(--navy);box-shadow:none}
+.btn:disabled{opacity:.6}
+input,select{font-family:var(--sans);border-radius:14px;border-color:var(--line);background:var(--inp);color:var(--tx)}
+input:focus,select:focus{outline:none;border-color:var(--teal);box-shadow:0 0 0 3px rgba(27,79,156,.2)}
+.code{font-family:var(--serif);color:#A8651A}
+.cd,.cd2{font-family:var(--serif);color:#A8651A}
+.alu .nm,.gqq{font-family:var(--serif)}
+.bar{height:10px}
+.bar i{background:var(--ok)}
+.badge{background:#EFE6CC}
+a.link{color:var(--teal)}
+.mut,.tag{color:var(--mut)}
+/* Barra de baixo */
+.tab{position:fixed;left:0;right:0;bottom:0;z-index:5;max-width:760px;margin:0 auto;display:flex;background:var(--navy);border-top:3px solid var(--gold);padding-bottom:env(safe-area-inset-bottom,0px)}
+.tab button{flex:1;display:flex;flex-direction:column;align-items:center;gap:2px;padding:9px 2px 8px;background:none;border:0;color:#C9D5E8;font:600 13px/1.1 var(--sans);position:relative;cursor:pointer}
+.tab svg{width:26px;height:26px}
+.tab .on{color:var(--gold)}
+.tab .on::before{content:"";position:absolute;top:0;left:22%;right:22%;height:3px;border-radius:0 0 3px 3px;background:var(--gold)}
+.conta{position:fixed;inset:0;z-index:3;background:var(--bg);overflow:auto;padding:96px 14px 110px}
+.conta[hidden]{display:none}
+.conta .card{max-width:520px;margin:0 auto;padding:20px 18px}
+.conta p{margin:4px 0 0;color:var(--mut)}
+.conta .btn{display:block;width:100%;margin-top:14px;padding:14px;font-size:17px}
+@media (prefers-reduced-motion:reduce){*{transition:none!important}}
