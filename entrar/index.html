@@ -4,32 +4,35 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
 <meta name="robots" content="noindex">
+<meta name="theme-color" content="#0A1830">
 <title>Entrar na classe · Didaquê Digital</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,600;9..144,700&family=Nunito+Sans:wght@400;600;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="../comum/app.css">
 <style>
-:root{--bg:#FFF8E7;--card:#fff;--tx:#222;--mut:#666;--navy:#1F3A5F;--or:#E07B39;--teal:#2A7F8E;--bad:#C62828;--line:#E6D9B8;--inp:#FDF1D8;--gold:#F4B43C}
-@media (prefers-color-scheme:dark){:root{--bg:#0F1B2D;--card:#172A45;--tx:#EDEFF2;--mut:#A9B4C4;--navy:#14263F;--or:#F0914F;--teal:#6CC6D3;--bad:#EF5350;--line:#2B4466;--inp:#1E3556}}
-*{box-sizing:border-box}
-body{margin:0;background:var(--bg);color:var(--tx);font:17px/1.55 Calibri,"Segoe UI",system-ui,sans-serif;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}
-.wrap{max-width:520px;margin:0 auto;padding:0 14px 40px}
-.hero{background:radial-gradient(circle at 88% 20%,#f4b43c55,transparent 45%),linear-gradient(135deg,var(--navy),#2c527f);color:#fff;margin:0 -14px 18px;padding:28px 22px 24px;border-radius:0 0 24px 24px}
-.hero h1{font:700 32px/1.1 Georgia,serif;margin:0 0 6px}
-.hero p{margin:0;opacity:.92}
-.card{background:var(--card);border:1px solid var(--line);border-left:6px solid var(--or);border-radius:14px;padding:18px}
-label{display:block;font-weight:700;margin:12px 0 4px}
-input{width:100%;font:inherit;padding:12px;border:2px solid var(--line);border-radius:10px;background:var(--inp);color:var(--tx)}
-input.cod{text-transform:uppercase;letter-spacing:.2em;font-weight:700;font-size:20px;text-align:center}
-.btn{display:block;width:100%;text-align:center;background:var(--or);color:#fff;border:0;border-radius:12px;padding:14px;font:700 18px inherit;cursor:pointer;margin-top:18px;text-decoration:none}
-.btn.sec{background:transparent;color:var(--teal);border:2px solid var(--teal);font-size:16px;padding:10px}
-.msg{margin-top:12px;font-weight:700;color:var(--bad)}
+.app{padding-bottom:calc(28px + env(safe-area-inset-bottom,0px))}
+.hd{background:radial-gradient(70% 120% at 90% 0%,rgba(242,182,61,.4),transparent 70%),linear-gradient(135deg,var(--navy2),var(--acc));color:#fff;padding:24px 20px 52px}
+.hd h1{margin:0 0 6px;font:700 clamp(28px,8vw,36px)/1.1 var(--serif)}
+.hd p{margin:0;opacity:.92}
+.box{position:relative;margin:-30px 14px 0;padding:20px 18px}
+.box p{margin:6px 0;color:var(--ink)}
+label{display:block;font-weight:700;margin:14px 0 6px}
+label:first-child{margin-top:0}
+input{width:100%;font:inherit;padding:14px;border:2px solid var(--line);border-radius:14px;background:#FFF8E6;color:var(--ink);-webkit-user-select:text;user-select:text}
+input:focus{outline:none;border-color:var(--acc);box-shadow:0 0 0 3px rgba(27,79,156,.2)}
+input.cod{text-transform:uppercase;letter-spacing:.22em;font:700 24px var(--serif);text-align:center}
+.btn.o{background:var(--gold);color:#1B1203;box-shadow:0 8px 18px -8px rgba(232,154,43,.9)}
+.btn:disabled{opacity:.6}
+.msg{margin-top:12px;font-weight:700;color:#C62828}
 .mut{color:var(--mut);font-size:15px}
-a.back{display:inline-block;margin-top:16px;color:var(--mut)}
 </style>
 </head>
 <body>
-<div class="wrap">
-  <div class="hero"><h1>Entrar na classe</h1><p>Use o código que o seu instrutor te passou.</p></div>
-  <div class="card" id="box">Carregando…</div>
-  <a class="back" href="../">← Voltar ao início</a>
+<div class="app">
+  <header class="top"><a href="../" aria-label="Página inicial"><svg viewBox="0 0 24 24" width="22" height="22" aria-hidden="true"><path fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round" d="M15 5l-7 7 7 7"/></svg></a><b>Didaquê <i>Digital</i></b></header>
+  <section class="hd"><h1>Entrar na classe</h1><p>Use o código que o seu instrutor te passou.</p></section>
+  <main class="cd box" id="box">Carregando…</main>
 </div>
 <script type="module">
 import { auth, db } from "../comum/fb.js";
@@ -46,14 +49,14 @@ function tela() {
   const a = atual();
   if (a && a.classe) {
     box.innerHTML = '<p>Você está na classe <b>' + esc(a.classe) + '</b> como <b>' + esc(a.nome) + '</b>.</p>' +
-      '<a class="btn" href="' + destino(a.serie) + '">Continuar os estudos</a>' +
-      '<button class="btn sec" id="trocar">Entrar em outra classe</button>';
+      '<a class="btn o" href="' + destino(a.serie) + '">Continuar os estudos</a>' +
+      '<button class="btn g" id="trocar">Entrar em outra classe</button>';
     $("#trocar").onclick = () => { localStorage.removeItem("didaque_aluno"); tela(); };
     return;
   }
   box.innerHTML = '<label for="nome">Seu nome</label><input id="nome" autocomplete="given-name" maxlength="30">' +
     '<label for="cod">Código da classe</label><input id="cod" class="cod" maxlength="8" autocapitalize="characters" autocomplete="off" spellcheck="false">' +
-    '<div id="m" class="msg"></div><button class="btn" id="ok">Entrar</button>' +
+    '<div id="m" class="msg"></div><button class="btn o" id="ok">Entrar</button>' +
     '<p class="mut" style="margin-bottom:0">Só pedimos o seu nome para o instrutor acompanhar o seu estudo.</p>';
   $("#ok").onclick = () => entrar();
   $("#cod").addEventListener("keydown", e => { if (e.key === "Enter") entrar(); });
@@ -77,8 +80,8 @@ async function entrar(confirmado) {
     const ex = await getDoc(ref);
     if (ex.exists() && confirmado !== true) {
       m.innerHTML = 'Já existe um aluno chamado <b>' + esc(nome) + '</b> nesta classe. É você voltando?' +
-        '<div style="margin-top:8px"><button class="btn" id="sim" style="margin-top:0">Sou eu, continuar</button>' +
-        '<button class="btn sec" id="nao">Não sou eu</button></div>';
+        '<div style="margin-top:8px"><button class="btn o" id="sim" style="margin-top:0">Sou eu, continuar</button>' +
+        '<button class="btn g" id="nao">Não sou eu</button></div>';
       $("#sim").onclick = () => entrar(true);
       $("#nao").onclick = () => { m.textContent = "Use o primeiro nome e a inicial do sobrenome, por exemplo: João P."; ok.disabled = false; };
       return;
