@@ -38,10 +38,10 @@ svg{display:block}
 .ico:active{background:rgba(255,255,255,.12)}
 
 /* Destaque */
-.hero{position:relative;min-height:236px;padding:22px 18px 46px;overflow:hidden;
+.hero{position:relative;padding:22px 18px 170px;overflow:hidden;
   background:radial-gradient(70% 90% at 82% 70%,rgba(242,182,61,.55),transparent 70%),linear-gradient(180deg,#0C2145,#143A6B)}
-.hero p{position:relative;z-index:1;margin:0;max-width:11.5em;font:600 clamp(20px,5.6vw,27px)/1.3 var(--serif)}
-.hero svg.book{position:absolute;right:-6px;bottom:14px;width:min(62%,360px);filter:drop-shadow(0 14px 18px rgba(0,0,0,.45))}
+.hero p{position:relative;z-index:1;margin:0;max-width:19em;font:600 clamp(19px,5.2vw,26px)/1.3 var(--serif)}
+.hero svg.book{position:absolute;right:14px;bottom:20px;width:min(54%,230px);filter:drop-shadow(0 14px 18px rgba(0,0,0,.45))}
 .hero::after{content:"";position:absolute;left:-12%;right:-12%;bottom:-2px;height:30px;background:var(--navy);
   border-top:2px solid var(--gold);border-radius:50% 50% 0 0/100% 100% 0 0}
 
@@ -67,7 +67,7 @@ h2::before{content:"";width:4px;height:30px;border-radius:2px;background:var(--g
 .sc[disabled] .go{background:#6B7280;color:#E5E7EB}
 
 /* Entrar */
-.acts{display:grid;grid-template-columns:1fr 1fr;gap:12px;margin-top:20px}
+.acts{display:grid;grid-template-columns:1fr;gap:12px;margin-top:20px}
 .act{position:relative;display:flex;align-items:center;gap:12px;padding:16px 14px;border-radius:22px;text-decoration:none;overflow:hidden;
   border:1px solid rgba(255,255,255,.25);box-shadow:0 12px 24px -12px rgba(0,0,0,.7);transition:transform .12s}
 .act:active{transform:scale(.97)}
@@ -104,7 +104,8 @@ h2::before{content:"";width:4px;height:30px;border-radius:2px;background:var(--g
 .sbtn.g{background:transparent;border:2px solid var(--ink);color:var(--ink)}
 
 @media (prefers-reduced-motion:reduce){*{transition:none!important}}
-@media (max-width:370px){.acts{grid-template-columns:1fr}.series{gap:8px}}
+@media (min-width:560px){.acts{grid-template-columns:1fr 1fr}}
+@media (max-width:370px){.series{gap:8px}}
 </style>
 </head>
 <body>
