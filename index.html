@@ -1,146 +1,244 @@
 <!DOCTYPE html>
 <html lang="pt-BR">
 <head>
-<link rel="manifest" href="manifest.json">
-<meta name="theme-color" content="#0c1a2e">
-<script>if('serviceWorker' in navigator){navigator.serviceWorker.register('sw.js');}</script>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
 <meta name="robots" content="noindex">
-<meta name="theme-color" content="#0C1A2E">
-<title>Didaquê Digital · Boas-vindas</title>
+<meta name="theme-color" content="#0A1830">
+<link rel="manifest" href="manifest.json">
+<script>if('serviceWorker' in navigator){navigator.serviceWorker.register('sw.js');}</script>
+<title>Didaquê Digital</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,600;9..144,700&family=Nunito+Sans:wght@400;600;700&display=swap" rel="stylesheet">
 <style>
 :root{
-  --bg:#F6F4EF; --card:#FFFFFF; --tx:#1D2433; --mut:#5B6577; --line:#E4DFD3;
-  --navy:#0C1A2E; --navy2:#16355A; --amber:#F2A93B; --or:#E07B39; --or-d:#C9651F; --teal:#2A7F8E;
-  --h:#12304F;
+  --navy:#0A1830; --navy2:#12305A; --gold:#F2B63D; --gold2:#E89A2B; --cream:#F8EBCB; --ink:#12243F;
+  --blue:#1B4F9C; --teal:#17747E; --line:rgba(255,255,255,.18);
   --serif:"Fraunces",Georgia,"Times New Roman",serif;
   --sans:"Nunito Sans","Segoe UI",system-ui,-apple-system,sans-serif;
 }
-@media (prefers-color-scheme:dark){
-  :root{--bg:#0A1424;--card:#13243D;--tx:#ECEFF4;--mut:#A8B3C6;--line:#25405F;--h:#DCE8FA;--teal:#6CC6D3}
-}
 *{box-sizing:border-box}
-html{-webkit-text-size-adjust:100%}
-body{margin:0;background:var(--bg);color:var(--tx);font:17px/1.6 var(--sans);padding-bottom:env(safe-area-inset-bottom,0px)}
-a:focus-visible{outline:3px solid var(--amber);outline-offset:3px}
-.w{max-width:680px;margin:0 auto;padding:0 20px}
+html{-webkit-text-size-adjust:100%;background:var(--navy)}
+body{margin:0;background:var(--navy);color:#fff;font:17px/1.4 var(--sans);-webkit-tap-highlight-color:transparent;-webkit-user-select:none;user-select:none;overscroll-behavior:none}
+button,a{font:inherit;color:inherit;-webkit-touch-callout:none}
+button{border:0;background:none;padding:0;cursor:pointer;text-align:inherit}
+:focus-visible{outline:3px solid var(--gold);outline-offset:3px}
+svg{display:block}
+.app{max-width:760px;margin:0 auto;min-height:100vh;min-height:100dvh;display:flex;flex-direction:column;
+  background:linear-gradient(180deg,var(--navy) 0%,#0D2347 55%,var(--navy) 100%)}
 
-/* HERO */
-.hero{background:
-  radial-gradient(60% 50% at 90% 0%,rgba(242,169,59,.28),transparent 70%),
-  radial-gradient(70% 60% at 0% 100%,rgba(42,127,142,.30),transparent 70%),
-  linear-gradient(160deg,var(--navy) 20%,var(--navy2));
-  color:#fff;padding:calc(44px + env(safe-area-inset-top,0px)) 0 56px;border-radius:0 0 36px 36px;position:relative;overflow:hidden}
-.hero::after{content:"";position:absolute;inset:auto -60px -90px auto;width:280px;height:280px;border-radius:50%;border:1px solid rgba(255,255,255,.12);box-shadow:0 0 0 38px rgba(255,255,255,.03),0 0 0 76px rgba(255,255,255,.02)}
-.hero .w{position:relative;z-index:1}
-.tag{display:inline-block;font-weight:700;font-size:14px;color:var(--amber);border:1px solid rgba(242,169,59,.5);padding:5px 14px;border-radius:99px;margin-bottom:18px}
-h1{font:700 clamp(44px,12vw,68px)/1 var(--serif);letter-spacing:-.02em;margin:0 0 16px}
-.lead{font-size:19px;line-height:1.55;margin:0 0 28px;max-width:30em;color:#E3EAF5}
-.btn{display:inline-block;background:var(--or);color:#fff;font:700 18px var(--sans);padding:16px 34px;border-radius:14px;text-decoration:none;box-shadow:0 10px 24px -8px rgba(224,123,57,.7);transition:background .15s,transform .15s}
-.btn:hover{background:var(--or-d)}
-.btn:active{transform:translateY(1px)}
-.cta{display:flex;flex-wrap:wrap;gap:12px}
-.btn.ghost{background:transparent;border:2px solid rgba(255,255,255,.55);box-shadow:none;padding:14px 28px}
-.btn.ghost:hover{background:rgba(255,255,255,.12)}
-.note{margin:14px 0 0;font-size:15px;color:#B9C6DB}
+/* Barra de cima */
+.bar{display:flex;align-items:center;gap:14px;padding:calc(14px + env(safe-area-inset-top,0px)) 18px 10px}
+.logo{font:700 26px/.95 var(--serif);letter-spacing:-.01em}
+.logo b{display:block;color:var(--gold);font-weight:700;margin-left:22px}
+.bar .sep{width:2px;height:38px;background:var(--gold);opacity:.8;border-radius:2px}
+.bar .nm{flex:1;font-size:18px}
+.ico{width:48px;height:48px;border-radius:14px;display:grid;place-items:center}
+.ico:active{background:rgba(255,255,255,.12)}
 
-/* Trilha de 13 estudos */
-.trail{margin-top:40px}
-.rail{position:relative;display:flex;justify-content:space-between;align-items:center;height:26px}
-.rail::before{content:"";position:absolute;left:6px;right:6px;top:50%;height:2px;background:rgba(255,255,255,.22);transform:translateY(-50%)}
-.rail i{position:relative;width:12px;height:12px;border-radius:50%;background:#31506F;box-shadow:0 0 0 3px var(--navy2);animation:light .5s ease forwards;animation-delay:calc(var(--n)*90ms + .3s)}
-.rail i:first-child{width:20px;height:20px;background:var(--amber);box-shadow:0 0 0 4px rgba(242,169,59,.3),0 0 22px rgba(242,169,59,.8)}
-@keyframes light{from{background:#31506F}to{background:#6B87A8}}
-.rail i:first-child{animation:none}
-.trail p{margin:12px 0 0;font-size:15px;color:#C9D5E8}
-.trail b{color:#fff}
+/* Destaque */
+.hero{position:relative;min-height:236px;padding:22px 18px 46px;overflow:hidden;
+  background:radial-gradient(70% 90% at 82% 70%,rgba(242,182,61,.55),transparent 70%),linear-gradient(180deg,#0C2145,#143A6B)}
+.hero p{position:relative;z-index:1;margin:0;max-width:11.5em;font:600 clamp(20px,5.6vw,27px)/1.3 var(--serif)}
+.hero svg.book{position:absolute;right:-6px;bottom:14px;width:min(62%,360px);filter:drop-shadow(0 14px 18px rgba(0,0,0,.45))}
+.hero::after{content:"";position:absolute;left:-12%;right:-12%;bottom:-2px;height:30px;background:var(--navy);
+  border-top:2px solid var(--gold);border-radius:50% 50% 0 0/100% 100% 0 0}
 
-/* SEÇÕES */
-section{padding:44px 0 0}
-h2{font:700 28px/1.2 var(--serif);color:var(--h);margin:0 0 6px;letter-spacing:-.01em}
-.sub{margin:0 0 22px;color:var(--mut)}
-.steps{list-style:none;margin:0;padding:0;display:grid;gap:12px;counter-reset:s}
-.steps li{counter-increment:s;display:flex;gap:16px;align-items:flex-start;background:var(--card);border:1px solid var(--line);border-radius:16px;padding:16px 18px}
-.steps li::before{content:counter(s);flex:none;width:36px;height:36px;border-radius:50%;background:var(--navy2);color:#fff;font:700 18px/36px var(--serif);text-align:center}
-.steps strong{display:block;color:var(--h);font-size:18px;line-height:1.3;margin-bottom:2px}
-.steps span{color:var(--mut);font-size:16px}
-@media(min-width:620px){.steps{grid-template-columns:1fr 1fr}}
+.w{padding:0 16px}
+h2{display:flex;align-items:center;gap:12px;margin:18px 0 14px;font:700 clamp(24px,6.4vw,30px)/1.1 var(--serif)}
+h2::before{content:"";width:4px;height:30px;border-radius:2px;background:var(--gold)}
 
-.chips{display:flex;flex-wrap:wrap;gap:10px;margin:0;padding:0;list-style:none}
-.chips li{background:var(--card);border:1px solid var(--line);padding:9px 16px;border-radius:99px;font-weight:600;font-size:16px}
+/* Séries */
+.series{display:grid;grid-template-columns:repeat(3,1fr);gap:10px}
+.sc{display:flex;flex-direction:column;background:var(--cream);color:var(--ink);border-radius:20px;overflow:hidden;
+  border:1px solid rgba(242,182,61,.7);box-shadow:0 10px 22px -10px rgba(0,0,0,.6);transition:transform .12s}
+.sc:active{transform:scale(.97)}
+.sc[disabled]{cursor:default}.sc[disabled]:active{transform:none}
+.art{height:112px;display:grid;place-items:center;position:relative;overflow:hidden}
+.art svg{width:100%;height:100%}
+.a1{background:radial-gradient(circle at 50% 100%,#FFE9A8 0,#F2B63D 22%,#7A5A2A 55%,#2B4A2A 100%)}
+.a2{background:linear-gradient(180deg,#3E6FB5 0%,#E9A24A 78%,#C97A2E 100%)}
+.a3{background:radial-gradient(circle at 78% 6%,#FFC970 0,#3B6FB6 14%,#0E2347 55%,#050C1C 100%)}
+.sc .t{padding:10px 8px 6px;text-align:center;font:700 clamp(15px,4.2vw,19px)/1.15 var(--serif);min-height:3.2em;display:grid;place-items:center}
+.sc .m{display:flex;align-items:center;justify-content:center;gap:6px;margin:0 8px;padding:7px 0;border-top:2px solid var(--gold);font-size:14px;font-weight:600}
+.sc .go{display:flex;align-items:center;justify-content:center;gap:4px;margin:4px 8px 10px;padding:10px 4px;border-radius:99px;background:var(--ink);color:#fff;font-size:13px;font-weight:700;line-height:1.1;text-align:center}
+.sc[disabled] .go{background:#6B7280;color:#E5E7EB}
 
-/* Didaquê */
-.didaque{margin-top:44px;background:var(--navy);color:#fff;border-radius:24px;padding:30px 24px;position:relative;overflow:hidden}
-.didaque::before{content:"διδαχή";position:absolute;right:-6px;top:-14px;font:700 92px/1 var(--serif);color:rgba(255,255,255,.07)}
-.didaque h2{color:#fff;position:relative}
-.didaque p{margin:0 0 12px;color:#D5DFEE;position:relative;max-width:34em}
-.didaque .ref{display:inline-block;color:var(--amber);font-weight:700;position:relative}
+/* Entrar */
+.acts{display:grid;grid-template-columns:1fr 1fr;gap:12px;margin-top:20px}
+.act{position:relative;display:flex;align-items:center;gap:12px;padding:16px 14px;border-radius:22px;text-decoration:none;overflow:hidden;
+  border:1px solid rgba(255,255,255,.25);box-shadow:0 12px 24px -12px rgba(0,0,0,.7);transition:transform .12s}
+.act:active{transform:scale(.97)}
+.act.al{background:linear-gradient(135deg,#1D5BB8,#0F3A7A)}
+.act.in{background:linear-gradient(135deg,#1C8A8A,#0C5560)}
+.act svg.p{flex:none;width:44px;height:44px}
+.act div{flex:1;line-height:1.2}
+.act b{display:block;font:700 clamp(19px,5vw,23px)/1.1 var(--serif);margin-bottom:3px}
+.act span{font-size:14px;opacity:.92}
+.act i{flex:none;width:34px;height:34px;border-radius:50%;background:var(--gold);color:var(--ink);display:grid;place-items:center}
 
-/* Final */
-.final{text-align:center;padding:48px 0 56px}
-.final p{color:var(--mut);margin:0 0 20px}
+.info{display:flex;align-items:center;gap:14px;margin:18px 0 0;padding:14px 16px;border:1.5px solid var(--line);border-radius:18px;background:rgba(255,255,255,.04);font-size:15.5px}
+.info svg{flex:none;width:30px;height:30px;color:var(--gold)}
+
+.foot{margin-top:auto;padding:22px 18px calc(18px + env(safe-area-inset-bottom,0px));display:flex;align-items:center;gap:12px;font-size:14px}
+.foot .logo{font-size:21px}.foot .logo b{display:inline;margin:0 0 0 5px}
+.foot .tg{flex:1;color:#C9D5E8;border-left:2px solid var(--gold);padding-left:12px;line-height:1.25}
+.foot button{display:flex;align-items:center;gap:6px;color:#fff;min-height:44px;padding:0 6px;font-weight:600}
+.foot button svg{width:22px;height:22px}
+
+/* Folha de baixo */
+.ov{position:fixed;inset:0;background:rgba(3,10,24,.65);opacity:0;pointer-events:none;transition:opacity .2s;z-index:5}
+.sheet{position:fixed;left:0;right:0;bottom:0;z-index:6;margin:0 auto;max-width:760px;background:var(--cream);color:var(--ink);
+  border-radius:26px 26px 0 0;padding:12px 22px calc(24px + env(safe-area-inset-bottom,0px));transform:translateY(105%);transition:transform .25s ease;visibility:hidden}
+.open .ov{opacity:1;pointer-events:auto}
+.open .sheet{transform:none;visibility:visible}
+.grip{width:46px;height:5px;border-radius:3px;background:rgba(18,36,63,.25);margin:0 auto 14px}
+.sheet h3{margin:0 0 6px;font:700 26px/1.15 var(--serif)}
+.sheet .n{font-weight:700;color:#8A5A0E;margin-bottom:8px}
+.sheet p{margin:0 0 18px;font-size:17.5px;line-height:1.5;-webkit-user-select:text;user-select:text}
+.sheet .row{display:grid;gap:10px}
+.sbtn{display:block;text-align:center;text-decoration:none;padding:15px;border-radius:16px;background:var(--ink);color:#fff;font-weight:700;font-size:18px}
+.sbtn.o{background:var(--gold2);color:#1B1203}
+.sbtn.g{background:transparent;border:2px solid var(--ink);color:var(--ink)}
+
+@media (prefers-reduced-motion:reduce){*{transition:none!important}}
+@media (max-width:370px){.acts{grid-template-columns:1fr}.series{gap:8px}}
 </style>
 </head>
 <body>
 
-<header class="hero">
-  <div class="w">
-    <span class="tag">Estudos bíblicos</span>
-    <h1>Didaquê Digital</h1>
-    <p class="lead">Descubra, passo a passo, o que a Bíblia ensina, e prepare o coração para uma decisão que muda tudo.</p>
-    <div class="cta">
-      <a class="btn" href="entrar/">Sou aluno</a>
-      <a class="btn ghost" href="instrutor/">Sou instrutor</a>
-    </div>
-    <p class="note">Alunos entram com o código da classe que o instrutor passar.</p>
+<svg width="0" height="0" style="position:absolute" aria-hidden="true">
+  <defs>
+    <linearGradient id="pg" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#FFF6DC"/><stop offset="1" stop-color="#E9D29A"/></linearGradient>
+    <radialGradient id="gl" cx=".5" cy=".5" r=".5"><stop offset="0" stop-color="#FFE3A0" stop-opacity=".9"/><stop offset="1" stop-color="#F2B63D" stop-opacity="0"/></radialGradient>
+    <radialGradient id="gb" cx=".35" cy=".3" r=".8"><stop offset="0" stop-color="#7FC4F2"/><stop offset=".6" stop-color="#2A64B4"/><stop offset="1" stop-color="#0E2A5C"/></radialGradient>
+    <linearGradient id="gd" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#F7D277"/><stop offset="1" stop-color="#C98A25"/></linearGradient>
+    <symbol id="i-book" viewBox="0 0 24 24"><path fill="currentColor" fill-rule="evenodd" d="M12 6.2C10.4 5 8 4.5 3 4.5v13.2c5 0 7.4.6 9 1.8 1.6-1.2 4-1.8 9-1.8V4.5c-5 0-7.4.5-9 1.7zm-1 11.2c-1.7-.7-3.6-1-6-1.1V6.2c2.4.2 4.3.6 6 1.4zm8 0c-2.400.1-4.300.4-6 1.100V7.600c1.700-.8 3.600-1.200 6-1.400z"/></symbol>
+    <symbol id="i-scroll" viewBox="0 0 24 24"><path fill="currentColor" d="M7 3a3 3 0 0 0-3 3v1h2.500v10a3 3 0 0 0 3 3H18a2.500 2.500 0 0 0 2.500-2.500V17H9V6a3 3 0 0 0-.4-1.500H18A1.500 1.500 0 0 1 19.500 6v9H21V6a3 3 0 0 0-3-3zm4 6h6v1.500h-6zm0 3h6v1.500h-6z"/></symbol>
+    <symbol id="i-clock" viewBox="0 0 24 24"><path fill="currentColor" d="M12 2a10 10 0 1 0 0 20 10 10 0 0 0 0-20zm0 18a8 8 0 1 1 0-16 8 8 0 0 1 0 16zm1-13h-2v6l5 3 1-1.700-4-2.300z"/></symbol>
+    <symbol id="i-chev" viewBox="0 0 24 24"><path fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" d="M9 5l7 7-7 7"/></symbol>
+    <symbol id="i-menu" viewBox="0 0 24 24"><path fill="none" stroke="currentColor" stroke-width="2.600" stroke-linecap="round" d="M3 6h18M3 12h18M3 18h18"/></symbol>
+    <symbol id="i-info" viewBox="0 0 24 24"><circle cx="12" cy="12" r="10" fill="none" stroke="currentColor" stroke-width="1.800"/><path fill="currentColor" d="M11 10.500h2V17h-2zm0-3.500h2v2h-2z"/></symbol>
+    <symbol id="i-aluno" viewBox="0 0 48 48"><circle cx="24" cy="12" r="7" fill="#fff"/><path fill="#fff" d="M10 40V28c0-5 6-8 14-8s14 3 14 8v12z"/><path fill="#0F3A7A" d="M13 40V30c3-2 7-3 11-3s8 1 11 3v10l-11-2z"/><path fill="#fff" d="M24 31l-10-2v10l10 2 10-2V29z" opacity=".95"/><path stroke="#0F3A7A" stroke-width="1.500" d="M24 31v10"/></symbol>
+    <symbol id="i-instrutor" viewBox="0 0 48 48"><circle cx="12" cy="14" r="6" fill="#fff"/><path fill="#fff" d="M3 38V27c0-4 4-6 9-6s9 2 9 6v11z"/><rect x="22" y="8" width="23" height="18" rx="2.500" fill="none" stroke="#fff" stroke-width="2.500"/><path stroke="#fff" stroke-width="2.500" stroke-linecap="round" d="M27 14h13M27 19h9M33 26l-4 11M37 26l4 11"/></symbol>
+  </defs>
+</svg>
 
-    <div class="trail" aria-label="Série de 13 estudos">
-      <div class="rail" aria-hidden="true">
-        <i style="--n:1"></i><i style="--n:2"></i><i style="--n:3"></i><i style="--n:4"></i><i style="--n:5"></i><i style="--n:6"></i><i style="--n:7"></i><i style="--n:8"></i><i style="--n:9"></i><i style="--n:10"></i><i style="--n:11"></i><i style="--n:12"></i><i style="--n:13"></i>
-      </div>
-      <p><b>Estudo 1 de 13.</b> Você começa por aqui, e cada estudo concluído libera o próximo.</p>
-    </div>
-  </div>
-</header>
+<div class="app" id="app">
 
-<main class="w">
+  <header class="bar">
+    <div class="logo">Didaquê<b>Digital</b></div>
+    <span class="sep" aria-hidden="true"></span>
+    <span class="nm">Estudos bíblicos</span>
+    <button class="ico" data-sheet="sobre" aria-label="Menu e informações"><svg width="30" height="30"><use href="#i-menu"/></svg></button>
+  </header>
 
-  <section>
-    <h2>Como funciona</h2>
-    <p class="sub">Um estudo de cada vez, no seu ritmo.</p>
-    <ol class="steps">
-      <li><div><strong>Leia e responda</strong><span>Uma pergunta por vez, com o texto bíblico indicado.</span></div></li>
-      <li><div><strong>Avance ao acertar</strong><span>Se errar, é só tentar de novo.</span></div></li>
-      <li><div><strong>Receba ajuda</strong><span>Se ficar difícil, aparece uma dica, e o seu instrutor pode ajudar.</span></div></li>
-      <li><div><strong>Libere o próximo</strong><span>Ao concluir um estudo, o seguinte é liberado.</span></div></li>
-    </ol>
+  <section class="hero">
+    <p>Descubra, passo a passo, o que a Bíblia ensina, e prepare o coração para uma decisão que muda tudo.</p>
+    <svg class="book" viewBox="0 0 220 140" aria-hidden="true">
+      <circle cx="110" cy="62" r="62" fill="url(#gl)"/>
+      <path d="M6 40L6 116C44 102 84 102 110 118C136 102 176 102 214 116L214 40Z" fill="#6E4210"/>
+      <path d="M110 36C86 20 42 20 12 34L12 108C44 94 86 94 110 108Z" fill="url(#pg)"/>
+      <path d="M110 36C134 20 178 20 208 34L208 108C176 94 134 94 110 108Z" fill="url(#pg)"/>
+      <g stroke="#8F7B4A" stroke-width="1.600" opacity=".55" stroke-linecap="round">
+        <path d="M24 46C48 38 76 40 98 50M24 56C48 48 76 50 98 60M24 66C48 58 76 60 98 70M24 76C48 68 76 70 98 80M24 86C48 78 76 80 98 90"/>
+        <path d="M122 50C144 40 172 38 196 46M122 60C144 50 172 48 196 56M122 70C144 60 172 58 196 66M122 80C144 70 172 68 196 76M122 90C144 80 172 78 196 86"/>
+      </g>
+      <path d="M110 36V108" stroke="#B8943E" stroke-width="2"/>
+    </svg>
   </section>
 
-  <section>
-    <h2>O que você vai estudar</h2>
-    <p class="sub">Uma série de 13 estudos, que passa por estes temas:</p>
-    <ul class="chips">
-      <li>A Bíblia</li><li>A criação</li><li>O plano da salvação</li><li>A volta de Jesus</li>
-      <li>A verdade sobre a morte</li><li>O santuário</li><li>A lei de Deus e o sábado</li>
-      <li>A saúde</li><li>O dom de profecia</li><li>A vida cristã</li><li>A igreja</li><li>O batismo</li>
-    </ul>
-  </section>
+  <main class="w">
+    <h2>Conheça as séries</h2>
+    <div class="series">
+      <button class="sc" data-sheet="o">
+        <span class="art a1"><svg viewBox="0 0 100 80" aria-hidden="true"><g stroke="#FFF1C2" stroke-width="1.500" opacity=".5"><path d="M50 78L10 6M50 78L30 2M50 78L50 0M50 78L70 2M50 78L90 6"/></g><svg x="31" y="30" width="38" height="38" viewBox="0 0 24 24" style="color:#FFF6DC"><use href="#i-book"/></svg></svg></span>
+        <span class="t">Ouvindo a Voz de Deus</span>
+        <span class="m"><svg width="18" height="18"><use href="#i-book"/></svg>13 estudos</span>
+        <span class="go">Conhecer a série <svg width="12" height="12"><use href="#i-chev"/></svg></span>
+      </button>
+      <button class="sc" data-sheet="d">
+        <span class="art a2"><svg viewBox="0 0 100 80" aria-hidden="true"><path d="M0 80V66l9-6 8 6v14zM76 80V58l10-8 14 8v22z" fill="#8A4F1E" opacity=".55"/><path d="M43 18l2-8 5 4 5-4 2 8z" fill="url(#gd)"/><circle cx="50" cy="24" r="7" fill="url(#gd)"/><path d="M33 36q17-7 34 0l5 44H28z" fill="url(#gd)"/><rect x="35" y="46" width="30" height="10" rx="5" fill="#B77B1E"/><path d="M50 38v6" stroke="#8A5A10" stroke-width="2"/></svg></span>
+        <span class="t">Daniel</span>
+        <span class="m"><svg width="18" height="18"><use href="#i-book"/></svg>16 estudos</span>
+        <span class="go">Conhecer a série <svg width="12" height="12"><use href="#i-chev"/></svg></span>
+      </button>
+      <button class="sc" disabled aria-label="Apocalipse, em breve">
+        <span class="art a3"><svg viewBox="0 0 100 80" aria-hidden="true"><circle cx="50" cy="46" r="27" fill="url(#gb)"/><path d="M34 32c6-5 14-4 16 1 2 5-6 6-4 11 2 4 9 2 8 8-1 5-9 6-13 3-5-4-10-14-7-23zM58 44c5-2 11 2 10 8-1 5-7 8-11 5-3-3-3-11 1-13z" fill="#4FA464" opacity=".9"/><path d="M26 40a27 27 0 0 1 40-18" fill="none" stroke="#fff" stroke-opacity=".35" stroke-width="2"/></svg></span>
+        <span class="t">Apocalipse</span>
+        <span class="m"><svg width="18" height="18"><use href="#i-clock"/></svg>Em breve</span>
+        <span class="go">Conhecer a série <svg width="12" height="12"><use href="#i-chev"/></svg></span>
+      </button>
+    </div>
 
-  <div class="didaque">
-    <h2>Por que “Didaquê”?</h2>
-    <p>Vem do grego e significa “ensino”. É a palavra por trás do mandato de Jesus: fazer discípulos, batizá-los e <strong>ensiná-los</strong>.</p>
-    <span class="ref">Mateus 28:19-20</span>
-  </div>
+    <nav class="acts" aria-label="Entrar">
+      <a class="act al" href="entrar/">
+        <svg class="p"><use href="#i-aluno"/></svg>
+        <div><b>Sou aluno</b><span>Entrar com o código da classe</span></div>
+        <i><svg width="18" height="18"><use href="#i-chev"/></svg></i>
+      </a>
+      <a class="act in" href="instrutor/">
+        <svg class="p"><use href="#i-instrutor"/></svg>
+        <div><b>Sou instrutor</b><span>Criar e acompanhar classes</span></div>
+        <i><svg width="18" height="18"><use href="#i-chev"/></svg></i>
+      </a>
+    </nav>
 
-  <div class="final">
-    <p>Estudos conduzidos por um instrutor.</p>
-    <a class="btn" href="entrar/">Entrar e começar</a>
-  </div>
+    <div class="info">
+      <svg><use href="#i-info"/></svg>
+      <span>As perguntas e atividades acontecem dentro de uma classe, com acompanhamento de um instrutor.</span>
+    </div>
+  </main>
 
-</main>
+  <footer class="foot">
+    <div class="logo">Didaquê<b>Digital</b></div>
+    <div class="tg">Aprender. Compartilhar. Crescer.</div>
+    <button data-sheet="sobre"><svg><use href="#i-info"/></svg>Sobre</button>
+  </footer>
+</div>
+
+<div class="ov" id="ov"></div>
+<div class="sheet" id="sheet" role="dialog" aria-modal="true" aria-labelledby="sh-t">
+  <div class="grip"></div>
+  <h3 id="sh-t"></h3>
+  <div class="n" id="sh-n"></div>
+  <p id="sh-p"></p>
+  <div class="row" id="sh-r"></div>
+</div>
+
+<script>
+(function(){
+  var S={
+    o:{t:"Ouvindo a Voz de Deus",n:"13 estudos",p:"Os grandes temas da Bíblia, um de cada vez: da criação e do plano da salvação até a volta de Jesus, a vida cristã e o batismo.",b:1},
+    d:{t:"Profecias de Daniel",n:"16 estudos",p:"Os sonhos e as visões de Daniel, e como eles se cumprem na história, apontando para Cristo e para o fim do grande conflito.",b:1},
+    sobre:{t:"Sobre o Didaquê Digital",n:"Mateus 28:19-20",p:"“Didaquê” vem do grego e significa “ensino”. É a palavra por trás do mandato de Jesus: fazer discípulos, batizá-los e ensiná-los. Os estudos são conduzidos por um instrutor, e cada estudo concluído libera o próximo."}
+  };
+  var app=document.getElementById("app"),sh=document.getElementById("sheet"),last=null;
+  function esc(s){return s}
+  function abrir(k,el){
+    var d=S[k]; last=el;
+    document.getElementById("sh-t").textContent=d.t;
+    document.getElementById("sh-n").textContent=d.n;
+    document.getElementById("sh-p").textContent=d.p;
+    var r=document.getElementById("sh-r");
+    r.innerHTML=d.b?'<a class="sbtn" href="entrar/">Sou aluno: entrar com o código</a><a class="sbtn o" href="instrutor/">Sou instrutor</a><button class="sbtn g" data-x>Fechar</button>':'<button class="sbtn" data-x>Fechar</button>';
+    document.body.classList.add("open");
+    app.setAttribute("aria-hidden","true");
+    setTimeout(function(){var f=r.querySelector("a,button");if(f)f.focus()},60);
+  }
+  function fechar(){
+    document.body.classList.remove("open");
+    app.removeAttribute("aria-hidden");
+    if(last)last.focus();
+  }
+  document.addEventListener("click",function(e){
+    var b=e.target.closest("[data-sheet]");
+    if(b){abrir(b.getAttribute("data-sheet"),b);return}
+    if(e.target.closest("[data-x]")||e.target.id==="ov")fechar();
+  });
+  document.addEventListener("keydown",function(e){if(e.key==="Escape"&&document.body.classList.contains("open"))fechar()});
+})();
+</script>
 </body>
 </html>
