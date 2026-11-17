@@ -40,6 +40,9 @@ svg{display:block}
 /* Destaque */
 .hero{position:relative;padding:22px 18px 170px;overflow:hidden;
   background:radial-gradient(70% 90% at 82% 70%,rgba(242,182,61,.55),transparent 70%),linear-gradient(180deg,#0C2145,#143A6B)}
+.hero.ban{padding:0;background:none}
+.hero.ban img{display:block;width:100%;height:auto}
+.hero.ban::after{height:18px}
 .hero p{position:relative;z-index:1;margin:0;max-width:19em;font:600 clamp(19px,5.2vw,26px)/1.3 var(--serif)}
 .hero svg.book{position:absolute;right:14px;bottom:20px;width:min(54%,230px);filter:drop-shadow(0 14px 18px rgba(0,0,0,.45))}
 .hero::after{content:"";position:absolute;left:-12%;right:-12%;bottom:-2px;height:30px;background:var(--navy);
@@ -136,19 +139,8 @@ h2::before{content:"";width:4px;height:30px;border-radius:2px;background:var(--g
     <button class="ico" data-sheet="sobre" aria-label="Menu e informações"><svg width="30" height="30"><use href="#i-menu"/></svg></button>
   </header>
 
-  <section class="hero">
-    <p>Descubra, passo a passo, o que a Bíblia ensina, e prepare o coração para uma decisão que muda tudo.</p>
-    <svg class="book" viewBox="0 0 220 140" aria-hidden="true">
-      <circle cx="110" cy="62" r="62" fill="url(#gl)"/>
-      <path d="M6 40L6 116C44 102 84 102 110 118C136 102 176 102 214 116L214 40Z" fill="#6E4210"/>
-      <path d="M110 36C86 20 42 20 12 34L12 108C44 94 86 94 110 108Z" fill="url(#pg)"/>
-      <path d="M110 36C134 20 178 20 208 34L208 108C176 94 134 94 110 108Z" fill="url(#pg)"/>
-      <g stroke="#8F7B4A" stroke-width="1.600" opacity=".55" stroke-linecap="round">
-        <path d="M24 46C48 38 76 40 98 50M24 56C48 48 76 50 98 60M24 66C48 58 76 60 98 70M24 76C48 68 76 70 98 80M24 86C48 78 76 80 98 90"/>
-        <path d="M122 50C144 40 172 38 196 46M122 60C144 50 172 48 196 56M122 70C144 60 172 58 196 66M122 80C144 70 172 68 196 76M122 90C144 80 172 78 196 86"/>
-      </g>
-      <path d="M110 36V108" stroke="#B8943E" stroke-width="2"/>
-    </svg>
+  <section class="hero ban">
+    <img src="img/banner.png" alt="Didaquê Digital: estudos bíblicos guiados por instrutor direto no celular ou tablet">
   </section>
 
   <main class="w">
