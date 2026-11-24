@@ -7,7 +7,7 @@
 import { auth, db } from "./fb.js";
 import { signInAnonymously } from "https://www.gstatic.com/firebasejs/12.13.0/firebase-auth.js";
 import { doc, getDoc, updateDoc, setDoc, increment, serverTimestamp } from "https://www.gstatic.com/firebasejs/12.13.0/firebase-firestore.js";
-
+import "./certificado.js"
 const m = location.pathname.match(/(daniel\/)?estudo-(\d+)/);
 const L = m ? +m[2] : 0;              // número do estudo dentro da série (o que o aluno vê)
 const OFF = m && m[1] ? 100 : 0;      // Daniel soma 100 ao número guardado
