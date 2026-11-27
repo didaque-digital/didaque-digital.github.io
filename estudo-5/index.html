@@ -118,7 +118,7 @@ var Q = [
  {q:"O que acontece com a pessoa quando morre?",
   v:[["Gênesis 3:19", "gen 3:19"], ["Eclesiastes 12:7", "ecc 12:7"], ["Eclesiastes 9:5", "ecc 9:5"]],
   p:["O corpo volta a ser ",["pó","=po","poeira","terra"],". O fôlego de vida volta para ",["Deus","deus"],". A memória é entregue ao ",["esquecimento","esquec"],"."],
-  h:"Gênesis 3:19: ao pó tornarás. Eclesiastes 12:7: o espírito volta a Deus. Eclesiastes 9:5: a lembrança dos mortos cai no ..."},
+  h:"Gênesis 3:19: ao pó voltará. Eclesiastes 12:7: o espírito volta a Deus. Eclesiastes 9:5: a memória dos mortos é entregue ao ..."},
  {q:"Para onde vai a pessoa após a morte?",
   v:[["Eclesiastes 9:5, 10", "ecc 9:5,10"], ["Jó 7:9-10", "job 7:9-10"]],
   o:["Céu","Inferno","Flutuar no espaço","Sepultura"], c:3,
@@ -139,7 +139,7 @@ var Q = [
  {q:"Qual será a recompensa dos que participarem da primeira ressurreição?",
   v:[["1 Coríntios 15:51-53", "1co 15:51-53"]],
   p:["Receberão a imortalidade perdida, num ",["abrir","abrir","abri"]," e fechar de ",["olhos","olho"],"."],
-  h:"1 Coríntios 15:52: num momento, num piscar de ... (o tempo de abrir e fechar os olhos)."},
+  h:"1 Coríntios 15:52 diz como será rápido: num instante, no tempo de abrir e fechar os olhos."},
  {q:"O que o Senhor prometeu criar depois do milênio?",
   v:[["2 Pedro 3:13", "2pe 3:13"], ["Apocalipse 21:2", "rev 21:2"]],
   p:["Nós, porém, ",["segundo","segundo","conforme","acordo"]," a sua ",["promessa","promessa"],", esperamos novos ",["céus","ceus","ceu"]," e nova ",["terra","terra"]," onde habita a justiça."],
@@ -147,7 +147,7 @@ var Q = [
   n:"Depois dos mil anos, a Nova Jerusalém descerá para a Terra e será a capital da Nova Terra. Na cidade estarão o trono de Deus, a árvore da vida e o rio da vida (Ap 21:2; 22:1, 2)."},
  {q:"Quem ficará fora da cidade e quem entrará nela?",
   v:[["Apocalipse 21:8", "rev 21:8"], ["Apocalipse 21:27", "rev 21:27"], ["1 Coríntios 6:9-10", "1co 6:9-10"]],
-  p:["Ficarão de fora os ",["ímpios","impi","pecador","incredul","covard","impenit","imoral","assassin","mentiros","idolatr","injust","desobedi","maus"],". Entrarão somente aqueles que têm o nome no ",["Livro da Vida","livro","vida"],"."],
+  p:["Ficarão de fora os ",["ímpios","impi","pecador","incredul","covard","medros","impenit","imoral","assassin","homicid","adulter","feiticeir","abomin","mentiros","idolatr","injust","desobedi","maus"],". Entrarão somente aqueles que têm o nome no ",["Livro da Vida","livro","vida"],"."],
   h:"Apocalipse 21:8 lista os que ficam de fora (os que rejeitam a Deus). Apocalipse 21:27 diz quem entra: os que estão inscritos no livro ..."},
  {q:"Como será a vida na Nova Terra?",
   v:[["Apocalipse 21:4", "rev 21:4"], ["Isaías 35:5-6, 9-10", "isa 35:5-6,9-10"]],
@@ -183,42 +183,42 @@ var BAD=[[190,.18,"square"],[150,.3,"square"]], GOOD=[[660,.12],[880,.22]];
 /* ===== Pop-up bíblico ===== */
 var bibOpen=false, bibList=[], bibFocus=null;
 // ====== TEXTOS BÍBLICOS (ficam dentro do aplicativo, funcionam sem internet) ======
-// Tradução atual: João Ferreira de Almeida (domínio público).
-// Para trocar por outra tradução, substitua o texto de cada versículo abaixo.
+// Tradução: João Ferreira de Almeida (domínio público), adaptada para o português atual
+// (sem "vós", sem verbos na 2ª pessoa; "vocês" no lugar). Para trocar, substitua o texto de cada versículo.
 // Formato: "chave": [ [número do versículo, "texto"], ... ]
 var BIB = {
- "gen 2:7":[[7, "E formou o Senhor Deus o homem do pó da terra, e soprou-lhe nas narinas o fôlego da vida; e o homem tornou-se alma vivente."]],
- "eze 18:4":[[4, "Eis que todas as almas são minhas; como o é a alma do pai, assim também a alma do filho é minha: a alma que pecar, essa morrerá."]],
- "gen 46:27":[[27, "e os filhos de José, que lhe nasceram no Egito, eram duas almas. Todas as almas da casa de Jacó, que vieram para o Egito eram setenta."]],
- "deu 10:22":[[22, "Com setenta almas teus pais desceram ao Egito; e agora o Senhor teu Deus te fez, em número, como as estrelas do céu."]],
- "gen 3:19":[[19, "Do suor do teu rosto comerás o teu pão, até que tornes à terra, porque dela foste tomado; porquanto és pó, e ao pó tornarás."]],
- "ecc 12:7":[[7, "e o pó volte para a terra como o era, e o espírito volte a Deus que o deu."]],
- "ecc 9:5":[[5, "Pois os vivos sabem que morrerão, mas os mortos não sabem coisa nenhuma, nem tampouco têm eles daí em diante recompensa; porque a sua memória ficou entregue ao esquecimento."]],
- "ecc 9:5,10":[[5, "Pois os vivos sabem que morrerão, mas os mortos não sabem coisa nenhuma, nem tampouco têm eles daí em diante recompensa; porque a sua memória ficou entregue ao esquecimento."], [10, "Tudo quanto te vier à mão para fazer, faze-o conforme as tuas forças; porque no Seol, para onde tu vais, não há obra, nem projeto, nem conhecimento, nem sabedoria alguma."]],
- "job 7:9-10":[[9, "Tal como a nuvem se desfaz e some, aquele que desce à sepultura nunca tornará a subir."], [10, "Nunca mais tornará à sua casa, nem o seu lugar o conhecerá mais."]],
- "2co 11:13-14":[[13, "Pois os tais são falsos apóstolos, obreiros fraudulentos, disfarçando-se em apóstolos de Cristo."], [14, "E não é de admirar, porquanto o próprio Satanás se disfarça em anjo de luz."]],
- "1ti 6:16":[[16, "aquele que possui, ele só, a imortalidade, e habita em luz inacessível; a quem nenhum dos homens tem visto nem pode ver; ao qual seja honra e poder sempiterno. Amém."]],
- "gen 2:16-17":[[16, "Ordenou o Senhor Deus ao homem, dizendo: De toda árvore do jardim podes comer livremente;"], [17, "mas da árvore do conhecimento do bem e do mal, dessa não comerás; porque no dia em que dela comeres, certamente morrerás."]],
- "rom 5:12":[[12, "Portanto, assim como por um só homem entrou o pecado no mundo, e pelo pecado a morte, assim também a morte passou a todos os homens, porquanto todos pecaram."]],
- "rom 6:23":[[23, "Porque o salário do pecado é a morte, mas o dom gratuito de Deus é a vida eterna em Cristo Jesus nosso Senhor."]],
- "john 11:11-14":[[11, "E, tendo assim falado, acrescentou: Lázaro, o nosso amigo, dorme, mas vou despertá-lo do sono."], [12, "Disseram-lhe, pois, os discípulos: Senhor, se dorme, ficará bom."], [13, "Mas Jesus falara da sua morte; eles, porém, entenderam que falava do repouso do sono."], [14, "Então Jesus lhes disse claramente: Lázaro morreu;"]],
- "john 5:28-29":[[28, "Não vos admireis disso, porque vem a hora em que todos os que estão nos sepulcros ouvirão a sua voz e sairão:"], [29, "os que tiverem feito o bem, para a ressurreição da vida, e os que tiverem praticado o mal, para a ressurreição do juízo."]],
- "1th 4:16":[[16, "Porque o Senhor mesmo descerá do céu com grande brado, à voz do arcanjo, ao som da trombeta de Deus, e os que morreram em Cristo ressuscitarão primeiro."]],
- "1co 15:51-53":[[51, "Eis aqui vos digo um mistério: Nem todos dormiremos mas todos seremos transformados,"], [52, "num momento, num abrir e fechar de olhos, ao som da última trombeta; porque a trombeta soará, e os mortos serão ressuscitados incorruptíveis, e nós seremos transformados."], [53, "Porque é necessário que isto que é corruptível se revista da incorruptibilidade e que isto que é mortal se revista da imortalidade."]],
- "2pe 3:13":[[13, "Nós, porém, segundo a sua promessa, aguardamos novos céus e uma nova terra, nos quais habita a justiça."]],
- "rev 21:2":[[2, "E vi a santa cidade, a nova Jerusalém, que descia do céu da parte de Deus, adereçada como uma noiva ataviada para o seu noivo."]],
- "rev 21:8":[[8, "Mas, quanto aos medrosos, e aos incrédulos, e aos abomináveis, e aos homicidas, e aos adúlteros, e aos feiticeiros, e aos idólatras, e a todos os mentirosos, a sua parte será no lago ardente de fogo e enxofre, que é a segunda morte."]],
- "rev 21:27":[[27, "E não entrará nela coisa alguma impura, nem o que pratica abominação ou mentira; mas somente os que estão inscritos no livro da vida do Cordeiro."]],
- "1co 6:9-10":[[9, "Não sabeis que os injustos não herdarão o reino de Deus? Não vos enganeis: nem os devassos, nem os idólatras, nem os adúlteros, nem os efeminados, nem os sodomitas,"], [10, "nem os ladrões, nem os avarentos, nem os bêbedos, nem os maldizentes, nem os roubadores herdarão o reino de Deus."]],
- "rev 21:4":[[4, "Ele enxugará de seus olhos toda lágrima; e não haverá mais morte, nem haverá mais pranto, nem lamento, nem dor; porque já as primeiras coisas são passadas."]],
- "isa 35:5-6,9-10":[[5, "Então os olhos dos cegos serão abertos, e os ouvidos dos surdos se desimpedirão."], [6, "Então o coxo saltará como o cervo, e a língua do mudo cantará de alegria; porque águas arrebentarão no deserto e ribeiros no ermo."], [9, "Ali não haverá leão, nem animal feroz subirá por ele, nem se achará nele; mas os redimidos andarão por ele."], [10, "E os resgatados do Senhor voltarão; e virão a Sião com júbilo, e alegria eterna haverá sobre as suas cabeças; gozo e alegria alcançarão, e deles fugirá a tristeza e o gemido."]],
- "isa 65:21-22":[[21, "E eles edificarão casas, e as habitarão; e plantarão vinhas, e comerão o fruto delas."], [22, "Não edificarão para que outros habitem; não plantarão para que outros comam; porque os dias do meu povo serão como os dias da árvore, e os meus escolhidos gozarão por longo tempo das obras das suas mãos:"]],
- "isa 65:25":[[25, "O lobo e o cordeiro juntos se apascentarão, o leão comerá palha como o boi; e pó será a comida da serpente. Não farão mal nem dano algum em todo o meu santo monte, diz o Senhor."]],
- "isa 66:22-23":[[22, "Pois, como os novos céus e a nova terra, que hei de fazer, durarão diante de mim, diz o Senhor, assim durará a vossa posteridade e o vosso nome."], [23, "E acontecerá que desde uma lua nova até a outra, e desde um sábado até o outro, virá toda a carne a adorar perante mim, diz o Senhor."]],
- "1co 2:9":[[9, "Mas, como está escrito: As coisas que olhos não viram, nem ouvidos ouviram, nem penetraram o coração do homem, são as que Deus preparou para os que o amam."]],
- "john 14:15":[[15, "Se me amardes, guardareis os meus mandamentos."]]
+ "gen 2:7":[[7, "O Senhor Deus formou o homem do pó da terra e soprou em suas narinas o fôlego da vida, e o homem se tornou alma vivente."]],
+ "eze 18:4":[[4, "Todas as almas são minhas; tanto a alma do pai como a alma do filho são minhas. A alma que pecar, essa morrerá."]],
+ "gen 46:27":[[27, "Os filhos de José, que lhe nasceram no Egito, eram duas almas. Todas as almas da casa de Jacó que foram para o Egito eram setenta."]],
+ "deu 10:22":[[22, "Os antepassados de vocês desceram ao Egito com setenta almas, e agora o Senhor, o Deus de vocês, os tornou tão numerosos como as estrelas do céu."]],
+ "gen 3:19":[[19, "Com o suor do seu rosto você comerá o seu pão, até que volte à terra, pois dela foi tirado; porque você é pó, e ao pó voltará."]],
+ "ecc 12:7":[[7, "e o pó volte à terra, como era, e o espírito volte a Deus, que o deu."]],
+ "ecc 9:5":[[5, "Pois os vivos sabem que vão morrer, mas os mortos não sabem coisa nenhuma, nem têm mais recompensa, porque a sua memória é entregue ao esquecimento."]],
+ "ecc 9:5,10":[[5, "Pois os vivos sabem que vão morrer, mas os mortos não sabem coisa nenhuma, nem têm mais recompensa, porque a sua memória é entregue ao esquecimento."], [10, "Tudo o que você tiver oportunidade de fazer, faça com todas as suas forças, porque na sepultura, para onde você vai, não há trabalho, nem planos, nem conhecimento, nem sabedoria alguma."]],
+ "job 7:9-10":[[9, "Assim como a nuvem se desfaz e desaparece, quem desce à sepultura não sobe mais."], [10, "Nunca mais voltará para a sua casa, e o seu lugar não o conhecerá mais."]],
+ "2co 11:13-14":[[13, "Pois esses são falsos apóstolos, trabalhadores enganadores, que se disfarçam de apóstolos de Cristo."], [14, "E não é de admirar, pois o próprio Satanás se disfarça de anjo de luz."]],
+ "1ti 6:16":[[16, "Ele é o único que possui imortalidade e vive em luz inacessível. Nenhum ser humano o viu nem pode vê-lo. A ele sejam honra e poder eternos. Amém."]],
+ "gen 2:16-17":[[16, "O Senhor Deus ordenou ao homem: Você pode comer livremente de todas as árvores do jardim,"], [17, "mas da árvore do conhecimento do bem e do mal você não deve comer; porque, no dia em que comer dela, certamente morrerá."]],
+ "rom 5:12":[[12, "Portanto, assim como por meio de um só homem o pecado entrou no mundo, e pelo pecado a morte, assim também a morte passou a todos os homens, porque todos pecaram."]],
+ "rom 6:23":[[23, "Porque o salário do pecado é a morte, mas o dom gratuito de Deus é a vida eterna em Cristo Jesus, nosso Senhor."]],
+ "john 11:11-14":[[11, "Depois de dizer isso, acrescentou: Nosso amigo Lázaro dorme, mas vou acordá-lo."], [12, "Os discípulos disseram: Senhor, se ele dorme, vai melhorar."], [13, "Jesus tinha falado da morte de Lázaro, mas eles pensaram que ele falava do descanso do sono."], [14, "Então Jesus lhes disse claramente: Lázaro morreu."]],
+ "john 5:28-29":[[28, "Não se admirem disso, porque vem a hora em que todos os que estão nos túmulos ouvirão a sua voz e sairão:"], [29, "os que fizeram o bem, para a ressurreição da vida; e os que praticaram o mal, para a ressurreição do julgamento."]],
+ "1th 4:16":[[16, "Pois o próprio Senhor descerá do céu com um grande grito, com a voz do arcanjo e o som da trombeta de Deus, e os que morreram em Cristo ressuscitarão primeiro."]],
+ "1co 15:51-53":[[51, "Eu lhes digo um mistério: nem todos dormiremos, mas todos seremos transformados,"], [52, "num instante, num abrir e fechar de olhos, ao som da última trombeta. Pois a trombeta soará, os mortos ressuscitarão incorruptíveis, e nós seremos transformados."], [53, "Pois é necessário que este corpo corruptível se revista de incorruptibilidade, e que este corpo mortal se revista de imortalidade."]],
+ "2pe 3:13":[[13, "Mas nós, segundo a sua promessa, esperamos novos céus e uma nova terra, nos quais habita a justiça."]],
+ "rev 21:2":[[2, "Vi a santa cidade, a nova Jerusalém, que descia do céu, da parte de Deus, preparada como uma noiva enfeitada para o seu noivo."]],
+ "rev 21:8":[[8, "Mas os covardes, os incrédulos, os abomináveis, os assassinos, os imorais, os feiticeiros, os idólatras e todos os mentirosos terão a sua parte no lago que arde com fogo e enxofre, que é a segunda morte."]],
+ "rev 21:27":[[27, "Nela nunca entrará coisa impura, nem alguém que pratique abominação ou mentira, mas somente os que estão inscritos no livro da vida do Cordeiro."]],
+ "1co 6:9-10":[[9, "Vocês não sabem que os injustos não herdarão o reino de Deus? Não se enganem: nem os imorais, nem os idólatras, nem os adúlteros, nem os efeminados, nem os sodomitas,"], [10, "nem os ladrões, nem os avarentos, nem os bêbados, nem os caluniadores, nem os assaltantes herdarão o reino de Deus."]],
+ "rev 21:4":[[4, "Ele enxugará de seus olhos toda lágrima; não haverá mais morte, nem pranto, nem lamento, nem dor, porque as primeiras coisas já passaram."]],
+ "isa 35:5-6,9-10":[[5, "Então os olhos dos cegos serão abertos, e os ouvidos dos surdos se abrirão."], [6, "Então o manco saltará como o cervo, e a língua do mudo cantará de alegria; porque águas brotarão no deserto, e ribeiros na terra seca."], [9, "Ali não haverá leão, nem animal feroz subirá por ele, nem será encontrado ali; mas os redimidos andarão por ele."], [10, "Os resgatados do Senhor voltarão e chegarão a Sião com cânticos de júbilo; alegria eterna estará sobre a sua cabeça. Gozo e alegria os alcançarão, e a tristeza e o gemido fugirão."]],
+ "isa 65:21-22":[[21, "Eles construirão casas e morarão nelas; plantarão vinhas e comerão o seu fruto."], [22, "Não construirão para que outro more, nem plantarão para que outro coma; pois os dias do meu povo serão como os dias de uma árvore, e os meus escolhidos desfrutarão por muito tempo do trabalho das suas mãos."]],
+ "isa 65:25":[[25, "O lobo e o cordeiro pastarão juntos, o leão comerá palha como o boi, e o pó será o alimento da serpente. Não farão mal nem destruição em todo o meu santo monte, diz o Senhor."]],
+ "isa 66:22-23":[[22, "Pois, assim como os novos céus e a nova terra que vou criar durarão diante de mim, diz o Senhor, assim durarão a descendência e o nome de vocês."], [23, "E acontecerá que, de uma lua nova até a outra e de um sábado até o outro, toda a carne virá adorar diante de mim, diz o Senhor."]],
+ "1co 2:9":[[9, "Mas, como está escrito: As coisas que os olhos não viram, nem os ouvidos ouviram, nem passaram pelo coração do ser humano são as que Deus preparou para os que o amam."]],
+ "john 14:15":[[15, "Se vocês me amam, guardarão os meus mandamentos."]]
 };
-var BIBNAME = "João Ferreira de Almeida (domínio público)";
+var BIBNAME = "João Ferreira de Almeida (domínio público), adaptada ao português atual";
 
 function openBible(list,opener,start){
   bibList=list; bibFocus=opener||document.activeElement;
